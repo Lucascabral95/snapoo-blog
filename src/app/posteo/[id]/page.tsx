@@ -32,7 +32,7 @@ const Posteos: React.FC = () => {
     };
 
     obtenerPosteo();
-  }, []);
+  }, [id]);
 
   return (
     <>

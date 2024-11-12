@@ -59,7 +59,6 @@ const PerfilUsuario = () => {
           <Image
             alt="Imagen de perfil"
             style={{ borderRadius: "50%" }}
-            // src={session?.user?.image ?? "/img/logoo.jpg"}
             src={session?.user?.image ?? "/img/logo-snapoo.png"}
             width={140}
             className="img"
