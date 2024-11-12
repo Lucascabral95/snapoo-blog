@@ -22,6 +22,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/api/register/route.tsx", "src/app/api/auth/[...nextauth]/route.jsx", "src/models/Posteos.jsx", "src/app/api/upload/route.jsx", "src/app/api/posteos/route.tsx", "src/DAO/PosteosDAO.jsx", "src/app/usuario/[username]/page.tsx"],
   "exclude": ["node_modules"]
 }

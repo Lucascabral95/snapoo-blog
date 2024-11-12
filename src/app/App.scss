@@ -1,0 +1,586 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body,
+header,
+html,
+main,
+footer {
+    margin: 0;
+    padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+strong {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+.not-found {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 200px);
+
+    .contenedor-not-found {
+        width: 100%;
+
+        .titulo-de-pagina {
+
+            h2 {
+                text-align: center;
+            }
+        }
+
+        .imagen-de-pagina {
+            display: flex;
+            align-items: center;
+            margin: 20px 0 0 0;
+            justify-content: center;
+
+            .img {
+                width: auto;
+                height: auto;
+            }
+        }
+    }
+}
+
+@media (max-width: 991) {
+    .not-found {
+        height: calc(100vh - 211px);
+
+        .contenedor-not-found {
+            .imagen-de-pagina {
+                .img {
+                    width: 100%;
+                    height: auto;
+                }
+            }
+        }
+    }
+}
+
+// PAGINA DE INICIO
+.pagina-principal {
+    width: 100%;
+    height: 100vh;
+    background-image: url("/img/japon-tokio.avif");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    .contenedor-pagina-principal {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .header-pagina-principal {
+            width: 100%;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            background-color: transparent;
+            backdrop-filter: blur(5px);
+
+            .header-contenedor-pagina-principal {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 24px;
+
+                .logo {
+                    display: flex;
+                    align-items: center;
+
+                    .imagen {
+                        display: flex;
+                        align-items: center;
+                    }
+
+                    .nombre {
+                        display: flex;
+                        align-items: center;
+                        margin: 0 0 0 10px;
+
+                        p {
+                            color: white;
+                            font-weight: bolder;
+                            font-size: 24px;
+                        }
+                    }
+                }
+
+                .botones-de-login-register {
+                    display: flex;
+                    align-items: center;
+
+                    .bot {
+
+                        .boton-ingreso-login {
+                            display: flex;
+                            align-items: center;
+                            color: white;
+                            font-size: 16px;
+                            height: 32px;
+                            padding: 0 20px;
+                            border-radius: 8px;
+                        }
+
+                        .boton-ingreso-register {
+                            display: flex;
+                            align-items: center;
+                            color: black;
+                            border-radius: 8px;
+                            background-color: white;
+                            font-size: 16px;
+                            height: 32px;
+                            padding: 0 20px;
+                            font-weight: 600;
+
+                            &:hover {
+                                transition: 0.2s;
+                                color: #737373;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .main-pagina-principal {
+            width: 100%;
+
+            .main-contenedor-pagina-principal {
+                padding: 0 60px;
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                justify-content: center;
+
+                .titulo-inspiracion {
+                    margin: 37px 0 5px 0;
+
+                    h2 {
+                        text-align: center;
+                        color: white;
+                        font-weight: bolder;
+                        font-size: 56px;
+                    }
+                }
+
+                .subtitulo {
+                    margin: 26px 0 50px 0;
+                    text-align: center;
+
+                    p {
+                        font-size: 26px;
+                        color: white;
+                    }
+                }
+
+                .boton-acceder-gratis {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    .link-acceder-gratis {
+                        display: flex;
+                        align-items: center;
+                        height: 64px;
+                        background-color: white;
+                        padding: 0 20px;
+                        color: black;
+                        font-weight: bolder;
+                        border-radius: 4px;
+                        font-size: 24px;
+
+                        &:hover {
+                            transition: 0.2s ease-in-out;
+                            color: #737373;
+                        }
+                    }
+                }
+            }
+        }
+
+        .footer-pagina-principal {
+            width: 100%;
+            height: 60px;
+            background-color: black;
+            display: flex;
+            align-items: center;
+
+            .footer-contenedor-pagina-principal {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                height: 28px;
+                padding: 0 24px;
+
+                .presentacion-mia {
+                    display: flex;
+                    align-items: center;
+
+                    p {
+                        color: #ffffff99;
+                        font-size: 14px;
+                    }
+                }
+
+                .mis-redes {
+                    display: flex;
+                    align-items: center;
+
+                    .icono {
+                        .icon {
+                            cursor: pointer;
+                            color: #ffffff99;
+                            font-size: 22px;
+
+                            &:hover {
+                                transition: 0.2s ease-in-out;
+                                color: white;
+                            }
+                        }
+                    }
+
+                    .icono-del-medio {
+                        margin: 0 30px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1080px) {
+    .pagina-principal {
+        width: 100%;
+        height: 100vh;
+
+        .contenedor-pagina-principal {
+
+            .header-pagina-principal {
+                width: 100%;
+                height: 64px;
+                display: flex;
+                align-items: center;
+
+                .header-contenedor-pagina-principal {
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: 0 24px;
+
+                    .logo {
+                        display: flex;
+                        align-items: center;
+
+                        .imagen {
+                            display: flex;
+                            align-items: center;
+                        }
+
+                        .nombre {
+                            display: flex;
+                            align-items: center;
+                            margin: 0 0 0 10px;
+
+                            p {
+                                font-weight: bolder;
+                                font-size: 24px;
+                            }
+                        }
+                    }
+
+                    .botones-de-login-register {
+                        display: flex;
+                        align-items: center;
+
+                        .bot {
+
+                            .boton-ingreso-login {
+                                display: flex;
+                                align-items: center;
+                                font-size: 16px;
+                                height: 32px;
+                                padding: 0 20px;
+                            }
+
+                            .boton-ingreso-register {
+                                display: flex;
+                                align-items: center;
+                                font-size: 16px;
+                                height: 32px;
+                                padding: 0 20px;
+                                font-weight: 600;
+
+                            }
+                        }
+                    }
+                }
+            }
+
+            .main-pagina-principal {
+                width: 100%;
+
+                .main-contenedor-pagina-principal {
+                    padding: 0 28px;
+                    display: flex;
+                    align-items: center;
+                    flex-direction: column;
+                    justify-content: center;
+
+                    .titulo-inspiracion {
+                        margin: 37px 0 30px 0;
+
+                        h2 {
+                            font-weight: 600;
+                            text-align: center;
+                            font-size: 40px;
+                        }
+                    }
+
+                    .subtitulo {
+                        display: none;
+                    }
+
+                    .boton-acceder-gratis {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+
+                        .link-acceder-gratis {
+                            height: 44px;
+                            padding: 0 20px;
+                            font-size: 22px;
+                            font-weight: 600;
+
+                        }
+                    }
+                }
+            }
+
+            .footer-pagina-principal {
+                width: 100%;
+                height: 60px;
+                display: flex;
+                align-items: center;
+
+                .footer-contenedor-pagina-principal {
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    height: 28px;
+                    padding: 0 24px;
+
+                    .presentacion-mia {
+                        display: flex;
+                        align-items: center;
+
+                        p {
+                            font-size: 14px;
+                        }
+                    }
+
+                    .mis-redes {
+                        display: flex;
+                        align-items: center;
+
+                        .icono {
+                            .icon {
+                                font-size: 22px;
+                            }
+                        }
+
+                        .icono-del-medio {
+                            margin: 0 30px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media(max-width: 600px) {
+    $margin-footer: 12px;
+
+    .pagina-principal {
+        width: 100%;
+        height: 100vh;
+        background-image: url("/img/japon-tokio-dos.avif");
+
+        .contenedor-pagina-principal {
+            height: 100vh;
+
+            .header-pagina-principal {
+                width: 100%;
+                height: 64px;
+                display: flex;
+                align-items: center;
+
+                .header-contenedor-pagina-principal {
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: 0 20px;
+
+                    .logo {
+                        display: flex;
+                        align-items: center;
+
+                        .imagen {
+                            display: flex;
+                            align-items: center;
+                        }
+
+                        .nombre {
+                            display: flex;
+                            align-items: center;
+                            margin: 0 0 0 10px;
+
+                            p {
+                                font-weight: bolder;
+                                font-size: 24px;
+                            }
+                        }
+                    }
+
+                    .botones-de-login-register {
+                        display: flex;
+                        align-items: center;
+
+                        .bot {
+
+                            .boton-ingreso-login {
+                                display: flex;
+                                align-items: center;
+                                font-size: 16px;
+                                height: 30px;
+                                padding: 0 16px;
+                                border-radius: 0px;
+                                border: 2px solid white;
+                            }
+
+                            .boton-ingreso-register {
+                                display: none;
+
+                            }
+                        }
+                    }
+                }
+            }
+
+            .main-pagina-principal {
+                width: 100%;
+
+                .main-contenedor-pagina-principal {
+                    padding: 0 28px;
+                    display: flex;
+                    align-items: center;
+                    flex-direction: column;
+                    justify-content: center;
+
+                    .titulo-inspiracion {
+                        margin: 37px 0 30px 0;
+
+                        h2 {
+                            font-weight: 600;
+                            text-align: center;
+                            font-size: 40px;
+                            font-weight: bolder;
+                            color: white;
+                            backdrop-filter: blur(1px);
+                        }
+                    }
+
+                    .subtitulo {
+                        display: none;
+                    }
+
+                    .boton-acceder-gratis {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+
+                        .link-acceder-gratis {
+                            height: 42px;
+                            padding: 0 20px;
+                            font-size: 20px;
+                            font-weight: 600;
+
+                        }
+                    }
+                }
+            }
+
+            .footer-pagina-principal {
+                width: 100%;
+                height: auto;
+                display: flex;
+                align-items: center;
+
+                .footer-contenedor-pagina-principal {
+                    width: 100%;
+                    height: auto;
+                    padding: 0 20px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    .presentacion-mia {
+                        display: flex;
+                        align-items: center;
+                        border-bottom: 1px solid #444444;
+                        padding: $margin-footer 0;
+
+                        p {
+                            font-size: 14px;
+                            text-align: center;
+                            line-height: 20px;
+                        }
+                    }
+
+                    .mis-redes {
+                        display: flex;
+                        align-items: center;
+                        padding: $margin-footer 0;
+
+                        .icono {
+                            .icon {
+                                font-size: 22px;
+                            }
+                        }
+
+                        .icono-del-medio {
+                            margin: 0 30px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

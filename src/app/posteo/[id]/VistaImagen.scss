@@ -1,0 +1,303 @@
+.vista-imagen {
+    width: calc(100% - 72px);
+    height: calc(100vh - 100px);
+    padding: 50px 36px;
+    background-color: white;
+
+    .contenedor-vista-imagen {
+
+        .cont-icono {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .icono-de-cierre {
+                width: 100%;
+                width: 34px;
+                height: 34px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                border-radius: 8px;
+
+                .icono {
+                    color: black;
+                    font-size: 28px;
+                }
+            }
+
+            .icono-de-cierre-fav-repost {
+                width: fit-content;
+
+                .icon {
+                    width: 34px;
+                    height: 34px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    border-radius: 8px;
+
+                    .icono {
+                        color: black;
+                        font-size: 28px;
+                    }
+
+                    .icono-corazon {
+                        font-size: 24px;
+                        color: black;
+
+                    }
+
+                    &:hover {
+                        .icono-corazon {
+                            transition: 0.2s ease-in-out;
+                            color: red;
+                        }
+                    }
+                }
+            }
+        }
+
+        .imagen-de-posteo {
+            margin: 20px 0 0 0;
+            width: calc(100% - 120px);
+            padding: 0 60px;
+            overflow: hidden;
+
+            img {
+                width: auto;
+                height: auto;
+                max-width: 100%;
+                max-height: 700px;
+            }
+
+            .fecha-usuario-favoritos {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                margin: 60 0 0 0;
+
+                .likes {
+                    display: flex;
+                    align-items: center;
+                    margin: 0 0 4px 0;
+
+                    .icono-like {
+                        display: flex;
+                        align-items: center;
+
+                        .icon {
+                            font-size: 20px;
+                            color: red;
+                        }
+                    }
+
+                    .cantidad-likes {
+                        display: flex;
+                        align-items: center;
+                        margin: 0 0 0 2px;
+
+                        p {
+                            font-size: 12.8px;
+                            color: black;
+                            font-weight: bolder;
+                        }
+                    }
+                }
+
+                .usuarios-favoritos {
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin: 10px 0;
+
+                    .usuario {
+                        width: fit-content;
+                        display: flex;
+                        align-items: center;
+
+                        p {
+                            color: black;
+                            font-weight: bolder;
+                            font-size: 13px;
+                        }
+                    }
+
+                    .iconos-de-interacciones {
+                        width: fit-content;
+                        display: flex;
+                        margin: 10px 0;
+
+                        .icono {
+                            margin: 0 0 0 10px;
+                            cursor: pointer;
+
+                            .icon {
+                                font-size: 24px;
+                                color: #c0c0c0;
+                            }
+
+                            &:hover {
+                                .icon {
+                                    transition: 0.2s;
+                                    color: black;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .descripcion {
+                    width: 100%;
+                    margin: 0 0 10px 0;
+                    display: flex;
+                    align-items: center;
+
+                    .detalle {
+                        p {
+                            color: black;
+                            font-size: 14.8px;
+                            font-family: Arial, Helvetica, sans-serif;
+                        }
+                    }
+                }
+
+                .descripcion-fecha {
+                    .detalle {
+                        p {
+                            color: #c0c0c0;
+                            font-size: 13px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 767px) {
+
+    .vista-imagen {
+        width: 100%;
+        height: fit-content;
+        padding: 16px 0px;
+        overflow: hidden;
+
+        .contenedor-vista-imagen {
+
+            .cont-icono {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                .icono-de-cierre {
+                    width: 100%;
+                    width: 34px;
+                    height: 34px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin: 0 10px;
+
+                    .icono {
+                        font-size: 28px;
+                    }
+                }
+
+                .icono-de-cierre-fav-repost {
+                    width: fit-content;
+
+                    .icon {
+                        width: 34px;
+                        height: 34px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+
+                        .icono {
+                            font-size: 28px;
+                        }
+
+                    }
+                }
+            }
+
+            .imagen-de-posteo {
+                padding: 0px;
+                margin: 20px 0 0 0;
+                width: auto;
+
+                img {
+                    width: 100%;
+                    height: auto;
+                }
+
+                .fecha-usuario-favoritos {
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    margin: 0 16px;
+
+                    .usuarios-favoritos {
+                        width: 100%;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin: 10px 0;
+
+                        .usuario {
+                            width: fit-content;
+                            display: flex;
+                            align-items: center;
+
+                            p {
+                                font-size: 13px;
+                            }
+                        }
+
+                        .iconos-de-interacciones {
+                            width: fit-content;
+                            display: flex;
+                            margin: 10px 0;
+
+                            .icono {
+                                margin: 0 0 0 10px;
+
+                                .icon {
+                                    font-size: 24px;
+                                }
+
+                            }
+                        }
+                    }
+
+                    .descripcion {
+                        width: 100%;
+                        margin: 0 0 10px 0;
+                        display: flex;
+                        align-items: center;
+
+                        .detalle {
+                            p {
+                                font-size: 14.8px;
+                            }
+                        }
+                    }
+
+                    .descripcion-fecha {
+                        .detalle {
+                            p {
+                                font-size: 13px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
