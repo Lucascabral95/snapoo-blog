@@ -129,18 +129,6 @@ const Login: React.FC = () => {
     obtenerReposteos();
   }, [session]);
 
-  const [sinData, setSinData] = useState<boolean>(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (posteos.length === 0 && rePosteos.length === 0) {
-        setSinData(true);
-      }
-    }, 800);
-  
-    return () => clearTimeout(timer);
-  }, [session, posteos, rePosteos]);
-
   return (
     <div className="seccion-perfil">
       {pathname === "/feed/perfil" && (
@@ -228,9 +216,9 @@ const Login: React.FC = () => {
       )}
 
       {seccionSeleccionada === "posteos" ? (
-        <EstructuraImagenes posteos={posteos} sinData={sinData} />
+        <EstructuraImagenes posteos={posteos} />
       ) : (
-        <EstructuraImagenes posteos={rePosteos} sinData={sinData} />
+        <EstructuraImagenes posteos={rePosteos} />
       )}
     </div>
   );
