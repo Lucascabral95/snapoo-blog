@@ -28,4 +28,6 @@ const posteosSchema = new mongoose.Schema({
     }
 });
 
-export default mongoose.models.Posteos || mongoose.model("Posteos", posteosSchema);
+// export default mongoose.models.Posteos || mongoose.model("Posteos", posteosSchema);
+const Posteo = mongoose.models.Posteos || mongoose.model("Posteos", posteosSchema);
+export default Posteo;
