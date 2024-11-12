@@ -15,4 +15,5 @@ const interesesSchema = new mongoose.Schema({
     }
 })
 
-export default mongoose.models.Intereses || mongoose.model("Intereses", interesesSchema)
+// export default mongoose.models.Intereses || mongoose.model("Intereses", interesesSchema)
+export default mongoose.model("Intereses", interesesSchema)
