@@ -6,13 +6,17 @@ import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { z } from "zod";
 import axios from "axios";
-import toast, { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from "react-hot-toast";
 
 const RegisterSchema = z.object({
   email: z.string().email("El email no es valido."),
   password: z
     .string()
-    .min(8, "La contraseña debe tener al menos 8 caracteres."),
+    .min(8, "La contraseña debe tener al menos 8 caracteres.")
+    .regex(
+      /[.,!?;:(){}[\]'"`~@#$%^&*-_]/,
+      "La contraseña debe contener al menos un carácter de puntuación."
+    ),
 });
 
 type User = z.infer<typeof RegisterSchema>;
@@ -42,11 +46,10 @@ const Register = () => {
             position: "top-center",
           });
           setTimeout(() => {
-             window.location.href = "/feed/login";
+            window.location.href = "/feed/login";
           }, 1600);
         }
       } else {
-        console.log(verificacion.error.errors);
         const formattedErrors: { [key: string]: string | undefined } = {};
         verificacion.error.errors.forEach((err) => {
           if (err.path[0]) {
@@ -61,7 +64,7 @@ const Register = () => {
           console.log(error.response.data.error);
           setError({
             email: error.response.data.error,
-          })
+          });
         } else {
           console.log("Error de servidor o red no disponible.");
         }
@@ -114,6 +117,10 @@ const Register = () => {
               required
             />
           </div>
+          <p className="caracteres-obligatorios">
+            La contraseña debe tener al menos 8 caracteres y contener al menos
+            un carácter de puntuación.
+          </p>
           {error.password && (
             <div style={{ color: "red" }} className="error">
               {error.password}
@@ -124,7 +131,6 @@ const Register = () => {
           </div>
 
           <Toaster />
-
         </form>
 
         <div className="linea-delimitante">

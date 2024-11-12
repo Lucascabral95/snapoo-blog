@@ -9,6 +9,7 @@ import EstructuraImagenes from "@/components/EstructuraImagenes/EstructuraImagen
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Skeleton from "react-loading-skeleton";
+import toast, { Toaster } from "react-hot-toast";
 
 interface User {
   id: string;
@@ -30,7 +31,6 @@ const Login: React.FC = () => {
   const [seccionSeleccionada, setSeccionSeleccionada] =
     useState<string>("posteos");
   const [posteos, setPosteos] = useState<any[]>([]);
-  const [compartidos, setCompartidos] = useState<any[]>([]);
   const [isOpenSubida, setIsOpenSubida] = useState<boolean>(false);
   const [file, setFile] = useState<File | undefined>(undefined);
   const [comentario, setComentario] = useState<string>("");
@@ -53,8 +53,8 @@ const Login: React.FC = () => {
       });
 
       if (result.status === 200 || result.status === 201) {
-        console.log(result.data);
         setIsOpenSubida(false);
+        toast.success("Imagen subida con éxito");
       }
     } catch (error) {
       console.log(`Se produjo un error en el servidor: ${error}`);
@@ -82,7 +82,7 @@ const Login: React.FC = () => {
     if (session?.user?.id) {
       obtenerImagenes();
     }
-  }, [session]);
+  }, [session, isOpenSubida]);
 
   useEffect(() => {
     const obtenerDatosPersonales = async () => {
@@ -128,6 +128,18 @@ const Login: React.FC = () => {
 
     obtenerReposteos();
   }, [session]);
+
+  const [sinData, setSinData] = useState<boolean>(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (posteos.length === 0 && rePosteos.length === 0) {
+        setSinData(true);
+      }
+    }, 800);
+  
+    return () => clearTimeout(timer);
+  }, [session, posteos, rePosteos]);
 
   return (
     <div className="seccion-perfil">
@@ -216,9 +228,9 @@ const Login: React.FC = () => {
       )}
 
       {seccionSeleccionada === "posteos" ? (
-        <EstructuraImagenes posteos={posteos} />
+        <EstructuraImagenes posteos={posteos} sinData={sinData} />
       ) : (
-        <EstructuraImagenes posteos={rePosteos} />
+        <EstructuraImagenes posteos={rePosteos} sinData={sinData} />
       )}
     </div>
   );

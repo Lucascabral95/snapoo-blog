@@ -9,6 +9,7 @@ const People: React.FC = () => {
     useState<string>("usuario");
   const [posteos, setPosteos] = useState<any[]>([]);
   const [input, setInput] = useState<string>("");
+  const [sinData, setSinData] = useState<boolean>(false);
 
   useEffect(() => {
     const obtenerDatos = async () => {
@@ -64,7 +65,7 @@ const People: React.FC = () => {
         </div>
       </div>
 
-      <EstructuraImagenes posteos={posteos} />
+      <EstructuraImagenes posteos={posteos} sinData={sinData} />
     </div>
   );
 };

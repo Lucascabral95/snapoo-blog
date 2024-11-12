@@ -36,9 +36,7 @@
         .imagen {
             margin: 0 0 12px 0;
 
-            .img {}
-
-            input{
+            input {
                 color: red;
 
                 &::-webkit-file-upload-button {
@@ -88,7 +86,7 @@
                 height: 36px;
                 cursor: pointer;
             }
-            
+
             .subir {
                 padding: 11px 16px;
                 display: flex;
@@ -103,11 +101,20 @@
                 height: 36px;
                 cursor: pointer;
 
-                &:hover{
+                &:hover {
                     transition: 0.2s ease-in-out;
                     background-color: #f0f0f0;
                 }
             }
         }
+    }
+}
+
+
+@media(max-width: 479px) {
+    .subida-dee-imagenes {
+        padding: 0 6px;
+        width: calc(100% - 12px);
+        height: 100vh;
     }
 }

@@ -289,6 +289,39 @@
                                     }
                                 }
                             }
+
+                            .sin-posteos-ni-resposteos {
+                                width: 100%;
+                                display: flex;
+                                flex-direction: column;
+                                align-items: center;
+                                justify-content: center;
+                                margin: 1.4vw 0 0 0;
+
+                                .texto {
+                                    width: 100%;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    
+                                    p {
+                                        color: black;
+                                        font-weight: bolder;
+                                        font-size: 28px;
+                                        text-align: center;
+                                    }
+                                }
+                                
+                                .imagen-sin-datos {
+                                    width: 100%;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    margin: -20px 0 0 0;
+
+                                    .img {}
+                                }
+                            }
                         }
                     }
                 }

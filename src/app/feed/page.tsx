@@ -7,6 +7,7 @@ import "./Feed.scss";
 const Inicio: React.FC = () => {
   const [posteos, setPosteos] = useState<any[]>([]);
   const [loadingSkeleton, setLoadingSkeleton] = useState<boolean>(true);
+  const [sinData, setSinData] = useState<boolean>(false);
 
   useEffect(() => {
     const obtenerTodasLasImagenes = async () => {
@@ -27,7 +28,7 @@ const Inicio: React.FC = () => {
 
   return (
     <div className="seccion-perfil seccion-perfil-inicio seccion-array-de-imagenes">
-      <EstructuraImagenes posteos={posteos} />
+      <EstructuraImagenes posteos={posteos} sinData={sinData} />
     </div>
   );
 };

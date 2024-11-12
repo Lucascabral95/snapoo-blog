@@ -28,6 +28,7 @@ const PerfilUsuario = () => {
   const [dataPosteos, setDataPosteos] = useState<any[]>([]);
   const [seccionSeleccionada, setSeccionSeleccionada] = useState("posteos");
   const [datosDelUsuario, setDatosDelUsuario] = useState<IUsuario>();
+  const [sinData, setSinData] = useState<boolean>(false);
 
   useEffect(() => {
     const obtenerImagenes = async () => {
@@ -104,7 +105,7 @@ const PerfilUsuario = () => {
         </div>
       </div>
 
-      <EstructuraImagenes posteos={dataPosteos} />
+      <EstructuraImagenes posteos={dataPosteos} sinData={sinData} />
     </div>
   );
 };

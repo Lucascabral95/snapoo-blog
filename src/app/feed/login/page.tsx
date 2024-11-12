@@ -10,8 +10,7 @@ import toast, { Toaster } from "react-hot-toast";
 const UserShcema = z.object({
   email: z.string(),
   password: z
-    .string()
-    .min(7, "La contraseña debe tener al menos 8 caracteres."),
+    .string().min(7, "La contraseña debe tener al menos 8 caracteres.")
 });
 
 type User = z.infer<typeof UserShcema>;
