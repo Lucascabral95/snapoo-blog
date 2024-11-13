@@ -85,4 +85,6 @@ class DAOUsuarios {
   }
 }
 
-export default new DAOUsuarios(); 
+// export default new DAOUsuarios(); 
+const daoUsuarios = new DAOUsuarios();
+export default daoUsuarios;
