@@ -59,9 +59,6 @@ const usuarioSchema: Schema<IUsuario> = new Schema({
 });
 
 // Usamos un patrón condicional para exportar el modelo
-//--
-// const Usuarios: Model<IUsuario> = mongoose.models.Usuarios || mongoose.model<IUsuario>("Usuarios", usuarioSchema);
-//--
 const Usuarios: Model<IUsuario> = mongoose.models.Usuarios || mongoose.model<IUsuario>("Usuarios", usuarioSchema);
 
 export default Usuarios;
