@@ -52,4 +52,4 @@ const usuarioSchema = new mongoose.Schema({
 });
 
 const Usuarios = mongoose.model("Usuarios", usuarioSchema);
-export default Usuarios;
+export default Usuarios
