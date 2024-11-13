@@ -124,7 +124,7 @@ const Login: React.FC = () => {
     };
 
     obtenerReposteos();
-  }, [session, seccionSeleccionada]);
+  }, [session]);
 
   return (
     <div className="seccion-perfil">
@@ -205,11 +205,15 @@ const Login: React.FC = () => {
         />
       )}
 
-      {seccionSeleccionada === "posteos" ? (
+      {seccionSeleccionada === "posteos" && <EstructuraImagenes posteos={posteos} />}
+      {seccionSeleccionada === "compartidos" && <EstructuraImagenes posteos={rePosteos} />}
+
+      {/* {seccionSeleccionada === "posteos" ? (
         <EstructuraImagenes posteos={posteos} />
       ) : (
         <EstructuraImagenes posteos={rePosteos} />
-      )}
+      )} */}
+
     </div>
   );
 };
