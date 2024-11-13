@@ -98,7 +98,9 @@ const EstructuraConDashboard = ({ children }: Props) => {
                 </div>
               ) : (
                 <div className="contenedor-setting">
-                  <Link className="boton-login-logout" href="/feed/login">
+                  <Link className="boton-login-logout" href="/feed/login" 
+                   style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+                  >
                     {" "}
                     Iniciar sesión{" "}
                   </Link>

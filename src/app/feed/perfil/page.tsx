@@ -78,7 +78,7 @@ const Login: React.FC = () => {
     if (session?.user?.id) {
       obtenerImagenes();
     }
-  }, [session, isOpenSubida, seccionSeleccionada]);
+  }, [session, isOpenSubida]);
 
   useEffect(() => {
     const obtenerDatosPersonales = async () => {
@@ -124,7 +124,9 @@ const Login: React.FC = () => {
       }
     };
 
-    obtenerReposteos();
+    if (session?.user?.id) {
+      obtenerReposteos();
+    }
   }, [session]);
 
   return (
