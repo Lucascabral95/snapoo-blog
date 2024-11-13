@@ -54,4 +54,6 @@ class DAOComentarios {
     }
 }
 
-export default new DAOComentarios();
+// export default new DAOComentarios();
+const daoComentarios = new DAOComentarios();
+export default daoComentarios;

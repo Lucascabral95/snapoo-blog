@@ -1,5 +1,5 @@
 "use client";
-import React, { use, useEffect } from "react";
+import React from "react";
 import "./VistaImagen.scss";
 import { IoMdClose } from "react-icons/io";
 import { BiRepost } from "react-icons/bi";
@@ -67,16 +67,9 @@ const VistaImagen: React.FC<VistaImagenProps> = ({
     }
   };
 
-  // const datos = async () => {
-  //   const result = await axios.get(`/api/intereses`);
-  //   const resultado = result.data.result;
-  //   console.log(resultado.map((e: any) => e.favoritos));
-  // };
-  // datos();
-
   const darLike = async () => {
     try {
-      const result = await axios.put(`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/posteos/?id=${id}`);
+      const result = await axios.put(`/api/posteos/?id=${id}`);
 
       if (result.status === 200 || result.status === 201) {
         toast.success("Like dado con exito");
