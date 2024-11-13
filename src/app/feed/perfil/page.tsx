@@ -69,7 +69,7 @@ const Login: React.FC = () => {
             (posteo: any) => posteo.usuario._id === session?.user?.id
           );
 
-          setPosteos(posteosFiltrados);
+          setPosteos(posteosFiltrados.reverse());
         }
       } catch (error) {
         console.log(`Se produjo un error en el servidor: ${error}`);
@@ -110,7 +110,7 @@ const Login: React.FC = () => {
           const misCompartidos = results.data.result.filter(
             (posteo: any) => posteo.user._id === session?.user?.id
           );
-          setRePosteos(misCompartidos[0].rePosteos);
+          setRePosteos(misCompartidos[0].rePosteos.reverse());
         }
       } catch (error: any) {
         if (error.response) {

@@ -13,7 +13,7 @@ const Inicio: React.FC = () => {
         const result = await axios.get(`/api/posteos`);
 
         if (result.status === 200 || result.status === 201) {
-          setPosteos(result.data.result);
+          setPosteos(result.data.result.reverse());
         }
       } catch (error: any) {
         if (error.response.status === 404 || error.response.status === 500) {
