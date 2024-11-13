@@ -124,7 +124,7 @@ const Login: React.FC = () => {
     };
 
     obtenerReposteos();
-  }, [session]);
+  }, [seccionSeleccionada]);
 
   return (
     <div className="seccion-perfil">
@@ -145,9 +145,7 @@ const Login: React.FC = () => {
           />
         </div>
         <div className="titulo-username">
-            <h2 className="font-username">
-              {misDatos?.userName ?? "Invitado"}
-            </h2>
+          <h2 className="font-username">{misDatos?.userName ?? "Invitado"}</h2>
         </div>
       </div>
       <div className="posteos-reposteos">
@@ -205,15 +203,11 @@ const Login: React.FC = () => {
         />
       )}
 
-      {seccionSeleccionada === "posteos" && <EstructuraImagenes posteos={posteos} />}
-      {seccionSeleccionada === "compartidos" && <EstructuraImagenes posteos={rePosteos} />}
-
-      {/* {seccionSeleccionada === "posteos" ? (
+      {seccionSeleccionada === "posteos" ? (
         <EstructuraImagenes posteos={posteos} />
       ) : (
         <EstructuraImagenes posteos={rePosteos} />
-      )} */}
-
+      )}
     </div>
   );
 };
