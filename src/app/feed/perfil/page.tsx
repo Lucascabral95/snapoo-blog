@@ -8,7 +8,6 @@ import axios from "axios";
 import EstructuraImagenes from "@/components/EstructuraImagenes/EstructuraImagenes";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import Skeleton from "react-loading-skeleton";
 import toast, { Toaster } from "react-hot-toast";
 
 interface User {
@@ -37,7 +36,6 @@ const Login: React.FC = () => {
   const pathname = usePathname();
   const [misDatos, setMisDatos] = useState<TUser>();
   const [rePosteos, setRePosteos] = useState<any[]>([]);
-  const [loadingSkeleton, setLoadingSkeleton] = useState<boolean>(true);
 
   const enviarImagen = async () => {
     const form = new FormData();
@@ -72,7 +70,6 @@ const Login: React.FC = () => {
           );
 
           setPosteos(posteosFiltrados);
-          setLoadingSkeleton(false);
         }
       } catch (error) {
         console.log(`Se produjo un error en el servidor: ${error}`);
@@ -148,18 +145,9 @@ const Login: React.FC = () => {
           />
         </div>
         <div className="titulo-username">
-          {loadingSkeleton ? (
-            <Skeleton
-              className="font-username"
-              count={1}
-              width={200}
-              height={36}
-            />
-          ) : (
             <h2 className="font-username">
               {misDatos?.userName ?? "Invitado"}
             </h2>
-          )}
         </div>
       </div>
       <div className="posteos-reposteos">
@@ -205,6 +193,8 @@ const Login: React.FC = () => {
           )}
         </div>
       </div>
+
+      <Toaster />
 
       {isOpenSubida && (
         <SubidaImagenes
