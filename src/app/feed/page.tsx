@@ -6,7 +6,6 @@ import "./Feed.scss";
 
 const Inicio: React.FC = () => {
   const [posteos, setPosteos] = useState<any[]>([]);
-  const [loadingSkeleton, setLoadingSkeleton] = useState<boolean>(true);
 
   useEffect(() => {
     const obtenerTodasLasImagenes = async () => {
@@ -15,10 +14,13 @@ const Inicio: React.FC = () => {
 
         if (result.status === 200 || result.status === 201) {
           setPosteos(result.data.result);
-          setLoadingSkeleton(false);
         }
-      } catch (error) {
-        console.log(error);
+      } catch (error: any) {
+        if (error.response.status === 404 || error.response.status === 500) {
+          window.location.reload();
+        } else {
+          console.log(error.response.data.error);
+        }
       }
     };
 
