@@ -32,5 +32,5 @@ const posteosSchema = new mongoose.Schema({
 //--
 // const Posteos = mongoose.models.Posteos || mongoose.model("Posteos", posteosSchema);
 //--
-const Posteos = mongoose.model("Posteos", posteosSchema);
+const Posteos = mongoose.models.Posteos || mongoose.model("Posteos", posteosSchema);
 export default Posteos;

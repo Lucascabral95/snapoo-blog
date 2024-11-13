@@ -124,7 +124,7 @@ const Login: React.FC = () => {
     };
 
     obtenerReposteos();
-  }, [session]);
+  }, [session, seccionSeleccionada]);
 
   return (
     <div className="seccion-perfil">
