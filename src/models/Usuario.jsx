@@ -51,5 +51,5 @@ const usuarioSchema = new mongoose.Schema({
     },
 });
 
-const Usuarios = mongoose.models.Usuarios || mongoose.model("Usuarios", usuarioSchema);
+const Usuarios = mongoose.model("Usuarios", usuarioSchema);
 export default Usuarios;
