@@ -56,6 +56,5 @@ class DAOIntereses {
     }
 }
 
-// export default new DAOIntereses();
 const daoIntereses = new DAOIntereses();
 export default daoIntereses;

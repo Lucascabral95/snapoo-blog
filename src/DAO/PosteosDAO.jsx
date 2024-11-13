@@ -74,6 +74,5 @@ class DAOPosteos {
     }
 }
 
-// export default new DAOPosteos();
 const daoPosteos = new DAOPosteos();
 export default daoPosteos;

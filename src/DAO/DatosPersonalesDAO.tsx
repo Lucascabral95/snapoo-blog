@@ -54,6 +54,5 @@ class DAODatosPersonales {
     }
 }
 
-// export default new DAODatosPersonales();
 const daoDatosPersonales = new DAODatosPersonales();
 export default daoDatosPersonales;
