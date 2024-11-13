@@ -42,6 +42,9 @@ const EstructuraImagenes: React.FC<Props> = ({ posteos }) => {
           ) : null}
         </Link>
       ))}
+      {/* <div className="boton-de-ver-mas" onClick={() => {}}>
+        <button> Ver más </button>
+      </div> */}
     </div>
   );
 };

@@ -68,7 +68,6 @@ const Login: React.FC = () => {
           const posteosFiltrados = results.data.result.filter(
             (posteo: any) => posteo.usuario._id === session?.user?.id
           );
-
           setPosteos(posteosFiltrados.reverse());
         }
       } catch (error) {
@@ -79,7 +78,7 @@ const Login: React.FC = () => {
     if (session?.user?.id) {
       obtenerImagenes();
     }
-  }, [session, isOpenSubida]);
+  }, [session, isOpenSubida, seccionSeleccionada]);
 
   useEffect(() => {
     const obtenerDatosPersonales = async () => {
@@ -126,7 +125,7 @@ const Login: React.FC = () => {
     };
 
     obtenerReposteos();
-  }, [seccionSeleccionada]);
+  }, [session]);
 
   return (
     <div className="seccion-perfil">
