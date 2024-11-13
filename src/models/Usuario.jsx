@@ -30,23 +30,16 @@
 // const Usuarios = mongoose.models.Usuarios as mongoose.Model<IUsuario> || mongoose.model<IUsuario>("Usuarios", usuarioSchema);
 // export default Usuarios;
 
-import mongoose, { Schema, Document, Model } from "mongoose";
+import mongoose from "mongoose";
 
-interface IUsuario extends Document {
-    email: string;
-    password?: string;
-    userName?: string;
-    avatar: string;
-}
-
-const usuarioSchema: Schema<IUsuario> = new Schema({
+const usuarioSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
         unique: true,
     },
     password: {
-        type: String,
+        type: String
     },
     userName: {
         type: String,
@@ -54,11 +47,10 @@ const usuarioSchema: Schema<IUsuario> = new Schema({
     },
     avatar: {
         type: String,
-        default: "",
+        default: ""
     },
 });
 
-// Usamos un patrón condicional para exportar el modelo
-const Usuarios: Model<IUsuario> = mongoose.models.Usuarios || mongoose.model<IUsuario>("Usuarios", usuarioSchema);
-
+// export default mongoose.models.Usuarios as mongoose.Model<IUsuario> || mongoose.model<IUsuario>("Usuarios", usuarioSchema);
+const Usuarios = mongoose.models.Usuarios || mongoose.model("Usuarios", usuarioSchema);
 export default Usuarios;
