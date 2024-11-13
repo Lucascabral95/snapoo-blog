@@ -26,7 +26,7 @@ interface TUser {
 }
 
 const Login: React.FC = () => {
-  const { data: session } = useSession() as { data: { user?: User } | null };
+  const { data: session } = useSession() as { data: { user: User } | null };
   const [seccionSeleccionada, setSeccionSeleccionada] =
     useState<string>("posteos");
   const [posteos, setPosteos] = useState<any[]>([]);
@@ -124,7 +124,7 @@ const Login: React.FC = () => {
       }
     };
 
-    if (session?.user?.id) {
+    if (session?.user) {
       obtenerReposteos();
     }
   }, [session]);

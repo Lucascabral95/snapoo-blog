@@ -28,6 +28,7 @@ const PerfilUsuario = () => {
   const [dataPosteos, setDataPosteos] = useState<any[]>([]);
   const [seccionSeleccionada, setSeccionSeleccionada] = useState("posteos");
   const [datosDelUsuario, setDatosDelUsuario] = useState<IUsuario>();
+  const [rePosteos, setRePosteos] = useState<any[]>([]);
 
   useEffect(() => {
     const obtenerImagenes = async () => {
@@ -38,9 +39,7 @@ const PerfilUsuario = () => {
           const posteosFiltrados = results.data.result.filter(
             (posteo: any) => posteo.usuario.userName === username
           );
-          setDataPosteos(posteosFiltrados);
-
-          console.log(results.data.result[0].usuario);
+          setDataPosteos(posteosFiltrados.reverse());
           setDatosDelUsuario(results.data.result[0].usuario);
         }
       } catch (error) {
@@ -50,6 +49,33 @@ const PerfilUsuario = () => {
 
     obtenerImagenes();
   }, [username]);
+
+  useEffect(() => {
+    const obtenerReposteos = async () => {
+      try {
+        const results = await axios.get(`/api/intereses`);
+
+        if (results.status === 200 || results.status === 201) {
+          const busquedaUsuario = results.data.result.filter(
+            (posteo: any) => posteo.user.userName === username
+          );
+          setRePosteos(busquedaUsuario[0].rePosteos.reverse());
+        }
+      } catch (error: any) {
+        if (error.response) {
+          if (error.response.status === 404) {
+            console.log(error.response.data.error);
+          } else if (error.response.status === 500) {
+            window.location.reload();
+          } else {
+            console.log(error.response.data.error);
+          }
+        }
+      }
+    };
+
+    obtenerReposteos();
+  }, []);
 
   return (
     <div className="seccion-perfil">
@@ -103,7 +129,11 @@ const PerfilUsuario = () => {
         </div>
       </div>
 
-      <EstructuraImagenes posteos={dataPosteos} />
+      {seccionSeleccionada === "posteos" ? (
+        <EstructuraImagenes posteos={dataPosteos} />
+      ) : (
+        <EstructuraImagenes posteos={rePosteos} />
+      )}
     </div>
   );
 };
