@@ -139,10 +139,8 @@ const Login: React.FC = () => {
             (posteo: any) => posteo._id === id
           );
 
-          if (!busquedaUsuario) {
-            setTimeout(() => {
-                setSiHayDatos(false);
-            }, 3000);
+          if (busquedaUsuario) {
+            setSiHayDatos(true);
           }
         }
       } catch (error: any) {

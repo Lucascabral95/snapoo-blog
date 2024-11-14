@@ -1,9 +1,18 @@
 .user-not-found{
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     .contenedor-user-not-found{
         width: 100%;
         .descripcionn{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
                h2{
+                text-align: center;
                 color: red;
                 font-weight: 600;
                }
