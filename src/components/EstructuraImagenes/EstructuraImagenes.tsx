@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -13,10 +12,10 @@ const EstructuraImagenes: React.FC<Props> = ({ posteos }) => {
 
   return (
     <div className="fotos-subidas-mi-perfil">
-      {posteos.map((item, index) => (
+      {posteos.map((item) => (
         <Link
           href={`/posteo/${item._id}`}
-          key={index}
+          key={item._id}
           className="contenedor-fotos-subidas-mi-perfil"
         >
           <div className="imagen">
@@ -42,9 +41,6 @@ const EstructuraImagenes: React.FC<Props> = ({ posteos }) => {
           ) : null}
         </Link>
       ))}
-      {/* <div className="boton-de-ver-mas" onClick={() => {}}>
-        <button> Ver más </button>
-      </div> */}
     </div>
   );
 };

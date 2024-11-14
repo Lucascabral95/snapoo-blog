@@ -16,16 +16,21 @@ const Inicio: React.FC = () => {
           setPosteos(result.data.result.reverse());
         }
       } catch (error: any) {
-        if (error.response.status === 404 || error.response.status === 500) {
+        if (error.response.status === 500) {
+          setTimeout(() => {
             window.location.reload();
+          }, 2500);
         } else {
           console.log(error.response.data.error);
         }
       }
     };
 
-    obtenerTodasLasImagenes();
-  }, []);
+    // obtenerTodasLasImagenes();
+    if (posteos.length === 0) {
+      obtenerTodasLasImagenes();
+    }
+  }, [posteos.length]);
 
   return (
     <div className="seccion-perfil seccion-perfil-inicio seccion-array-de-imagenes">

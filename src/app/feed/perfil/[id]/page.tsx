@@ -234,12 +234,11 @@ const Login: React.FC = () => {
         />
       )}
 
-      <EstructuraImagenes posteos={posteos} />
-      {/* {seccionSeleccionada === "posteos" ? (
+      {seccionSeleccionada === "posteos" ? (
         <EstructuraImagenes posteos={posteos} />
       ) : (
         <EstructuraImagenes posteos={rePosteos} />
-      )} */}
+      )}
 
       {siHayDatos && <UserNotFound />}
     </div>
