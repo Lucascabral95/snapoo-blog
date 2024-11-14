@@ -119,7 +119,7 @@ const Login: React.FC = () => {
           if (error.response.status === 404) {
             console.log(error.response.data.error);
           } else if (error.response.status === 500) {
-            window.location.reload();
+            // window.location.reload();
             console.log(error.response.data.error);
           } else {
             console.log(error.response.data.error);

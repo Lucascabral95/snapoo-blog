@@ -38,6 +38,7 @@ class DAOIntereses {
 
     async getAll() {
         try {
+            await mongo();
             return await Intereses.find().populate("user").populate("rePosteos");
         } catch (error) {
             console.error("Error al obtener todos los intereses:", error);
@@ -47,6 +48,7 @@ class DAOIntereses {
 
     async getInteresesByUserID(id) {
         try {
+            await mongo();
             return await Intereses.findOne({ user: id }).populate("user").populate("rePosteos");
         } catch (error) {
             console.error("Error al obtener el interes:", error);
