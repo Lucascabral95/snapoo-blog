@@ -18,7 +18,6 @@ class DAOComentarios {
     async inizializeDB(): Promise<void> {
         try {
             await mongo();
-            console.log("MongoDB Connected");
         } catch (error) {
             console.log(error);
         }

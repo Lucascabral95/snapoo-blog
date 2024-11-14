@@ -14,7 +14,7 @@ class DAOPosteos {
             try {
                 await mongo(); 
                 this.isConnected = true; 
-                console.log(`MongoDB Connected`);
+                console.log(`MongoDB Connected of Posteos`);
             } catch (error) {
                 console.log(error);
                 throw new Error('Error al conectar con MongoDB');

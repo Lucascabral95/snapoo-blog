@@ -46,8 +46,10 @@ const Inicio: React.FC = () => {
       }
     };
 
-    getImages();
-  }, []);
+    if(posteos.length === 0) {
+      getImages();
+    }
+  }, [posteos.length]);
 
   return (
     <div className="seccion-perfil seccion-perfil-inicio seccion-array-de-imagenes">
