@@ -25,20 +25,21 @@ class DAOPosteos {
         }
     }
 
+    async getPosteoByID(id) {
+        try {
+            await mongo();
+            return await Posteos.findOne({ _id: id }).populate("usuario");
+        } catch (error) {
+            console.error("Error al obtener el posteo:", error);
+            throw error;
+        }
+    }
+
     async createPost(data) {
         try {
             return await Posteos.create(data);
         } catch (error) {
             console.error("Error al crear el posteo:", error);
-            throw error;
-        }
-    }
-
-    async getPosteoByID(id) {
-        try {
-            return await Posteos.findOne({ _id: id }).populate("usuario");
-        } catch (error) {
-            console.error("Error al obtener el posteo:", error);
             throw error;
         }
     }

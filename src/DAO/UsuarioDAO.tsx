@@ -25,6 +25,7 @@ class DAOUsuarios {
 
   async getUserByEmail(email: string): Promise<IUsuarios | null> {
     try {
+      await mongo();
       return await Usuarios.findOne({ email: email });
     } catch (error) {
       console.error("Error al obtener el usuario:", error);
@@ -34,6 +35,7 @@ class DAOUsuarios {
 
   async getUserByUserName(userName: string): Promise<IUsuarios | null> {
     try {
+      await mongo();
       return await Usuarios.findOne({ userName: userName });
     } catch (error) {
       console.error("Error al obtener el usuario:", error);
@@ -68,7 +70,7 @@ class DAOUsuarios {
 
   async getUserByID(id: string): Promise<IUsuarios | null> {
     try {
-      await mongo(); 
+      await mongo();
       return await Usuarios.findOne({ _id: id });
     } catch (error) {
       console.error("Error al obtener el usuario:", error);
