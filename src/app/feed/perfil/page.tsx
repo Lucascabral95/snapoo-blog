@@ -66,8 +66,7 @@ const Login: React.FC = () => {
 
         if (results.status === 200 || results.status === 201) {
           const posteosFiltrados = results.data.result.filter(
-            // (posteo: any) => posteo.usuario._id === session?.user?.id
-            (posteo: any) => posteo.usuario._id === "6727842d5930020e96922079"
+            (posteo: any) => posteo.usuario._id === session?.user?.id
           );
           setPosteos(posteosFiltrados.reverse());
         }
@@ -108,8 +107,7 @@ const Login: React.FC = () => {
 
         if (results.status === 200 || results.status === 201) {
           const misCompartidos = results.data.result.filter(
-            // (posteo: any) => posteo.user._id === session?.user?.id
-            (posteo: any) => posteo.user._id === "6727842d5930020e96922079"
+            (posteo: any) => posteo.user._id === session?.user?.id
           );
           setRePosteos(misCompartidos[0].rePosteos.reverse());
         }

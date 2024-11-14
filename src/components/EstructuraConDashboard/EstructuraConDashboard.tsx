@@ -15,8 +15,17 @@ interface Props {
   children: React.ReactNode;
 }
 
+interface IUser {
+  user: {
+    email: string;
+    userName: string;
+    avatar?: string;
+    id: string;
+  };
+}
+
 const EstructuraConDashboard = ({ children }: Props) => {
-  const { data: session } = useSession<any>();
+  const { data: session } = useSession() as { data: IUser | null };
   const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false);
 
   return (
@@ -48,7 +57,7 @@ const EstructuraConDashboard = ({ children }: Props) => {
                     <p> INICIO </p>
                   </div>
                 </Link>
-                <Link href="/feed/perfil" className="cat">
+                <Link href={`/feed/perfil/${session?.user?.id}`} className="cat">
                   <div className="icono">
                     <RiUserSmileFill className="icon" />
                   </div>
@@ -98,8 +107,14 @@ const EstructuraConDashboard = ({ children }: Props) => {
                 </div>
               ) : (
                 <div className="contenedor-setting">
-                  <Link className="boton-login-logout" href="/feed/login" 
-                   style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+                  <Link
+                    className="boton-login-logout"
+                    href="/feed/login"
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
                   >
                     {" "}
                     Iniciar sesión{" "}
