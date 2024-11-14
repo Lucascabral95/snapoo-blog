@@ -10,6 +10,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 import { useParams } from "next/navigation";
+import UserNotFound from "@/components/UserNotFound/UserNotFound";
 
 interface User {
   id: string;
@@ -138,8 +139,10 @@ const Login: React.FC = () => {
             (posteo: any) => posteo._id === id
           );
 
-          if (busquedaUsuario) {
-            setSiHayDatos(true);
+          if (!busquedaUsuario) {
+            setTimeout(() => {
+                setSiHayDatos(false);
+            }, 3000);
           }
         }
       } catch (error: any) {
@@ -152,10 +155,6 @@ const Login: React.FC = () => {
     };
 
     hayDatos();
-  }, [session]);
-
-  useEffect(() => {
-    console.log(session)
   }, [session]);
 
   return (
@@ -242,9 +241,8 @@ const Login: React.FC = () => {
           <EstructuraImagenes posteos={rePosteos} />
         )
       ) : (
-        <h1> NO EXISTE EL USUARIO </h1>
+        <UserNotFound />
       )}
-
     </div>
   );
 };
