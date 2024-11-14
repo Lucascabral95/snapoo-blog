@@ -7,28 +7,6 @@ import "./Feed.scss";
 const Inicio: React.FC = () => {
   const [posteos, setPosteos] = useState<any[]>([]);
 
-  // useEffect(() => {
-  //   const obtenerTodasLasImagenes = async () => {
-  //     try {
-  //       const result = await axios.get(`/api/posteos`);
-
-  //       if (result.status === 200 || result.status === 201) {
-  //         setPosteos(result.data.result.reverse());
-  //       }
-  //     } catch (error: any) {
-  //       if (error.response.status === 500) {
-  //         window.location.reload();
-  //       } else {
-  //         console.log(error.response.data.error);
-  //       }
-  //     }
-  //   };
-
-  //   if (posteos.length === 0) {
-  //     obtenerTodasLasImagenes();
-  //   }
-  // }, [posteos.length]);
-
   useEffect(() => {
     const getImages = async () => {
       try {
