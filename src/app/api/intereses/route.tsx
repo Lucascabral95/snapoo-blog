@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import daoIntereses from "../../../DAO/InteresesDAO";
 
-export async function POST(req) {
+export async function POST(req: Request) {
   try {
     const { rePosteos, user } = await req.json();
 
@@ -11,7 +11,7 @@ export async function POST(req) {
     const result = await daoIntereses.addRePosteos(rePosteos, user);
 
     return NextResponse.json({ result: result }, { status: 200 });
-  } catch (error) {
+  } catch (error: any) {
     console.error(error);
     const status = error.message === "Ya reposteaste este posteo" ? 400 : 500;
     return NextResponse.json(
@@ -26,7 +26,7 @@ export async function GET() {
   try {
     const result = await daoIntereses.getAll();
     return NextResponse.json({ result }, { status: 200 });
-  } catch (error) {
+  } catch (error: any) {
     return NextResponse.json({ error: error || 'Internal Server Error' }, { status: 500 });
   }
 }
