@@ -24,7 +24,7 @@ class DAOIntereses {
             } else {
                 const existeReposteo = usuario.rePosteos.some(r => r.equals(repost));
                 if (existeReposteo) {
-                    throw { message: "Ya reposteaste este posteo", statusCode: 400 }; 
+                    throw { message: "Ya reposteaste este posteo", statusCode: 400 };
                 }
 
                 usuario.rePosteos.push(repost);

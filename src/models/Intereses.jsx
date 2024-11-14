@@ -2,7 +2,11 @@ import mongoose from "mongoose";
 
 const interesesSchema = new mongoose.Schema({
     rePosteos: [
-        {type: mongoose.Schema.Types.ObjectId, ref: "Posteos", required: true}
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Posteos",
+            required: true
+        }
     ],
     fecha: {
         type: Date,
@@ -16,4 +20,4 @@ const interesesSchema = new mongoose.Schema({
 })
 
 const Intereses = mongoose.models.Intereses || mongoose.model("Intereses", interesesSchema)
-export default Intereses
+export default Intereses;

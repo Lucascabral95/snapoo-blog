@@ -4,12 +4,12 @@ import DAOIntereses from "@/DAO/InteresesDAO";
 export async function POST(req) {
   try {
     const { rePosteos, user } = await req.json();
-    
+
     if (!rePosteos || !user) {
       return NextResponse.json({ error: "Faltan datos" }, { status: 400 });
     }
     const result = await DAOIntereses.addRePosteos(rePosteos, user);
-  
+
     return NextResponse.json({ result: result }, { status: 200 });
   } catch (error) {
     console.error(error);

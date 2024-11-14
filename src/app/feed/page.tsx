@@ -17,16 +17,13 @@ const Inicio: React.FC = () => {
         }
       } catch (error: any) {
         if (error.response.status === 500) {
-          setTimeout(() => {
             window.location.reload();
-          }, 2500);
         } else {
           console.log(error.response.data.error);
         }
       }
     };
 
-    // obtenerTodasLasImagenes();
     if (posteos.length === 0) {
       obtenerTodasLasImagenes();
     }
