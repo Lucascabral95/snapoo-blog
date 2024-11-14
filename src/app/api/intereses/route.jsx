@@ -25,8 +25,8 @@ export async function POST(req) {
 export async function GET() {
   try {
     const result = await daoIntereses.getAll();
-    return NextResponse.json({ result: result }, { status: 200 });
+    return NextResponse.json({ result }, { status: 200 });
   } catch (error) {
-    return NextResponse.json({ error: error }, { status: 500 });
+    return NextResponse.json({ error: error || 'Internal Server Error' }, { status: 500 });
   }
 }

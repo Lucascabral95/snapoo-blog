@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import daoPosteos from "@/DAO/PosteosDAO";
 
-export async function GET(req: Request) {
+export async function GET(req) {
      try {
           const result = await daoPosteos.getAll();
           return NextResponse.json({ result: result }, { status: 200 });

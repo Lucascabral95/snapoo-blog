@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import DAOPosteos from "@/DAO/PosteosDAO";
 
-export async function GET(req: Request) {
+export async function GET(req) {
   try {
     const url = new URL(req.url);
     const id = url.searchParams.get("id");
@@ -37,7 +37,7 @@ export async function GET(req: Request) {
   }
 }
 
-export async function POST(req: Request) {
+export async function POST(req) {
   const { likes, usuario, comentarios, imagen, descripcion } = await req.json();
 
   if (!usuario || !imagen) {
@@ -58,7 +58,7 @@ export async function POST(req: Request) {
   }
 }
 
-export async function DELETE(req: Request) {
+export async function DELETE(req) {
   const id = new URL(req.url).searchParams.get("id");
 
   if (!id) {
@@ -81,7 +81,7 @@ export async function DELETE(req: Request) {
   }
 }
 
-export async function PUT(req: Request) {
+export async function PUT(req) {
   try {
     const id = new URL(req.url).searchParams.get("id");
 

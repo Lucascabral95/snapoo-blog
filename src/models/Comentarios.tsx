@@ -31,4 +31,5 @@ const comentariosSchema = new mongoose.Schema<IComentarios>({
     }
 })
 
-export default mongoose.models.Comentarios as mongoose.Model<IComentarios> || mongoose.model<IComentarios>("Comentarios", comentariosSchema);
+const Comentarios = mongoose.models.Comentarios as mongoose.Model<IComentarios> || mongoose.model<IComentarios>("Comentarios", comentariosSchema);
+export default Comentarios;
