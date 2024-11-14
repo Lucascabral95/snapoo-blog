@@ -1,5 +1,5 @@
-import mongo from "@/services/mongoDB";
-import Intereses from "@/models/Intereses";
+import mongo from "../services/mongoDB";
+import Intereses from "../models/Intereses";
 
 class DAOIntereses {
     constructor() {
