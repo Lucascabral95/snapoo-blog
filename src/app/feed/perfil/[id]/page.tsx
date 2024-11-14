@@ -68,7 +68,8 @@ const Login: React.FC = () => {
       if (!session || !id) return;
 
       try {
-        const results = await axios.get(`/api/posteos`);
+        // const results = await axios.get(`/api/posteos`);
+        const results = await axios.get(`/api/posteo`);
 
         if (results.status === 200 || results.status === 201) {
           const posteosFiltrados = results.data.result.filter(
