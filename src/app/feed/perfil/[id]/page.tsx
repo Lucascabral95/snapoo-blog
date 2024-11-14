@@ -131,7 +131,7 @@ const Login: React.FC = () => {
     if (id) {
       obtenerReposteos();
     }
-  }, [id, seccionSeleccionada]);
+  }, [seccionSeleccionada]);
 
   useEffect(() => {
     const hayDatos = async () => {
@@ -234,11 +234,12 @@ const Login: React.FC = () => {
         />
       )}
 
-      {seccionSeleccionada === "posteos" ? (
+      <EstructuraImagenes posteos={posteos} />
+      {/* {seccionSeleccionada === "posteos" ? (
         <EstructuraImagenes posteos={posteos} />
       ) : (
         <EstructuraImagenes posteos={rePosteos} />
-      )}
+      )} */}
 
       {siHayDatos && <UserNotFound />}
     </div>
