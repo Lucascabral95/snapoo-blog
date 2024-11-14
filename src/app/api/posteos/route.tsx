@@ -23,7 +23,7 @@ export async function GET(req: Request) {
 
     if (!posteos) {
       return NextResponse.json(
-        { result: [], message: "No posts available" },
+        { result: [], message: "Sin posteos por el momento" },
         { status: 404 }
       );
     }
