@@ -17,6 +17,7 @@ class DAOPosteos {
 
     async getAll() {
         try {
+            await mongo(); 
             return await Posteos.find().populate("usuario");
         } catch (error) {
             console.error("Error al obtener todos los posteos:", error);

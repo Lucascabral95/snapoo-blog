@@ -58,6 +58,7 @@ class DAOUsuarios {
 
   async getAll(): Promise<IUsuarios[]> {
     try {
+      await mongo();
       return await Usuarios.find();
     } catch (error) {
       console.error("Error al obtener todos los usuarios:", error);
@@ -67,6 +68,7 @@ class DAOUsuarios {
 
   async getUserByID(id: string): Promise<IUsuarios | null> {
     try {
+      await mongo(); 
       return await Usuarios.findOne({ _id: id });
     } catch (error) {
       console.error("Error al obtener el usuario:", error);
