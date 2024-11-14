@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import DAOIntereses from "@/DAO/InteresesDAO";
+import daoIntereses from "../../../DAO/InteresesDAO";
 
 export async function POST(req) {
   try {
@@ -8,7 +8,7 @@ export async function POST(req) {
     if (!rePosteos || !user) {
       return NextResponse.json({ error: "Faltan datos" }, { status: 400 });
     }
-    const result = await DAOIntereses.addRePosteos(rePosteos, user);
+    const result = await daoIntereses.addRePosteos(rePosteos, user);
 
     return NextResponse.json({ result: result }, { status: 200 });
   } catch (error) {
@@ -24,7 +24,7 @@ export async function POST(req) {
 
 export async function GET() {
   try {
-    const result = await DAOIntereses.getAll();
+    const result = await daoIntereses.getAll();
     return NextResponse.json({ result: result }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error: error }, { status: 500 });
