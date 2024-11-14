@@ -72,7 +72,8 @@ const Login: React.FC = () => {
 
         if (results.status === 200 || results.status === 201) {
           const posteosFiltrados = results.data.result.filter(
-            (posteo: any) => posteo.usuario._id === id
+            // (posteo: any) => posteo.usuario._id === id
+            (posteo: any) => posteo.usuario.userName === "User-sdjfns"
           );
           setPosteos(posteosFiltrados.reverse());
         }
@@ -91,7 +92,8 @@ const Login: React.FC = () => {
 
         if (results.status === 200 || results.status === 201) {
           const filtroMio = results.data.result.filter(
-            (posteo: any) => posteo._id === id
+            // (posteo: any) => posteo._id === id
+            (posteo: any) => posteo.userName === "User-sdjfns"
           );
           setMisDatos(filtroMio[0]);
         }
@@ -110,7 +112,8 @@ const Login: React.FC = () => {
 
         if (results.status === 200 || results.status === 201) {
           const misCompartidos = results.data.result.filter(
-            (posteo: any) => posteo.user._id === id
+            // (posteo: any) => posteo.user._id === id
+            (posteo: any) => posteo.user.userName === "User-sdjfns"
           );
           setRePosteos(misCompartidos[0].rePosteos.reverse());
         }
@@ -138,8 +141,11 @@ const Login: React.FC = () => {
         const results = await axios.get(`/api/register`);
 
         if (results.status === 200 || results.status === 201) {
+          // const busquedaUsuario = results.data.result.some(
+          //   (posteo: any) => posteo._id === id
+          // );
           const busquedaUsuario = results.data.result.some(
-            (posteo: any) => posteo._id === id
+            (posteo: any) => posteo.userName === "User-sdjfns"
           );
 
           if (!busquedaUsuario) {
