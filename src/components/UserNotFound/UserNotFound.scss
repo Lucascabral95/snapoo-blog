@@ -1,21 +1,40 @@
-.user-not-found{
+.user-not-found {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 
-    .contenedor-user-not-found{
+    .contenedor-user-not-found {
         width: 100%;
-        .descripcionn{
+
+        .descripcionn {
             width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-               h2{
+            margin: 10% 0 0 0;
+
+            h2 {
                 text-align: center;
-                color: red;
+                color: black;
                 font-weight: 600;
-               }
+            }
+        }
+    }
+}
+
+@media (max-width: 479px) {
+    .user-not-found {
+    
+        .contenedor-user-not-found {
+    
+            .descripcionn {
+                margin: 30% 0 0 0;
+    
+                h2 {
+                    font-size: 22px;
+                }
+            }
         }
     }
 }

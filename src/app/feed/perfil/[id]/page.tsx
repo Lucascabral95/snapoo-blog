@@ -118,6 +118,9 @@ const Login: React.FC = () => {
           if (error.response.status === 404) {
             console.log(error.response.data.error);
           } else if (error.response.status === 500) {
+            setTimeout(() => {
+              window.location.reload();
+            }, 2500);
             console.log(error.response.data.error);
           } else {
             console.log(error.response.data.error);
@@ -139,7 +142,7 @@ const Login: React.FC = () => {
             (posteo: any) => posteo._id === id
           );
 
-          if (busquedaUsuario) {
+          if (!busquedaUsuario) {
             setSiHayDatos(true);
           }
         }
@@ -174,7 +177,7 @@ const Login: React.FC = () => {
           />
         </div>
         <div className="titulo-username">
-          <h2 className="font-username">{misDatos?.userName ?? "Invitado"}</h2>
+          <h2 className="font-username">{misDatos?.userName ?? "404"}</h2>
         </div>
       </div>
       <div className="posteos-reposteos">
@@ -220,9 +223,7 @@ const Login: React.FC = () => {
           )}
         </div>
       </div>
-
       <Toaster />
-
       {isOpenSubida && (
         <SubidaImagenes
           setIsOpenSubida={setIsOpenSubida}
@@ -232,15 +233,13 @@ const Login: React.FC = () => {
         />
       )}
 
-      {siHayDatos ? (
-        seccionSeleccionada === "posteos" ? (
-          <EstructuraImagenes posteos={posteos} />
-        ) : (
-          <EstructuraImagenes posteos={rePosteos} />
-        )
+      {seccionSeleccionada === "posteos" ? (
+        <EstructuraImagenes posteos={posteos} />
       ) : (
-        <UserNotFound />
+        <EstructuraImagenes posteos={rePosteos} />
       )}
+
+      {siHayDatos && <UserNotFound />}
     </div>
   );
 };
