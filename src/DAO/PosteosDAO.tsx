@@ -1,105 +1,30 @@
-// import mongo from "@/services/mongoDB";
-// import Posteos from "@/models/Posteos";
-
-// class DAOPosteos {
-//     constructor() {
-//         this.inizializeDB();
-//     }
-
-//     async inizializeDB() {
-//         try {
-//             await mongo();
-//             console.log(`MongoDB Connected`);
-//         } catch (error) {
-//             console.log(error);
-//         }
-//     }
-
-//     async getAll() {
-//         try {
-//             await mongo(); 
-//             return await Posteos.find().populate("usuario");
-//         } catch (error) {
-//             console.error("Error al obtener todos los posteos:", error);
-//             throw error;
-//         }
-//     }
-
-//     async getPosteoByID(id) {
-//         try {
-//             await mongo();
-//             return await Posteos.findOne({ _id: id }).populate("usuario");
-//         } catch (error) {
-//             console.error("Error al obtener el posteo:", error);
-//             throw error;
-//         }
-//     }
-
-//     async createPost(data) {
-//         try {
-//             return await Posteos.create(data);
-//         } catch (error) {
-//             console.error("Error al crear el posteo:", error);
-//             throw error;
-//         }
-//     }
-
-//     async deletePosteoByID(id) {
-//         try {
-//             return await Posteos.findOneAndDelete({ _id: id });
-//         } catch (error) {
-//             console.error("Error al eliminar el posteo:", error);
-//             throw error;
-//         }
-//     }
-
-//     async filtrarPosteosPorUsuario(id) {
-//         try {
-//             const posteos = await Posteos.find().populate("usuario");
-//             const filtrarPosteosPorUsuario = posteos.filter((posteo) => posteo.usuario._id.toString() === id);
-//             return filtrarPosteosPorUsuario;
-//         } catch (error) {
-//             console.error("Error al obtener los posteos del usuario:", error);
-//             throw error;
-//         }
-//     }
-
-//     async likePosteo(id) {
-//         try {
-//             const posteo = await Posteos.findOneAndUpdate({ _id: id },
-//                 { $inc: { likes: 1 } }, { new: true });
-//             return posteo;
-//         } catch (error) {
-//             console.error("Error al dar me gusta:", error)
-//             throw error;
-//         }
-//     }
-// }
-
-// const daoPosteos = new DAOPosteos();
-// export default daoPosteos;
-
-
 import mongo from "@/services/mongoDB";
 import Posteos from "@/models/Posteos";
 
 class DAOPosteos {
+    private isConnected: boolean;
+
     constructor() {
+        this.isConnected = false;
         this.inizializeDB();
     }
 
     async inizializeDB(): Promise<void> {
-        try {
-            await mongo();
-            console.log(`MongoDB Connected`);
-        } catch (error) {
-            console.log(error);
+        if (!this.isConnected) {
+            try {
+                await mongo(); 
+                this.isConnected = true; 
+                console.log(`MongoDB Connected`);
+            } catch (error) {
+                console.log(error);
+                throw new Error('Error al conectar con MongoDB');
+            }
         }
     }
 
     async getAll(): Promise<any> {
         try {
-            await mongo(); 
+            if (!this.isConnected) await this.inizializeDB(); 
             return await Posteos.find().populate("usuario");
         } catch (error) {
             console.error("Error al obtener todos los posteos:", error);
@@ -109,7 +34,7 @@ class DAOPosteos {
 
     async getPosteoByID(id: string): Promise<any> {
         try {
-            await mongo();
+            if (!this.isConnected) await this.inizializeDB(); 
             return await Posteos.findOne({ _id: id }).populate("usuario");
         } catch (error) {
             console.error("Error al obtener el posteo:", error);
@@ -119,6 +44,7 @@ class DAOPosteos {
 
     async createPost(data: any): Promise<any> {
         try {
+            if (!this.isConnected) await this.inizializeDB(); 
             return await Posteos.create(data);
         } catch (error) {
             console.error("Error al crear el posteo:", error);
@@ -128,6 +54,7 @@ class DAOPosteos {
 
     async deletePosteoByID(id: string): Promise<any> {
         try {
+            if (!this.isConnected) await this.inizializeDB(); 
             return await Posteos.findOneAndDelete({ _id: id });
         } catch (error) {
             console.error("Error al eliminar el posteo:", error);
@@ -137,6 +64,7 @@ class DAOPosteos {
 
     async filtrarPosteosPorUsuario(id: string): Promise<any> {
         try {
+            if (!this.isConnected) await this.inizializeDB(); 
             const posteos = await Posteos.find().populate("usuario");
             const filtrarPosteosPorUsuario = posteos.filter((posteo) => posteo.usuario._id.toString() === id);
             return filtrarPosteosPorUsuario;
@@ -148,6 +76,7 @@ class DAOPosteos {
 
     async likePosteo(id: string): Promise<any> {
         try {
+            if (!this.isConnected) await this.inizializeDB(); 
             const posteo = await Posteos.findOneAndUpdate({ _id: id },
                 { $inc: { likes: 1 } }, { new: true });
             return posteo;

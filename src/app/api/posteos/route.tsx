@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import DAOPosteos from "@/DAO/PosteosDAO";
 
-export async function GET(req) {
+export async function GET(req: Request) {
   try {
     const url = new URL(req.url);
     const id = url.searchParams.get("id");
@@ -29,7 +29,7 @@ export async function GET(req) {
     }
 
     return NextResponse.json({ result: posteos }, { status: 200 });
-  } catch (error) {
+  } catch (error: any) {
     return NextResponse.json(
       { error: "Internal Server Error" },
       { status: 500 }
@@ -37,7 +37,7 @@ export async function GET(req) {
   }
 }
 
-export async function POST(req) {
+export async function POST(req: Request) {
   const { likes, usuario, comentarios, imagen, descripcion } = await req.json();
 
   if (!usuario || !imagen) {
@@ -53,12 +53,12 @@ export async function POST(req) {
       descripcion: descripcion,
     });
     return NextResponse.json({ result: posteo }, { status: 200 });
-  } catch (error) {
+  } catch (error: any) {
     return NextResponse.json({ error: error }, { status: 500 });
   }
 }
 
-export async function DELETE(req) {
+export async function DELETE(req: Request) {
   const id = new URL(req.url).searchParams.get("id");
 
   if (!id) {
@@ -76,12 +76,12 @@ export async function DELETE(req) {
     }
 
     return NextResponse.json({ result: "Posteo eliminado" }, { status: 200 });
-  } catch (error) {
+  } catch (error: any) {
     return NextResponse.json({ error: error }, { status: 500 });
   }
 }
 
-export async function PUT(req) {
+export async function PUT(req: Request) {
   try {
     const id = new URL(req.url).searchParams.get("id");
 
@@ -95,7 +95,7 @@ export async function PUT(req) {
       { result: cantidadDeLikes },
       { status: 200 }
     );
-  } catch (error) {
+  } catch (error: any) {
     return NextResponse.json(
       { error: "Internal Server Error" },
       { status: 500 }
