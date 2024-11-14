@@ -65,6 +65,8 @@ const Login: React.FC = () => {
 
   useEffect(() => {
     const obtenerImagenes = async () => {
+      if (!session || !id) return;
+
       try {
         const results = await axios.get(`/api/posteos`);
 
@@ -80,7 +82,7 @@ const Login: React.FC = () => {
     };
 
     obtenerImagenes();
-  }, [isOpenSubida]);
+  }, [id, session, isOpenSubida]);
 
   useEffect(() => {
     const obtenerDatosPersonales = async () => {
@@ -129,8 +131,10 @@ const Login: React.FC = () => {
       }
     };
 
-    obtenerReposteos();
-  }, [id]);
+    if (id) {
+      obtenerReposteos();
+    }
+  }, [id, seccionSeleccionada]);
 
   useEffect(() => {
     const hayDatos = async () => {
