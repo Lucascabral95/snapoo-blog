@@ -23,6 +23,10 @@ export async function POST(req) {
 
 
 export async function GET() {
-  const result = await DAOIntereses.getAll();
-  return NextResponse.json({ result: result }, { status: 200 });
+  try {
+    const result = await DAOIntereses.getAll();
+    return NextResponse.json({ result: result }, { status: 200 });
+  } catch (error) {
+    return NextResponse.json({ error: error }, { status: 500 });
+  }
 }
