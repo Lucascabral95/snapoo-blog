@@ -9,7 +9,6 @@ class DAOIntereses {
     async inizializeDB() {
         try {
             await mongo();
-            console.log(`MongoDB Connected`);
         } catch (error) {
             console.log(error);
         }

@@ -1,5 +1,5 @@
-import Usuarios from "../models/Usuario"; 
-import mongo from "@/services/mongoDB"; 
+import Usuarios from "../models/Usuario";
+import mongo from "@/services/mongoDB";
 import bcrypt from "bcrypt";
 
 interface IUsuarios {
@@ -47,7 +47,7 @@ class DAOUsuarios {
         const hashedPassword = await bcrypt.hash(user.password, 10);
         user.password = hashedPassword;
       }
-  
+
       const newUser = new Usuarios(user);
       return await newUser.save();
     } catch (error) {
@@ -55,7 +55,6 @@ class DAOUsuarios {
       throw error;
     }
   }
-  
 
   async getAll(): Promise<IUsuarios[]> {
     try {
@@ -80,7 +79,7 @@ class DAOUsuarios {
       return await Usuarios.findOneAndDelete({ _id: id });
     } catch (error) {
       console.error("Error al eliminar el usuario:", error);
-      throw error
+      throw error;
     }
   }
 }

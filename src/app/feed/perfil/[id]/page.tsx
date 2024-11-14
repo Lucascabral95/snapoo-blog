@@ -93,7 +93,6 @@ const Login: React.FC = () => {
           const filtroMio = results.data.result.filter(
             (posteo: any) => posteo._id === id
           );
-
           setMisDatos(filtroMio[0]);
         }
       } catch (error) {
@@ -120,9 +119,7 @@ const Login: React.FC = () => {
           if (error.response.status === 404) {
             console.log(error.response.data.error);
           } else if (error.response.status === 500) {
-            setTimeout(() => {
-              window.location.reload();
-            }, 2500);
+            window.location.reload();
             console.log(error.response.data.error);
           } else {
             console.log(error.response.data.error);
