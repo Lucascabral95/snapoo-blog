@@ -73,7 +73,7 @@ const MenuHamburguesa: React.FC<PropsMenu> = ({ setIsOpenMenu }) => {
               <p> BUSQUEDA </p>
             </div>
           </Link>
-        </motion.div>
+        </motion.div>   
         <motion.div
           initial={{ opacity: 0, x: 100 }}
           animate={{ opacity: 1, x: 0 }}
