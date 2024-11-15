@@ -38,15 +38,56 @@
 
 // export default Inicio;
 
+// SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION 
+// SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION 
+// SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION 
+// SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION 
+// SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION 
+
+// import EstructuraImagenes from "@/components/EstructuraImagenes/EstructuraImagenes";
+// import axios from "axios";
+// import React from "react";
+// import "./Feed.scss";
+
+// async function obtenerImagenes() {
+//   try {
+//     const results = await axios.get(`${process.env.NEXTAUTH_URL}api/posteo`);
+    
+//     if (results.status === 200 || results.status === 201) {
+//       return results.data.result.reverse();
+//     }
+//   } catch (error) {
+//     console.log(error);
+//     return [];
+//   }
+// }
+
+// const Inicio: React.FC = async () => {
+//   const posteos = await obtenerImagenes();
+  
+//   return (
+//     <div className="seccion-perfil seccion-perfil-inicio seccion-array-de-imagenes">
+//       <EstructuraImagenes posteos={posteos} />
+//     </div>
+//   );
+// };
+
+// export default Inicio;
+// SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION 
+// SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION 
+// SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION 
+// SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION 
+// SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION 
+"use client";
+import React, { useEffect, useState } from "react";
 import EstructuraImagenes from "@/components/EstructuraImagenes/EstructuraImagenes";
 import axios from "axios";
-import React from "react";
 import "./Feed.scss";
 
-async function obtenerImagenes() {
+// Función asíncrona para obtener las imágenes
+const obtenerImagenes = async () => {
   try {
     const results = await axios.get(`${process.env.NEXTAUTH_URL}api/posteo`);
-
     if (results.status === 200 || results.status === 201) {
       return results.data.result.reverse();
     }
@@ -54,10 +95,19 @@ async function obtenerImagenes() {
     console.log(error);
     return [];
   }
-}
+};
 
-const Inicio: React.FC = async () => {
-  const posteos = await obtenerImagenes();
+const Inicio: React.FC = () => {
+  const [posteos, setPosteos] = useState<any[]>([]);
+
+  useEffect(() => {
+    const cargarImagenes = async () => {
+      const posts = await obtenerImagenes();
+      setPosteos(posts);
+    };
+
+    cargarImagenes(); 
+  }, []);
 
   return (
     <div className="seccion-perfil seccion-perfil-inicio seccion-array-de-imagenes">
