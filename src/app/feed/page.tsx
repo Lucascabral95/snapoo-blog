@@ -87,7 +87,7 @@ import "./Feed.scss";
 // Función asíncrona para obtener las imágenes
 const obtenerImagenes = async () => {
   try {
-    const results = await axios.get(`${process.env.NEXTAUTH_URL}api/posteo`);
+    const results = await axios.get(`/api/posteo`);
     if (results.status === 200 || results.status === 201) {
       return results.data.result.reverse();
     }
