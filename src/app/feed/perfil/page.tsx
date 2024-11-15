@@ -211,6 +211,7 @@ const Login: React.FC = () => {
       ) : (
         <EstructuraImagenes posteos={rePosteos} />
       )}
+      
     </div>
   );
 };
