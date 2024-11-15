@@ -57,7 +57,8 @@ const EstructuraConDashboard = ({ children }: Props) => {
                     <p> INICIO </p>
                   </div>
                 </Link>
-                <Link href={`/feed/perfil/${session?.user?.id}`} className="cat">
+                {/* <Link href={`/feed/perfil/${session?.user?.id}`} className="cat"> */}
+                <Link href={`/feed/perfil/`} className="cat">
                   <div className="icono">
                     <RiUserSmileFill className="icon" />
                   </div>

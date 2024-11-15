@@ -153,8 +153,6 @@ type Username = {
   }>;
 };
 
-
-
 async function obtenerImagenes(username: string) {
   try {
     const results = await axios.get(`${process.env.NEXTAUTH_URL}api/posteos`);
@@ -194,7 +192,6 @@ const PerfilUsuario: React.FC<Username> = async ({ params }) => {
 
   const dataPosteos = await obtenerImagenes(username);
   const datosDelUsuario = dataPosteos[0].usuario;
-
   const rePosteos = await obtenerReposteos(username);
 
   return (

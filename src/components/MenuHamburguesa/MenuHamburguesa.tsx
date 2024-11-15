@@ -49,8 +49,8 @@ const MenuHamburguesa: React.FC<PropsMenu> = ({ setIsOpenMenu }) => {
             </div>
           </Link>
           <Link
-            // href="/feed/perfil"
-            href={`/feed/perfil/${session?.user?.id}`}
+            // href={`/feed/perfil/${session?.user?.id}`}
+            href={`/feed/perfil`}
             className="seccion"
             onClick={() => setIsOpenMenu(false)}
           >
