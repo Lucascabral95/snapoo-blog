@@ -93,6 +93,7 @@ const Posteos: React.FC<PosteoProps> = async ({ params }) => {
   const { id } = await params;
 
   const dataPosteos = await obtenerPosteo(id);
+  console.log(dataPosteos)
 
   const loadingSkeleton: boolean = false;
 

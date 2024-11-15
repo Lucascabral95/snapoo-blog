@@ -46,7 +46,7 @@ import axios from "axios";
 import React from "react";
 import "./Feed.scss";
 
-const obtenerImagenes = async () => {
+const obtenerImagenes = async (): Promise<any> => {
   try {
     const results = await axios.get(`${process.env.NEXTAUTH_URL}api/posteo`);
 
