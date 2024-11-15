@@ -102,7 +102,6 @@ import Link from "next/link";
 import SubidaImagenes from "../SubidaImagenes/SubidaImagenes";
 import toast, { Toaster } from "react-hot-toast";
 import { GoPlus } from "react-icons/go";
-import { useSession } from "next-auth/react";
 
 interface UserProfileProps {
   dataPosteos: any[];
@@ -164,7 +163,8 @@ const UserProfile: React.FC<UserProfileProps> = ({
           <Image
             alt="Imagen de perfil"
             style={{ borderRadius: "50%" }}
-            src={session?.user?.image ?? "/img/logo-snapoo.png"}
+            // src={session?.user?.image ?? "/img/logo-snapoo.png"}
+            src={"/img/logo-snapoo.png"}
             width={140}
             className="img"
             height={140}

@@ -24,7 +24,7 @@ export async function GET(req: Request) {
     if (!posteos) {
       return NextResponse.json(
         { result: [], message: "Sin posteos por el momento" },
-        { status: 404 }
+        { status: 201 }
       );
     }
 
@@ -91,10 +91,7 @@ export async function PUT(req: Request) {
 
     const cantidadDeLikes = await DAOPosteos.likePosteo(id);
 
-    return NextResponse.json(
-      { result: cantidadDeLikes },
-      { status: 200 }
-    );
+    return NextResponse.json({ result: cantidadDeLikes }, { status: 200 });
   } catch (error: any) {
     return NextResponse.json(
       { error: "Internal Server Error" },

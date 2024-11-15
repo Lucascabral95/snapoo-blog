@@ -44,26 +44,58 @@
 // SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION
 // SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION SEPARACION
 
+// import EstructuraImagenes from "@/components/EstructuraImagenes/EstructuraImagenes";
+// import axios from "axios";
+// import React from "react";
+// import "./Feed.scss";
+
+// async function obtenerImagenes() {
+//   try {
+//     const results = await axios.get(`${process.env.NEXTAUTH_URL}api/posteos`);
+
+//     if (results.status === 200 || results.status === 201) {
+//       const datos = results.data.result.reverse();
+//       return datos;
+//     }
+//   } catch (error) {
+//     console.log(`Se produjo un error en el servidor: ${error}`);
+//     return [];
+//   }
+// }
+
+// const Inicio: React.FC = async () => {
+//   const posteos = await obtenerImagenes();
+
+//   return (
+//     <div className="seccion-perfil seccion-perfil-inicio seccion-array-de-imagenes">
+//       <EstructuraImagenes posteos={posteos} />
+//     </div>
+//   );
+// };
+
+// export default Inicio;
+
 import EstructuraImagenes from "@/components/EstructuraImagenes/EstructuraImagenes";
 import axios from "axios";
 import React from "react";
 import "./Feed.scss";
 
-const Inicio: React.FC = async () => {
-  
-  async function obtenerImagenes() {
-    try {
-      const results = await axios.get(`${process.env.NEXTAUTH_URL}api/posteos`);
+export const dynamic = "force-dynamic"; 
 
-      if (results.status === 200 || results.status === 201) {
-        return results.data.result.reverse();
-      }
-    } catch (error) {
-      console.log(error);
-      return [];
+async function obtenerImagenes() {
+  try {
+    const results = await axios.get(`${process.env.NEXTAUTH_URL}api/posteos`);
+
+    if (results.status === 200 || results.status === 201) {
+      return results.data.result.reverse();
     }
+  } catch (error) {
+    console.log(error);
+    return [];
   }
+}
 
+const Inicio = async () => {
   const posteos = await obtenerImagenes();
 
   return (
