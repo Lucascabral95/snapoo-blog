@@ -45,7 +45,7 @@ import "./Feed.scss";
 
 const obtenerImagenes = async () => {
   try {
-    const results = await axios.get(`https://snapoo-blog.vercel.app/api/posteo`);
+    const results = await axios.get(`${process.env.NEXTAUTH_URL}api/posteo`);
 
     if (results.status === 200 || results.status === 201) {
       return results.data.result.reverse();
