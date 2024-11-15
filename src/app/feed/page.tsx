@@ -38,6 +38,9 @@
 
 // export default Inicio;
 
+
+
+
 import EstructuraImagenes from "@/components/EstructuraImagenes/EstructuraImagenes";
 import axios from "axios";
 import React from "react";
