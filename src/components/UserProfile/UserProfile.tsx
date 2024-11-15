@@ -112,7 +112,7 @@ interface UserProfileProps {
   rePosteos: any[];
   session: {
     user: {
-      image: string;
+      image?: string;
       id: string;
     };
   };

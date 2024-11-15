@@ -38,15 +38,12 @@
 
 // export default Inicio;
 
-
-
-
 import EstructuraImagenes from "@/components/EstructuraImagenes/EstructuraImagenes";
 import axios from "axios";
 import React from "react";
 import "./Feed.scss";
 
-const obtenerImagenes = async (): Promise<any> => {
+async function obtenerImagenes() {
   try {
     const results = await axios.get(`${process.env.NEXTAUTH_URL}api/posteo`);
 
@@ -57,7 +54,7 @@ const obtenerImagenes = async (): Promise<any> => {
     console.log(error);
     return [];
   }
-};
+}
 
 const Inicio: React.FC = async () => {
   const posteos = await obtenerImagenes();
