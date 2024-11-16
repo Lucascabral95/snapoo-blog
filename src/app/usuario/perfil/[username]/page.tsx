@@ -72,7 +72,6 @@ const PerfilUsuario: React.FC<Username> = async ({ params }) => {
         dataPosteos={dataPosteos}
         datosDelUsuario={datosDelUsuario}
         rePosteos={rePosteos}
-        session={session}
       />
     </>
   );

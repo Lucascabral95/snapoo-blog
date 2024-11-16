@@ -287,7 +287,6 @@ const Login: React.FC = async () => {
       <UserProfile
         dataPosteos={dataPosteos}
         datosDelUsuario={datosDelUsuario}
-        session={session}
         rePosteos={rePosteos}
       />
     </>

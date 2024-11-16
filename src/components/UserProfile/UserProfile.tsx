@@ -91,7 +91,7 @@
 // TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR
 
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import EstructuraImagenes from "../EstructuraImagenes/EstructuraImagenes";
 import axios from "axios";
@@ -105,12 +105,6 @@ interface UserProfileProps {
   dataPosteos: any[] | [];
   datosDelUsuario: string;
   rePosteos: any[] | [];
-  session: {
-    user: {
-      image?: string;
-      id: string;
-    };
-  };
 }
 
 interface IUser {
@@ -127,7 +121,6 @@ const UserProfile: React.FC<UserProfileProps> = ({
   dataPosteos,
   datosDelUsuario,
   rePosteos,
-  session,
 }) => {
   const [seccionSeleccionada, setSeccionSeleccionada] = useState("posteos");
   const [isOpenSubida, setIsOpenSubida] = useState<boolean>(false);
@@ -139,7 +132,7 @@ const UserProfile: React.FC<UserProfileProps> = ({
     const form = new FormData();
     form.append("file", file!);
     form.append("comentario", comentario);
-    form.append("id", session!.user!.id);
+    form.append("id", sesion!.user!.id);
 
     try {
       const result = await axios.post("/api/upload", form, {
@@ -169,7 +162,7 @@ const UserProfile: React.FC<UserProfileProps> = ({
           <Image
             alt="Imagen de perfil"
             style={{ borderRadius: "50%" }}
-            src={session?.user?.image ?? "/img/logo-snapoo.png"}
+            src={sesion?.user?.image ?? "/img/logo-snapoo.png"}
             width={140}
             className="img"
             height={140}
