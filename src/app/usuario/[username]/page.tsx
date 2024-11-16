@@ -178,6 +178,7 @@ async function obtenerReposteos(username: string) {
       const busquedaUsuario = results.data.result.filter(
         (posteo: any) => posteo.user.userName === username
       );
+      
       return busquedaUsuario[0].rePosteos.reverse();
     }
   } catch (error) {

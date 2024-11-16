@@ -270,15 +270,8 @@ const obtenerReposteos = async (id: string): Promise<any> => {
       return misCompartidos[0].rePosteos;
     }
   } catch (error: any) {
-    if (error.response) {
-      if (error.response.status === 404) {
-        console.log(error.response.data.error);
-      } else if (error.response.status === 500) {
-        console.log(error.response.data.error);
-      } else {
-        console.log(error.response.data.error);
-      }
-    }
+    console.log(`Se produjo un error en el servidor: ${error}`);
+    return [];
   }
 };
 
@@ -288,9 +281,7 @@ const Login: React.FC = async () => {
   const dataPosteos = await obtenerPosteos(session?.user?.id);
   const datosDelUsuario = await obtenerDatosPersonales(session?.user?.id);
   const rePosteos = await obtenerReposteos(session?.user?.id);
-
-  // console.log(dataPosteos);
-
+  
   return (
     <>
       <UserProfile
