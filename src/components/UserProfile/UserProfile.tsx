@@ -86,34 +86,40 @@
 // };
 
 // export default UserProfile;
-// TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR 
-// TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR 
-// TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR 
-
-
+// TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR
+// TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR
+// TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR TITULAR
 
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import EstructuraImagenes from "../EstructuraImagenes/EstructuraImagenes";
-import { usePathname } from "next/navigation";
 import axios from "axios";
 import Link from "next/link";
 import SubidaImagenes from "../SubidaImagenes/SubidaImagenes";
 import toast, { Toaster } from "react-hot-toast";
 import { GoPlus } from "react-icons/go";
+import { useSession } from "next-auth/react";
 
 interface UserProfileProps {
-  dataPosteos: any[];
-  datosDelUsuario: {
-    userName: string;
-  };
-  rePosteos: any[];
+  dataPosteos: any[] | [];
+  datosDelUsuario: string;
+  rePosteos: any[] | [];
   session: {
     user: {
       image?: string;
       id: string;
     };
+  };
+}
+
+interface IUser {
+  user: {
+    id: string;
+    name?: string;
+    email?: string;
+    image?: string;
+    userName: string;
   };
 }
 
@@ -127,7 +133,7 @@ const UserProfile: React.FC<UserProfileProps> = ({
   const [isOpenSubida, setIsOpenSubida] = useState<boolean>(false);
   const [file, setFile] = useState<File | undefined>(undefined);
   const [comentario, setComentario] = useState<string>("");
-  const pathname = usePathname();
+  const { data: sesion } = useSession() as { data: IUser | null };
 
   const enviarImagen = async () => {
     const form = new FormData();
@@ -153,7 +159,7 @@ const UserProfile: React.FC<UserProfileProps> = ({
 
   return (
     <div className="seccion-perfil">
-       {pathname === "/feed/perfil" && (
+      {sesion?.user?.userName === datosDelUsuario && (
         <Link href="/feed/ajustes" className="editar">
           <button> EDITAR </button>
         </Link>
@@ -171,7 +177,7 @@ const UserProfile: React.FC<UserProfileProps> = ({
         </div>
 
         <div className="titulo-username">
-          <h2> {datosDelUsuario?.userName ?? "Invitado"} </h2>
+          <h2> {datosDelUsuario ?? "Invitado"} </h2>
         </div>
       </div>
       <div className="posteos-reposteos">
@@ -205,7 +211,7 @@ const UserProfile: React.FC<UserProfileProps> = ({
               <p> COMPARTIDOS </p>
             </div>
           </div>
-          {pathname === "/feed/perfil" && (
+          {sesion?.user?.userName === datosDelUsuario && (
             <div className="subida-imagenes">
               <div className="icono">
                 <GoPlus

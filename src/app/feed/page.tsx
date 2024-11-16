@@ -49,7 +49,7 @@ import axios from "axios";
 import React from "react";
 import "./Feed.scss";
 
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
 
 async function obtenerImagenes() {
   try {
@@ -59,10 +59,10 @@ async function obtenerImagenes() {
       return results.data.result.reverse();
     }
   } catch (error: any) {
-    if (error.response.status === 500) {
+    if (error.response && error.response.status === 500) {
       setTimeout(() => {
         window.location.reload();
-      }, 2000);
+      }, 1200);
     } else {
       console.log(error.response.data.error);
     }

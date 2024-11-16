@@ -28,6 +28,7 @@ const EstructuraConDashboard = ({ children }: Props) => {
   const { data: session } = useSession() as { data: IUser | null };
   const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false);
 
+
   return (
     <div className="estructura-con-dashboard">
       <div className="contenedor-estructura-con-dashboard">
@@ -58,7 +59,7 @@ const EstructuraConDashboard = ({ children }: Props) => {
                   </div>
                 </Link>
                 {/* <Link href={`/feed/perfil/${session?.user?.id}`} className="cat"> */}
-                <Link href={`/feed/perfil/`} className="cat">
+                <Link href={`/usuario/${session?.user?.userName}`} className="cat">
                   <div className="icono">
                     <RiUserSmileFill className="icon" />
                   </div>

@@ -42,7 +42,7 @@ const authOptions = {
           if (!client) {
             const newUser = await UsuarioDAO.createUser({
               email: user.email,
-              userName: user.name,
+              name: user.usename,
               avatar: user.image
             });
             user._id = newUser._id;
@@ -60,11 +60,13 @@ const authOptions = {
     async session({ session, token }) {
       session.user.id = token.id || null;
       session.user.saludo = "Hola Developer Beginner";
+      session.user.userName = token.userName; 
       return session;
     },
     async jwt({ token, user }) {
       if (user) {
         token.id = user._id;
+        token.userName = user.userName;
       }
       return token;
     },

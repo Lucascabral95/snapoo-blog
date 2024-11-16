@@ -9,6 +9,7 @@ export const authOptions = {
         async session({ session, token }) {
             if (token) {
                 session.user.id = token.id;
+                session.user.userName = token.userName;
                 session.saludo = "Hola Developer Beginner";
             }
             return session;

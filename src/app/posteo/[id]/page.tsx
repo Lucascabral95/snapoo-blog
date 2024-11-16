@@ -56,14 +56,6 @@
 
 // export default Posteos;
 
-
-
-
-
-
-
-
-
 import React from "react";
 import axios from "axios";
 import VistaImagen from "./VistaImagen";
@@ -93,7 +85,6 @@ const Posteos: React.FC<PosteoProps> = async ({ params }) => {
   const { id } = await params;
 
   const dataPosteos = await obtenerPosteo(id);
-  console.log(dataPosteos)
 
   const loadingSkeleton: boolean = false;
 

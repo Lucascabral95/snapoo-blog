@@ -15,7 +15,7 @@ const EstructuraImagenes: React.FC<Props> = ({ posteos }) => {
     <div className="fotos-subidas-mi-perfil">
       {posteos?.map((item) => (
         <Link
-          href={`/posteo/${item._id}`}
+          href={`/posteo/${item?._id}`}
           key={item?._id}
           className="contenedor-fotos-subidas-mi-perfil"
         >

@@ -178,7 +178,7 @@ async function obtenerReposteos(username: string) {
       const busquedaUsuario = results.data.result.filter(
         (posteo: any) => posteo.user.userName === username
       );
-      
+
       return busquedaUsuario[0].rePosteos.reverse();
     }
   } catch (error) {
@@ -187,12 +187,26 @@ async function obtenerReposteos(username: string) {
   }
 }
 
+async function obtenerUsuario(username: string) {
+  try {
+    const results = await axios.get(`${process.env.NEXTAUTH_URL}api/register`);
+
+    if (results.status === 200 || results.status === 201) {
+      return results.data.result.filter((posteo: any) => posteo.userName === username);
+    }
+  } catch (error) {
+    console.log(`Se produjo un error en el servidor: ${error}`);
+    return null;
+  }
+}
+
 const PerfilUsuario: React.FC<Username> = async ({ params }) => {
   const { username } = await params;
   const session = await getServerSession(authOptions);
-
+  
   const dataPosteos = await obtenerImagenes(username);
-  const datosDelUsuario = dataPosteos[0].usuario;
+  const userName = await obtenerUsuario(username);
+  const datosDelUsuario = userName[0].userName;
   const rePosteos = await obtenerReposteos(username);
 
   return (
