@@ -16,7 +16,7 @@ export async function middleware(req: NextRequest) {
 
   if (!session) {
     if (
-      req.nextUrl.pathname.startsWith("/feed/perfil") ||
+      req.nextUrl.pathname.startsWith("/usuario/perfil/") ||
       req.nextUrl.pathname.startsWith("/feed/ajustes")
     ) {
       return NextResponse.redirect(new URL("/feed/login", req.url));
@@ -28,9 +28,9 @@ export async function middleware(req: NextRequest) {
 
 export const config = {
   matcher: [
-    "/feed/login",
+    "/usuario/perfil/:path*",
     "/feed/register",
     "/feed/perfil/:path*",
-    "/feed/ajustes",
+    "/feed/ajustes"
   ],
 };
