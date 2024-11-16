@@ -28,7 +28,7 @@ const EstructuraImagenes: React.FC<Props> = ({ posteos }) => {
               alt={item?.descripcion}
             />
           </div>
-          {pathName === "/feed" || pathName === "/feed/people" ? (
+          {pathName === "/feed/people" ? (
             <div className="nombre-fav-repost">
               <div className="nombre">
                 <p>
