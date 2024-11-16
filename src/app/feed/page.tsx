@@ -59,13 +59,7 @@ async function obtenerImagenes() {
       return results.data.result.reverse();
     }
   } catch (error: any) {
-    if (error.response && error.response.status === 500) {
-      setTimeout(() => {
-        window.location.reload();
-      }, 1200);
-    } else {
-      console.log(error.response.data.error);
-    }
+    console.log(`Se produjo un error en el servidor: ${error}`);
   }
 }
 
