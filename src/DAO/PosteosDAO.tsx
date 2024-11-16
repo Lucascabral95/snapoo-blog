@@ -26,6 +26,15 @@ class DAOPosteos {
     }
   }
 
+  async getAllWithoutPopulate(): Promise<any> {
+    try {
+      return Posteos.find();
+    } catch (error) {
+      console.error("Error al obtener todos los posteos:", error);
+      throw error;
+    }
+  }
+
   async getPosteoByID(id: string): Promise<any> {
     try {
       return await Posteos.findOne({ _id: id }).populate("usuario");
