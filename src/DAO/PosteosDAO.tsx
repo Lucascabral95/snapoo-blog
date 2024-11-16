@@ -18,7 +18,8 @@ class DAOPosteos {
 
   async getAll(): Promise<any> {
     try {
-      return await Posteos.find().populate("usuario");
+      const posteos = await Posteos.find().populate("usuario");
+      return posteos;
     } catch (error) {
       console.error("Error al obtener todos los posteos:", error);
       throw error;

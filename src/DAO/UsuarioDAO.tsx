@@ -23,6 +23,16 @@ class DAOUsuarios {
     }
   }
 
+  async getAll(): Promise<IUsuarios[]> {
+    try {
+      await mongo();
+      return await Usuarios.find();
+    } catch (error) {
+      console.error("Error al obtener todos los usuarios:", error);
+      throw new Error("No se pudo obtener la lista de usuarios.");
+    }
+  }
+
   async getUserByEmail(email: string): Promise<IUsuarios | null> {
     try {
       await mongo();
@@ -55,16 +65,6 @@ class DAOUsuarios {
     } catch (error) {
       console.error("Error al crear el usuario:", error);
       throw error;
-    }
-  }
-
-  async getAll(): Promise<IUsuarios[]> {
-    try {
-      await mongo();
-      return await Usuarios.find();
-    } catch (error) {
-      console.error("Error al obtener todos los usuarios:", error);
-      throw new Error("No se pudo obtener la lista de usuarios.");
     }
   }
 
