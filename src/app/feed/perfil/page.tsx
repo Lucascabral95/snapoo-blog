@@ -289,13 +289,15 @@ const Login: React.FC = async () => {
   const datosDelUsuario = await obtenerDatosPersonales(session?.user?.id);
   const rePosteos = await obtenerReposteos(session?.user?.id);
 
+  // console.log(dataPosteos);
+
   return (
     <>
       <UserProfile
         dataPosteos={dataPosteos}
         datosDelUsuario={datosDelUsuario}
-        rePosteos={rePosteos}
         session={session}
+        rePosteos={rePosteos}
       />
     </>
   );

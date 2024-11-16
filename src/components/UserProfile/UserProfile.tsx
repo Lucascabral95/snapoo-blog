@@ -163,8 +163,7 @@ const UserProfile: React.FC<UserProfileProps> = ({
           <Image
             alt="Imagen de perfil"
             style={{ borderRadius: "50%" }}
-            // src={session?.user?.image ?? "/img/logo-snapoo.png"}
-            src={"/img/logo-snapoo.png"}
+            src={session?.user?.image ?? "/img/logo-snapoo.png"}
             width={140}
             className="img"
             height={140}

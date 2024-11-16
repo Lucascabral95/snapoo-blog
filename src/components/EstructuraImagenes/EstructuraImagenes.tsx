@@ -13,10 +13,10 @@ const EstructuraImagenes: React.FC<Props> = ({ posteos }) => {
 
   return (
     <div className="fotos-subidas-mi-perfil">
-      {posteos.map((item) => (
+      {posteos?.map((item) => (
         <Link
           href={`/posteo/${item._id}`}
-          key={item._id}
+          key={item?._id}
           className="contenedor-fotos-subidas-mi-perfil"
         >
           <div className="imagen">
@@ -24,8 +24,8 @@ const EstructuraImagenes: React.FC<Props> = ({ posteos }) => {
               width={500}
               height={500}
               style={{ width: "100%", height: "100%" }}
-              src={item.imagen}
-              alt={item.descripcion}
+              src={item?.imagen}
+              alt={item?.descripcion}
             />
           </div>
           {pathName === "/feed" || pathName === "/feed/people" ? (
@@ -33,9 +33,9 @@ const EstructuraImagenes: React.FC<Props> = ({ posteos }) => {
               <div className="nombre">
                 <p>
                   {" "}
-                  {item.usuario.userName !== ""
-                    ? item.usuario.userName
-                    : item.usuario.email}{" "}
+                  {item?.usuario?.userName !== ""
+                    ? item?.usuario?.userName
+                    : item?.usuario?.email}{" "}
                 </p>
               </div>
             </div>
