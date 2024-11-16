@@ -62,10 +62,10 @@ import "./Feed.scss";
 //     console.log(`Se produjo un error en el servidor: ${error}`);
 //   }
 // }
-async function obtenerImagenes() {
+async function obtenerImagenes(retry = 3) {
   try {
     const res = await fetch(`${process.env.NEXTAUTH_URL}api/posteos`, {
-      next: { revalidate: 0 }, 
+      next: { revalidate: 0 },
     });
 
     if (!res.ok) {
@@ -75,10 +75,15 @@ async function obtenerImagenes() {
     const data = await res.json();
     return data.result.reverse();
   } catch (error) {
+    if (retry > 0) {
+      console.warn(`Reintentando... (${3 - retry + 1})`);
+      return obtenerImagenes(retry - 1);
+    }
     console.log(`Se produjo un error en el servidor: ${error}`);
     return [];
   }
 }
+
 
 
 const Inicio = async () => {
