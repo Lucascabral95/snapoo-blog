@@ -51,17 +51,35 @@ import "./Feed.scss";
 
 // export const dynamic = "force-dynamic";
 
+// async function obtenerImagenes() {
+//   try {
+//     const results = await axios.get(`${process.env.NEXTAUTH_URL}api/posteos`);
+
+//     if (results.status === 200 || results.status === 201) {
+//       return results.data.result.reverse();
+//     }
+//   } catch (error: any) {
+//     console.log(`Se produjo un error en el servidor: ${error}`);
+//   }
+// }
 async function obtenerImagenes() {
   try {
-    const results = await axios.get(`${process.env.NEXTAUTH_URL}api/posteos`);
+    const res = await fetch(`${process.env.NEXTAUTH_URL}api/posteos`, {
+      next: { revalidate: 0 }, 
+    });
 
-    if (results.status === 200 || results.status === 201) {
-      return results.data.result.reverse();
+    if (!res.ok) {
+      throw new Error("Error al obtener los datos.");
     }
-  } catch (error: any) {
+
+    const data = await res.json();
+    return data.result.reverse();
+  } catch (error) {
     console.log(`Se produjo un error en el servidor: ${error}`);
+    return [];
   }
 }
+
 
 const Inicio = async () => {
   const posteos = await obtenerImagenes();
