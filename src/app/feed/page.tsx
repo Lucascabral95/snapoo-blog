@@ -16,7 +16,7 @@ const Inicio: React.FC = () => {
           setPosteos(result.data.result.reverse());
         }
       } catch (error: any) {
-        if (error.response.status === 500 || error.response.status === 404) {
+        if (error.response.status === 500) {
           window.location.reload();
         } else {
           console.log(error.response.data.error);

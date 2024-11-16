@@ -120,14 +120,13 @@ const PerfilUsuario: React.FC = () => {
   useEffect(() => {
     const obtenerReposteos = async () => {
       try {
-        const results = await axios.get(
-          `${process.env.NEXTAUTH_URL}api/intereses`
-        );
+        const results = await axios.get(`/api/intereses`);
 
         if (results.status === 200 || results.status === 201) {
           const busquedaUsuario = results.data.result.filter(
             (posteo: any) => posteo.user.userName === username
           );
+          
           setRePosteos(busquedaUsuario[0].rePosteos.reverse());
         }
       } catch (error: any) {
