@@ -50,7 +50,8 @@ class DAOIntereses {
   async getAll() {
     try {
       if (!this.isConnected) await this.inizializeDB();
-      return await Intereses.find().populate("user").populate("rePosteos");
+      // return await Intereses.find().populate("user").populate("rePosteos");
+      return await Intereses.find().populate("rePosteos");
     } catch (error) {
       console.error("Error al obtener todos los intereses:", error);
       throw error;
