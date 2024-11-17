@@ -1,5 +1,7 @@
 import mongo from "../services/mongoDB";
 import Intereses from "../models/Intereses";
+import Usuarios from "@/models/Usuario";
+import Posteos from "@/models/Posteos";
 
 class DAOIntereses {
   private isConnected: boolean;
@@ -50,8 +52,7 @@ class DAOIntereses {
   async getAll() {
     try {
       if (!this.isConnected) await this.inizializeDB();
-      // return await Intereses.find().populate("user").populate("rePosteos");
-      return await Intereses.find().populate("rePosteos");
+      return await Intereses.find().populate("user").populate("rePosteos");
     } catch (error) {
       console.error("Error al obtener todos los intereses:", error);
       throw error;
@@ -64,6 +65,20 @@ class DAOIntereses {
       return await Intereses.findOne({ user: id })
         .populate("user")
         .populate("rePosteos");
+    } catch (error) {
+      console.error("Error al obtener el interes:", error);
+      throw error;
+    }
+  }
+
+  async getInteresesByUserName(userName: string): Promise<any> {
+    try {
+      const { _id } = await Usuarios.findOne({ userName: userName });
+      const interesDeUsuario = await Intereses.findOne({ user: _id });
+
+      const grupoDePosteos = await Posteos.find({ _id: { $in: interesDeUsuario.rePosteos } });
+
+      return grupoDePosteos;
     } catch (error) {
       console.error("Error al obtener el interes:", error);
       throw error;

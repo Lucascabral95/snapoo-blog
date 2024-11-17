@@ -28,7 +28,8 @@ const EstructuraImagenes: React.FC<Props> = ({ posteos }) => {
               alt={item?.descripcion}
             />
           </div>
-          {/* {pathName === "/feed" || pathName === "/feed/people" ? (
+          {/* {pathName === "/feed" || pathName === "/feed/people" ? ( */}
+          {pathName === "/feed/people" && item?.usuario?.userName ? (
             <div className="nombre-fav-repost">
               <div className="nombre">
                 <p>
@@ -39,7 +40,7 @@ const EstructuraImagenes: React.FC<Props> = ({ posteos }) => {
                 </p>
               </div>
             </div>
-          ) : null} */}
+          ) : null}
         </Link>
       ))}
     </div>

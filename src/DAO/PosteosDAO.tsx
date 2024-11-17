@@ -1,5 +1,6 @@
 import mongo from "@/services/mongoDB";
 import Posteos from "@/models/Posteos";
+import Usuarios from "@/models/Usuario";
 
 class DAOPosteos {
   constructor() {
@@ -28,7 +29,7 @@ class DAOPosteos {
 
   async getAllWithoutPopulate(): Promise<any> {
     try {
-      return Posteos.find();
+      return await Posteos.find();
     } catch (error) {
       console.error("Error al obtener todos los posteos:", error);
       throw error;
@@ -85,6 +86,20 @@ class DAOPosteos {
       return posteo;
     } catch (error) {
       console.error("Error al dar me gusta:", error);
+      throw error;
+    }
+  }
+
+  async getAllPosteosByUserNameId(userName: string): Promise<any> {
+    try {
+      const usuario = await Usuarios.findOne({ userName: userName });
+      const posteos = (await Posteos.find()).filter(
+        (posteo) => posteo.usuario._id.toString() === usuario._id.toString()
+      );
+
+      return posteos;
+    } catch (error) {
+      console.error("Error al obtener los posteos del usuario:", error);
       throw error;
     }
   }

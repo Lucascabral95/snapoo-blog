@@ -10,7 +10,7 @@ const Inicio: React.FC = () => {
   useEffect(() => {
     const getImages = async () => {
       try {
-        const result = await axios.get(`/api/posteos`);
+        const result = await axios.get(`/api/posteo`);
 
         if (result.status === 200 || result.status === 201) {
           setPosteos(result.data.result.reverse());

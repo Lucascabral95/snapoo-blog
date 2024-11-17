@@ -10,14 +10,11 @@ type Username = {
 
 async function obtenerImagenes(username: string) {
   try {
-    const results = await axios.get(`${process.env.NEXTAUTH_URL}api/posteos`);
+    const results = await axios.get(
+      `${process.env.NEXTAUTH_URL}api/posteos/posteosPorUsuario?username=${username}`);
 
     if (results.status === 200 || results.status === 201) {
-      const filtro = results.data.result
-        .filter((posteo: any) => posteo.usuario.userName === username)
-        .reverse();
-
-      return filtro;
+      return results.data.result;
     }
   } catch (error: any) {
     console.log(`Se produjo un error en el servidor: ${error}`);
@@ -27,14 +24,10 @@ async function obtenerImagenes(username: string) {
 
 async function obtenerReposteos(username: string) {
   try {
-    const results = await axios.get(`${process.env.NEXTAUTH_URL}api/intereses`);
+    const results = await axios.get(`${process.env.NEXTAUTH_URL}api/intereses/interesesPorUsuario?username=${username}`);
 
     if (results.status === 200 || results.status === 201) {
-      const busquedaUsuario = results.data.result.filter(
-        (posteo: any) => posteo.user.userName === username
-      );
-
-      return busquedaUsuario[0].rePosteos.reverse();
+      return results.data.result;
     }
   } catch (error) {
     console.log(`Se produjo un error en el servidor: ${error}`);
@@ -47,7 +40,9 @@ async function obtenerUsuario(username: string) {
     const results = await axios.get(`${process.env.NEXTAUTH_URL}api/register`);
 
     if (results.status === 200 || results.status === 201) {
-      return results.data.result.filter((posteo: any) => posteo.userName === username);
+      return results.data.result.filter(
+        (posteo: any) => posteo.userName === username
+      );
     }
   } catch (error) {
     console.log(`Se produjo un error en el servidor: ${error}`);
@@ -62,6 +57,8 @@ const PerfilUsuario: React.FC<Username> = async ({ params }) => {
   const userName = await obtenerUsuario(username);
   const datosDelUsuario = userName[0].userName;
   const rePosteos = await obtenerReposteos(username);
+
+  console.log(rePosteos)
 
   return (
     <>
