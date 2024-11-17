@@ -27,20 +27,21 @@ class DAOPosteos {
     }
   }
 
+  async getPosteoByID(id: string): Promise<any> {
+    try {
+      const posteo = await Posteos.findOne({ _id: id }).populate("usuario");
+      return posteo;
+    } catch (error) {
+      console.error("Error al obtener el posteo:", error);
+      throw error;
+    }
+  }
+
   async getAllWithoutPopulate(): Promise<any> {
     try {
       return await Posteos.find();
     } catch (error) {
       console.error("Error al obtener todos los posteos:", error);
-      throw error;
-    }
-  }
-
-  async getPosteoByID(id: string): Promise<any> {
-    try {
-      return await Posteos.findOne({ _id: id }).populate("usuario");
-    } catch (error) {
-      console.error("Error al obtener el posteo:", error);
       throw error;
     }
   }

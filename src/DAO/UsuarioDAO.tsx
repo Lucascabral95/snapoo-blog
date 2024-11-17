@@ -46,7 +46,13 @@ class DAOUsuarios {
   async getUserByUserName(userName: string): Promise<IUsuarios | null> {
     try {
       await mongo();
-      return await Usuarios.findOne({ userName: userName });
+      const usuario = await Usuarios.findOne({ userName: userName });
+
+      if (!usuario) {
+        throw { error: "El usuario no se encuentra registrado.", status: 400 };
+      }
+
+      return usuario;
     } catch (error) {
       console.error("Error al obtener el usuario:", error);
       throw error;

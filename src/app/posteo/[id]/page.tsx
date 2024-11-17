@@ -3,11 +3,13 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import axios from "axios";
 import VistaImagen from "./VistaImagen";
+import NotFoundComponent from "@/components/NotFound/NotFound";
+import EstructuraConDashboard from "@/components/EstructuraConDashboard/EstructuraConDashboard";
 
 const Posteos: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [dataPosteos, setDataPosteos] = useState<any>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<boolean>(false);
   const [loadingSkeleton, setLoadingSkeleton] = useState<boolean>(true);
 
   useEffect(() => {
@@ -21,11 +23,12 @@ const Posteos: React.FC = () => {
         }
       } catch (error: any) {
         if (error.response) {
-          if (error.response.status === 404 || error.response.status === 400) {
-            setError("No se encontro el posteo");
+          if (error.response.status === 404 || error.response.status === 500) {
+            setError(true);
+            console.log(`No se encontro el posteo solicitado`);
           }
         } else {
-          setError("Error al obtener el posteo");
+          setError(true);
           console.log(error);
         }
       }
@@ -37,7 +40,9 @@ const Posteos: React.FC = () => {
   return (
     <>
       {error ? (
-        <p>{error}</p>
+        <EstructuraConDashboard>
+          <NotFoundComponent contenido="Posteo no encontrado" />
+        </EstructuraConDashboard>
       ) : (
         <VistaImagen
           id={dataPosteos?._id}

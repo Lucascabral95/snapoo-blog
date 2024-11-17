@@ -73,10 +73,27 @@ class DAOIntereses {
 
   async getInteresesByUserName(userName: string): Promise<any> {
     try {
-      const { _id } = await Usuarios.findOne({ userName: userName });
-      const interesDeUsuario = await Intereses.findOne({ user: _id });
+      const usuario = await Usuarios.findOne({ userName: userName });
 
-      const grupoDePosteos = await Posteos.find({ _id: { $in: interesDeUsuario.rePosteos } });
+      if (!usuario) {
+        throw {
+          error: "El usuario no se encuentra registrado.",
+          status: 400,
+        };
+      }
+
+      const interesDeUsuario = await Intereses.findOne({ user: usuario._id });
+      
+      if(!interesDeUsuario){
+        throw {
+          error: "El usuario no tiene reposteos.",
+          status: 400,
+        }
+      }
+      
+      const grupoDePosteos = await Posteos.find({
+        _id: { $in: interesDeUsuario.rePosteos },
+      });
 
       return grupoDePosteos;
     } catch (error) {

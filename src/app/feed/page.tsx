@@ -23,6 +23,7 @@ const Inicio: React.FC = () => {
         }
       }
     };
+    
     getImages();
   }, []);
 

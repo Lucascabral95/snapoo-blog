@@ -7,16 +7,9 @@ export async function GET(req: Request) {
     const id = url.searchParams.get("id");
 
     if (id) {
-      const existePosteo = await DAOPosteos.getPosteoByID(id);
-
-      if (existePosteo) {
-        return NextResponse.json({ result: existePosteo }, { status: 200 });
-      } else {
-        return NextResponse.json(
-          { result: "No hay posteo", message: "EL posteo no existe" },
-          { status: 204 }
-        );
-      }
+      const posteo = await DAOPosteos.getPosteoByID(id);
+      
+      return NextResponse.json({ result: posteo }, { status: 200 });
     }
 
     const posteos = await DAOPosteos.getAll();
