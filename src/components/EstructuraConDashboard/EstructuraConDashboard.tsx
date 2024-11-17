@@ -212,7 +212,7 @@ const EstructuraConDashboard = ({ children }: Props) => {
                 </div>
                 <div className="categorias">
                   <div className="terminos">
-                    <p> Copyright 2024 - Lucas Cabral </p>
+                    <p> 2024 Lucas Cabral Dev - Todos los derechos reservados </p>
                   </div>
                 </div>
               </div>

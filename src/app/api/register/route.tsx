@@ -24,17 +24,6 @@ export async function POST(req: Request) {
   }
 }
 
-
-// export async function GET(req: Request) {
-//   try {
-//     const resultados = await DAOUsuarios.getAll();
-    
-//     return NextResponse.json({ result: resultados }, { status: 200 });
-//   } catch (error) {
-//     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
-//   }
-// }
-
 export async function GET(req: Request) {
   try {
      const username = new URL(req.url).searchParams.get("username");

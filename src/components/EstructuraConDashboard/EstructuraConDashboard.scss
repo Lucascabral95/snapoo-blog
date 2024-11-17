@@ -321,8 +321,6 @@
                                     align-items: center;
                                     justify-content: center;
                                     margin: -20px 0 0 0;
-
-                                    .img {}
                                 }
                             }
 
@@ -331,6 +329,7 @@
                                 display: flex;
                                 align-items: center;
                                 justify-content: center;
+                                margin-top: 2.2%;
 
                                 button{
                                  display: flex;
@@ -752,8 +751,6 @@
                                         .nombre {
                                             display: flex;
                                             align-items: center;
-
-                                            p {}
                                         }
                                     }
                                 }
@@ -903,8 +900,6 @@
                                         .nombre {
                                             display: flex;
                                             align-items: center;
-
-                                            p {}
                                         }
                                     }
                                 }
@@ -917,8 +912,6 @@
     }
 }
 
-// MEDIAS QUERIES DE ARRAY DE IMAGENES
-// MEDIAS QUERIES DE ARRAY DE IMAGENES
 // MEDIAS QUERIES DE ARRAY DE IMAGENES
 @media (min-width: 1192px) and (max-width: 1515px) {
     .estructura-con-dashboard {
@@ -965,8 +958,6 @@
                                 .imagen-de-perfil {
                                     display: flex;
                                     margin: 0 40px 0 0;
-
-                                    .img {}
                                 }
 
                                 .titulo-username {
@@ -1065,8 +1056,6 @@
                                         .nombre {
                                             display: flex;
                                             align-items: center;
-
-                                            p {}
                                         }
                                     }
                                 }
@@ -1124,8 +1113,6 @@
                                 .imagen-de-perfil {
                                     display: flex;
                                     margin: 0 40px 0 0;
-
-                                    .img {}
                                 }
 
                                 .titulo-username {
@@ -1226,8 +1213,6 @@
                                         .nombre {
                                             display: flex;
                                             align-items: center;
-
-                                            p {}
                                         }
                                     }
                                 }
@@ -1286,8 +1271,6 @@
                                 .imagen-de-perfil {
                                     display: flex;
                                     margin: 0 40px 0 0;
-
-                                    .img {}
                                 }
 
                                 .titulo-username {

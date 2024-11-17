@@ -45,13 +45,11 @@ async function obtenerReposteos(username: string) {
 
 async function obtenerUsuario(username: string) {
   try {
-    // const results = await axios.get(`${process.env.NEXTAUTH_URL}api/register`);
     const results = await axios.get(
       `${process.env.NEXTAUTH_URL}api/register?username=${username}`
     );
 
     if (results.status === 200 || results.status === 201) {
-      // return results.data.result.filter((posteo: any) => posteo.userName === username);
       return results.data.result;
     }
   } catch (error: any) {
@@ -66,7 +64,6 @@ const PerfilUsuario: React.FC<Username> = async ({ params }) => {
   const dataPosteos = await obtenerImagenes(username);
   const userName = await obtenerUsuario(username);
   const datosDelUsuario = userName.userName;
-  // const datosDelUsuario = userName[0].userName;
   const rePosteos = await obtenerReposteos(username);
 
   return (
