@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import Image from "next/image";
 import EstructuraImagenes from "../EstructuraImagenes/EstructuraImagenes";
 import axios from "axios";
 import Link from "next/link";
@@ -8,6 +7,7 @@ import SubidaImagenes from "../SubidaImagenes/SubidaImagenes";
 import toast, { Toaster } from "react-hot-toast";
 import { GoPlus } from "react-icons/go";
 import { useSession } from "next-auth/react";
+import Avvvatars from "avvvatars-react";
 
 interface UserProfileProps {
   dataPosteos: any[] | [];
@@ -67,14 +67,27 @@ const UserProfile: React.FC<UserProfileProps> = ({
       )}
       <div className="imagen-nombre-perfil">
         <div className="imagen-de-perfil">
-          <Image
-            alt="Imagen de perfil"
-            style={{ borderRadius: "50%" }}
-            src={sesion?.user?.image ?? "/img/logo-snapoo.png"}
-            width={140}
-            className="img"
-            height={140}
-          />
+          <div className="foto-grande">
+            <Avvvatars
+              value={datosDelUsuario ?? "Invitado"}
+              size={140}
+              style="shape"
+            />
+          </div>
+          <div className="foto-mediana">
+            <Avvvatars
+              value={datosDelUsuario ?? "Invitado"}
+              size={85}
+              style="shape"
+            />
+          </div>
+          <div className="foto-chica">
+            <Avvvatars
+              value={datosDelUsuario ?? "Invitado"}
+              size={74}
+              style="shape"
+            />
+          </div>
         </div>
 
         <div className="titulo-username">

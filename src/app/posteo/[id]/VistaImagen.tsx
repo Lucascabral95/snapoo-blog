@@ -13,6 +13,7 @@ import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { useSession } from "next-auth/react";
 import Skeleton from "react-loading-skeleton";
+import Avvvatars from "avvvatars-react";
 
 interface VistaImagenProps {
   url: string;
@@ -133,6 +134,9 @@ const VistaImagen: React.FC<VistaImagenProps> = ({
               </div>
             </div>
             <div className="usuarios-favoritos">
+              <Link href={`/usuario/${username}`} className="perfil-usuario-posteo">
+                <Avvvatars value={username} size={22} style="shape" />
+              </Link>
               <Link href={`/usuario/${username}`} className="usuario">
                 <p> {usuario} </p>
               </Link>

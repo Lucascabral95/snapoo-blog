@@ -110,10 +110,17 @@
 
                 .usuarios-favoritos {
                     width: 100%;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
                     margin: 10px 0;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    
+                    .perfil-usuario-posteo{
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        margin: 0 6px 0 0;
+                    }
 
                     .usuario {
                         width: fit-content;
@@ -245,10 +252,11 @@
 
                     .usuarios-favoritos {
                         width: 100%;
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
                         margin: 10px 0;
+                        display: flex;
+                        // justify-content: space-between;
+                        justify-content: flex-start;
+                        align-items: center;
 
                         .usuario {
                             width: fit-content;

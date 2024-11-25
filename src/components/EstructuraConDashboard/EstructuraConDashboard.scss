@@ -178,6 +178,18 @@
                                 .img {
                                     border-radius: 50%;
                                 }
+
+                                .foto-grande {
+                                    display: flex;
+                                }
+
+                                .foto-mediana {
+                                    display: none;
+                                }
+
+                                .foto-chica {
+                                    display: none;
+                                }
                             }
 
                             .titulo-username {
@@ -324,25 +336,25 @@
                                 }
                             }
 
-                            .boton-de-ver-mas{
+                            .boton-de-ver-mas {
                                 width: 100%;
                                 display: flex;
                                 align-items: center;
                                 justify-content: center;
                                 margin-top: 2.2%;
 
-                                button{
-                                 display: flex;
-                                 justify-content: center;
-                                 align-items: center;
-                                 border-radius: 8px;
-                                 background-color: black;
-                                 color: white;
-                                 padding: 8px 20px;
-                                 cursor: pointer;
-                                  border: none;
-                                  font-size: 16px;
-                                  font-weight: 600;
+                                button {
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    border-radius: 8px;
+                                    background-color: black;
+                                    color: white;
+                                    padding: 8px 20px;
+                                    cursor: pointer;
+                                    border: none;
+                                    font-size: 16px;
+                                    font-weight: 600;
                                 }
                             }
                         }
@@ -655,6 +667,18 @@
                                         width: 85px;
                                         height: 85px;
                                     }
+
+                                    .foto-grande {
+                                        display: none;
+                                    }
+    
+                                    .foto-mediana {
+                                        display: flex;
+                                    }
+    
+                                    .foto-chica {
+                                        display: none;
+                                    }
                                 }
 
                                 .titulo-username {
@@ -803,6 +827,18 @@
                                     .img {
                                         width: 74px;
                                         height: 74px;
+                                    }
+
+                                    .foto-grande {
+                                        display: none;
+                                    }
+    
+                                    .foto-mediana {
+                                        display: none;
+                                    }
+    
+                                    .foto-chica {
+                                        display: flex;
                                     }
                                 }
 
