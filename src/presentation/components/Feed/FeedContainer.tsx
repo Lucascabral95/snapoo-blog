@@ -17,10 +17,5 @@ export default function FeedContainer() {
     return <FeedError error={error} onRetry={refetch} />;
   }
 
-  return (
-    // <div className="seccion-perfil seccion-perfil-inicio seccion-array-de-imagenes">
-    //   <EstructuraImagenes posteos={posts} />
-    // </div>
-    <EstructuraImagenes posteos={posts} />
-  );
+  return <EstructuraImagenes posteos={posts} />;
 }

@@ -109,7 +109,7 @@ export default function EstructuraImagenes({
   }, [loadedImages, posteosVisibles.length]);
 
   return (
-    <div className="seccion-perfil seccion-perfil-inicio-2 seccion-array-de-imagenes">
+    <div className="seccion-perfil seccion-perfil-inicio seccion-array-de-imagenes">
       <div ref={containerRef} className="fotos-subidas-mi-perfil-masonry">
         {posteosVisibles.map((item, index) => (
           <Link

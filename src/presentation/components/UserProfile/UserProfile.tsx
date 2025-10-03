@@ -9,6 +9,7 @@ import Avvvatars from "avvvatars-react";
 
 import SubidaImagenes from "@/presentation/components/SubidaImagenes/SubidaImagenes";
 import EstructuraImagenesPerfiles from "@/presentation/components/SecondaryComponents/Gallery/EstructuraImagenPerfiles";
+import EstructuraImagenes from "../SecondaryComponents/Gallery/EstructuraImagenes";
 
 interface UserProfileProps {
   dataPosteos: any[];
@@ -200,7 +201,8 @@ export default function UserProfile({
         />
       )}
 
-      <EstructuraImagenesPerfiles posteos={posteosActuales} />
+      <EstructuraImagenes posteos={posteosActuales} />
+      {/* <EstructuraImagenesPerfiles posteos={posteosActuales} /> */}
     </div>
   );
 }

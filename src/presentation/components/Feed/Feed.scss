@@ -79,14 +79,19 @@
   }
 }
 
-.fotos-subidas-mi-perfil-masonry {
+.fotos-subidas-mi-perfil {
   width: 100%;
-  position: relative;
+  columns: 4;
+  column-gap: 4px;
+  padding: 0;
   margin: 0 auto;
 
   .contenedor-fotos-subidas-mi-perfil {
-    display: block;
-    position: absolute;
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 4px;
+    break-inside: avoid;
+    position: relative;
     overflow: hidden;
     background: #fafafa;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -114,7 +119,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 12px;
 
       img {
         width: 100%;
@@ -146,38 +150,61 @@
       }
     }
   }
+
+  .boton-de-ver-mas {
+    width: 100%;
+    column-span: all;
+    display: flex;
+    justify-content: center;
+    padding: 32px 0;
+    break-inside: avoid;
+
+    button {
+      padding: 12px 32px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #262626;
+      background: white;
+      border: 2px solid #dbdbdb;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        Helvetica, Arial, sans-serif;
+
+      &:hover {
+        background: #262626;
+        color: white;
+        border-color: #262626;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+    }
+  }
 }
 
-.boton-de-ver-mas-container {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  padding: 32px 0;
-  margin-top: 20px;
+@media (min-width: 1400px) {
+  .fotos-subidas-mi-perfil {
+    columns: 5;
+    column-gap: 4px;
 
-  button {
-    padding: 12px 32px;
-    font-size: 14px;
-    font-weight: 600;
-    color: #262626;
-    background: white;
-    border: 2px solid #dbdbdb;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      Helvetica, Arial, sans-serif;
-
-    &:hover {
-      background: #262626;
-      color: white;
-      border-color: #262626;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    .contenedor-fotos-subidas-mi-perfil {
+      margin-bottom: 4px;
     }
+  }
+}
 
-    &:active {
-      transform: translateY(0);
+@media (max-width: 1200px) {
+  .fotos-subidas-mi-perfil {
+    columns: 3;
+    column-gap: 3px;
+
+    .contenedor-fotos-subidas-mi-perfil {
+      margin-bottom: 3px;
     }
   }
 }
@@ -213,8 +240,13 @@
     }
   }
 
-  .fotos-subidas-mi-perfil-masonry {
+  .fotos-subidas-mi-perfil {
+    columns: 2;
+    column-gap: 2px;
+
     .contenedor-fotos-subidas-mi-perfil {
+      margin-bottom: 2px;
+
       &:hover {
         transform: scale(1.01);
       }
@@ -227,14 +259,26 @@
         }
       }
     }
+
+    .boton-de-ver-mas {
+      padding: 24px 0;
+
+      button {
+        padding: 10px 24px;
+        font-size: 13px;
+      }
+    }
   }
+}
 
-  .boton-de-ver-mas-container {
-    padding: 24px 0;
+@media (max-width: 480px) {
+  .fotos-subidas-mi-perfil {
+    margin-top: 20px;
+    columns: 1;
+    column-gap: 2px;
 
-    button {
-      padding: 10px 24px;
-      font-size: 13px;
+    .contenedor-fotos-subidas-mi-perfil {
+      margin-bottom: 2px;
     }
   }
 }
@@ -242,5 +286,13 @@
 @media (max-width: 375px) {
   .seccion-perfil-inicio {
     padding: 12px 4px;
+  }
+
+  .fotos-subidas-mi-perfil {
+    column-gap: 1px;
+
+    .contenedor-fotos-subidas-mi-perfil {
+      margin-bottom: 1px;
+    }
   }
 }
