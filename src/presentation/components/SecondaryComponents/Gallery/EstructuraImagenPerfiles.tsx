@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { GalleryPost } from "@/infrastructure/types/gallery.types";
+import "./EstructuraImagenPerfiles.scss";
 
 interface EstructuraImagenesProps {
   posteos: GalleryPost[];
@@ -12,7 +13,7 @@ interface EstructuraImagenesProps {
 
 const IMAGES_PER_PAGE = 30;
 
-export default function EstructuraImagenesPerfiles({
+export default function EstructuraImagenes({
   posteos,
 }: EstructuraImagenesProps) {
   const pathName = usePathname();
@@ -108,7 +109,7 @@ export default function EstructuraImagenesPerfiles({
   }, [loadedImages, posteosVisibles.length]);
 
   return (
-    <div className="seccion-perfil seccion-perfil-inicio seccion-array-de-imagenes">
+    <div className="seccion-perfil seccion-perfil-inicio-2 seccion-array-de-imagenes">
       <div ref={containerRef} className="fotos-subidas-mi-perfil-masonry">
         {posteosVisibles.map((item, index) => (
           <Link

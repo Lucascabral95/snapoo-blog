@@ -7,8 +7,8 @@ import { GoPlus } from "react-icons/go";
 import { useSession } from "next-auth/react";
 import Avvvatars from "avvvatars-react";
 
-import EstructuraImagenes from "@/presentation/components/SecondaryComponents/Gallery/EstructuraImagenes";
 import SubidaImagenes from "@/presentation/components/SubidaImagenes/SubidaImagenes";
+import EstructuraImagenesPerfiles from "@/presentation/components/SecondaryComponents/Gallery/EstructuraImagenPerfiles";
 
 interface UserProfileProps {
   dataPosteos: any[];
@@ -200,7 +200,7 @@ export default function UserProfile({
         />
       )}
 
-      <EstructuraImagenes posteos={posteosActuales} />
+      <EstructuraImagenesPerfiles posteos={posteosActuales} />
     </div>
   );
 }

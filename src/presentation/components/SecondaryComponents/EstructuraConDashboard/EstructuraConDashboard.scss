@@ -1,1422 +1,1402 @@
 .estructura-con-dashboard {
+  width: 100%;
+  min-height: 100vh;
+
+  .contenedor-estructura-con-dashboard {
     width: 100%;
-    min-height: 100vh;
+    display: flex;
 
-    .contenedor-estructura-con-dashboard {
-        width: 100%;
+    .header-titular {
+      height: 100vh;
+      position: sticky;
+      top: 0;
+      left: 0;
+      background-color: black;
+      width: 164px;
+
+      .div-superior {
+        height: 100vh;
         display: flex;
+        flex-direction: column;
+        justify-content: space-between;
 
-        .header-titular {
-            height: 100vh;
-            position: sticky;
-            top: 0;
-            left: 0;
-            background-color: black;
-            width: 164px;
-
-            .div-superior {
-                height: 100vh;
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-
-                .div-logo {
-
-                    .logo {
-                        padding: 20px 0 0 18px;
-                        margin: 0 0 90px;
-                        display: flex;
-                        align-items: center;
-
-                        .imagen {
-
-                            .img {
-                                border-radius: 100%;
-                            }
-                        }
-
-                        .titulo {
-                            margin: 0 0 0 10px;
-
-                            h1 {
-                                color: white;
-                                font-weight: bolder;
-                                font-size: 18px;
-                            }
-                        }
-                    }
-
-                    .categorias {
-                        display: flex;
-                        flex-direction: column;
-
-                        .cat {
-                            display: flex;
-                            align-items: center;
-                            padding: 8px 6px 8px 16px;
-                            margin: 0 0 2px 2px;
-                            cursor: pointer;
-
-                            .icono {
-                                display: flex;
-                                align-items: center;
-
-                                .icon {
-                                    color: white;
-                                    font-size: 24px;
-                                }
-                            }
-
-                            .texto {
-                                margin: 0 0 0 8px;
-                                display: flex;
-                                align-items: center;
-
-                                p {
-                                    color: white;
-                                    font-size: 13px;
-                                }
-                            }
-
-                            &:hover {
-                                background-color: #1a1a1a;
-                            }
-                        }
-                    }
-                }
-
-                .parte-inferior {
-                    width: 100%;
-
-                    .contenedor-setting {
-                        width: 100%;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        padding: 20px 0;
-
-                        .boton-login-logout {
-                            border: 1px solid #c0c0c0;
-                            background-color: transparent;
-                            cursor: pointer;
-                            border-radius: 16px;
-                            width: 124px;
-                            padding: 8px 16px;
-                            color: white;
-
-                            &:hover {
-                                transition: 0.2s ease-in-out;
-                                background-color: white;
-                                color: black;
-                            }
-                        }
-
-                    }
-                }
-            }
-        }
-
-        .header-mobile {
-            display: none;
-        }
-
-        .contenido-interno {
-            width: calc(100% - 164px);
-            min-height: 100vh;
+        .div-logo {
+          .logo {
+            padding: 20px 0 0 18px;
+            margin: 0 0 90px;
             display: flex;
-            justify-content: space-between;
-            flex-direction: column;
             align-items: center;
 
-            .main-titular {
-                width: calc(100% - 60px);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                margin-bottom: 40px;
-
-                .contenedor-main-titular {
-                    width: 100%;
-                    display: flex;
-                    justify-content: center;
-                    max-width: 1182px;
-
-                    .seccion-perfil {
-                        width: 100%;
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: center;
-
-                        .editar {
-                            width: 100%;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            padding: 20px 0;
-                            border-bottom: 0.5px solid #c0c0c05a;
-
-                            button {
-                                width: 130px;
-                                border-radius: 16px;
-                                font-size: 13px;
-                                border: none;
-                                padding: 8px 16px;
-                                background-color: black;
-                                color: white;
-                                cursor: pointer;
-                            }
-                        }
-
-                        .imagen-nombre-perfil {
-                            display: flex;
-                            padding: 40px 0 60px 0;
-
-                            .imagen-de-perfil {
-                                display: flex;
-                                margin: 0 40px 0 0;
-
-                                .img {
-                                    border-radius: 50%;
-                                }
-
-                                .foto-grande {
-                                    display: flex;
-                                }
-
-                                .foto-mediana {
-                                    display: none;
-                                }
-
-                                .foto-chica {
-                                    display: none;
-                                }
-                            }
-
-                            .titulo-username {
-                                display: flex;
-                                align-items: flex-start;
-
-                                .font-username {
-                                    padding: 0 0 8px 0;
-                                    color: black;
-                                    font-size: 36px;
-                                    font-weight: bolder;
-                                }
-                            }
-                        }
-
-                        .posteos-reposteos {
-                            display: flex;
-                            margin: 20px 0;
-                            border-top: 0.5px solid #c0c0c05a;
-
-                            .pr {
-                                width: 100%;
-                                display: flex;
-                                align-items: center;
-                                justify-content: space-between;
-
-                                .p {
-                                    display: flex;
-                                    align-items: center;
-
-                                    .posteos {
-                                        margin: 0 42px 0 0;
-                                        display: flex;
-                                        align-items: center;
-                                        justify-content: center;
-                                        height: 53px;
-                                        cursor: pointer;
-
-                                        p {
-                                            font-size: 13px;
-                                        }
-                                    }
-                                }
-
-                                .subida-imagenes {
-                                    display: flex;
-                                    justify-content: center;
-                                    align-items: center;
-
-                                    .icono {
-                                        display: flex;
-                                        justify-content: center;
-                                        align-items: center;
-                                        width: 32px;
-                                        height: 32px;
-                                        background-color: black;
-                                        border-radius: 50%;
-                                        cursor: pointer;
-
-                                        .icon {
-                                            font-size: 20px;
-                                            color: white;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                        .fotos-subidas-mi-perfil {
-                            width: 100%;
-                            display: flex;
-                            align-items: center;
-                            justify-content: space-between;
-                            flex-wrap: wrap;
-
-                            .contenedor-fotos-subidas-mi-perfil {
-                                display: flex;
-                                flex-direction: column;
-                                justify-content: flex-end;
-                                width: auto;
-                                height: fit-content;
-                                width: 24%;
-                                height: auto;
-                                margin-bottom: 10px;
-
-                                .imagen {
-                                    width: 100%;
-                                    cursor: pointer;
-                                    display: flex;
-                                    justify-content: center;
-                                    align-items: flex-end;
-
-                                    img {
-                                        max-width: auto;
-                                        width: 100%;
-                                    }
-                                }
-
-                                .nombre-fav-repost {
-                                    margin: 12px 0 22px 0;
-                                    display: flex;
-                                    justify-content: space-between;
-                                    align-items: center;
-
-                                    .nombre {
-                                        display: flex;
-                                        align-items: center;
-
-                                        p {
-                                            color: black;
-                                        }
-                                    }
-                                }
-                            }
-
-                            .sin-posteos-ni-resposteos {
-                                width: 100%;
-                                display: flex;
-                                flex-direction: column;
-                                align-items: center;
-                                justify-content: center;
-                                margin: 1.4vw 0 0 0;
-
-                                .texto {
-                                    width: 100%;
-                                    display: flex;
-                                    align-items: center;
-                                    justify-content: center;
-
-                                    p {
-                                        color: black;
-                                        font-weight: bolder;
-                                        font-size: 28px;
-                                        text-align: center;
-                                    }
-                                }
-
-                                .imagen-sin-datos {
-                                    width: 100%;
-                                    display: flex;
-                                    align-items: center;
-                                    justify-content: center;
-                                    margin: -20px 0 0 0;
-                                }
-                            }
-
-                            .boton-de-ver-mas {
-                                width: 100%;
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
-                                margin-top: 2.2%;
-
-                                button {
-                                    display: flex;
-                                    justify-content: center;
-                                    align-items: center;
-                                    border-radius: 8px;
-                                    background-color: black;
-                                    color: white;
-                                    padding: 8px 20px;
-                                    cursor: pointer;
-                                    border: none;
-                                    font-size: 16px;
-                                    font-weight: 600;
-                                }
-                            }
-                        }
-                    }
-                }
+            .imagen {
+              .img {
+                border-radius: 100%;
+              }
             }
 
-            .footer-titular {
-                width: 100%;
-                background-color: black;
+            .titulo {
+              margin: 0 0 0 10px;
+
+              h1 {
+                color: white;
+                font-weight: bolder;
+                font-size: 18px;
+              }
+            }
+          }
+
+          .categorias {
+            display: flex;
+            flex-direction: column;
+
+            .cat {
+              display: flex;
+              align-items: center;
+              padding: 8px 6px 8px 16px;
+              margin: 0 0 2px 2px;
+              cursor: pointer;
+
+              .icono {
                 display: flex;
-                justify-content: center;
                 align-items: center;
 
-                .contenedor-footer {
-                    width: calc(100% - 80px);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    flex-direction: column;
-                    padding: 10px 0;
-
-                    .superior {
-                        width: 100%;
-                        display: flex;
-                        align-items: center;
-                        border-bottom: 0.4px solid #c0c0c057;
-                        justify-content: center;
-                        padding: 20px 0;
-
-                        .imagen-footer {
-                            .img {
-                                border-radius: 50%;
-                            }
-                        }
-
-                        .texto {
-                            margin: 0 0 0 10px;
-
-                            h2 {
-                                color: white;
-                                font-weight: bolder;
-                                font-size: 18px;
-                            }
-                        }
-                    }
-
-                    .inferior-footer {
-                        width: 100%;
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                        padding: 20px 0;
-
-                        .categorias {
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            cursor: pointer;
-
-                            .secciones {
-                                margin: 0 20px 0 0;
-
-                                p {
-                                    color: #c0c0c0;
-                                    font-size: 13px;
-                                }
-
-                                &:hover {
-
-                                    p {
-                                        transition: 0.2s ease-in-out;
-                                        text-decoration: underline;
-                                    }
-                                }
-                            }
-
-                            .terminos {
-                                p {
-                                    color: #c0c0c0;
-                                    font-size: 13px;
-                                }
-                            }
-
-                        }
-                    }
+                .icon {
+                  color: white;
+                  font-size: 24px;
                 }
+              }
+
+              .texto {
+                margin: 0 0 0 8px;
+                display: flex;
+                align-items: center;
+
+                p {
+                  color: white;
+                  font-size: 13px;
+                }
+              }
+
+              &:hover {
+                background-color: #1a1a1a;
+              }
             }
+          }
         }
+
+        .parte-inferior {
+          width: 100%;
+
+          .contenedor-setting {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 0;
+
+            .boton-login-logout {
+              border: 1px solid #c0c0c0;
+              background-color: transparent;
+              cursor: pointer;
+              border-radius: 16px;
+              width: 124px;
+              padding: 8px 16px;
+              color: white;
+
+              &:hover {
+                transition: 0.2s ease-in-out;
+                background-color: white;
+                color: black;
+              }
+            }
+          }
+        }
+      }
     }
-}
 
-.input-file {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: black;
-    color: black;
-    cursor: pointer;
-}
+    .header-mobile {
+      display: none;
+    }
 
-@media (max-width: 991px) {
-    $altura-header-mobile: 50px;
-    $margin-top-footer-titular: 12px;
+    .contenido-interno {
+      width: calc(100% - 164px);
+      min-height: 100vh;
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      align-items: center;
 
-    .estructura-con-dashboard {
-        width: 100%;
+      .main-titular {
+        width: calc(100% - 60px);
         display: flex;
-        min-height: 100vh;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 40px;
 
-        .contenedor-estructura-con-dashboard {
+        .contenedor-main-titular {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          max-width: 1182px;
+
+          .seccion-perfil {
             width: 100%;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: auto;
-            min-height: 100vh;
-            margin: 0;
-            padding: 0;
 
-            .header-titular {
-                display: none;
+            .editar {
+              width: 100%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              padding: 20px 0;
+              border-bottom: 0.5px solid #c0c0c05a;
+
+              button {
+                width: 130px;
+                border-radius: 16px;
+                font-size: 13px;
+                border: none;
+                padding: 8px 16px;
+                background-color: black;
+                color: white;
+                cursor: pointer;
+              }
             }
 
-            .header-mobile {
+            .imagen-nombre-perfil {
+              display: flex;
+              padding: 40px 0 60px 0;
+
+              .imagen-de-perfil {
+                display: flex;
+                margin: 0 40px 0 0;
+
+                .img {
+                  border-radius: 50%;
+                }
+
+                .foto-grande {
+                  display: flex;
+                }
+
+                .foto-mediana {
+                  display: none;
+                }
+
+                .foto-chica {
+                  display: none;
+                }
+              }
+
+              .titulo-username {
+                display: flex;
+                align-items: flex-start;
+
+                .font-username {
+                  padding: 0 0 8px 0;
+                  color: black;
+                  font-size: 36px;
+                  font-weight: bolder;
+                }
+              }
+            }
+
+            .posteos-reposteos {
+              display: flex;
+              margin: 20px 0;
+              border-top: 0.5px solid #c0c0c05a;
+
+              .pr {
+                width: 100%;
                 display: flex;
                 align-items: center;
-                width: 100%;
-                background-color: black;
-                padding: 2px 0;
-                height: 50px;
+                justify-content: space-between;
 
-                .contenedor-header-mobile {
+                .p {
+                  display: flex;
+                  align-items: center;
+
+                  .posteos {
+                    margin: 0 42px 0 0;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 53px;
+                    cursor: pointer;
+
+                    p {
+                      font-size: 13px;
+                    }
+                  }
+                }
+
+                .subida-imagenes {
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+
+                  .icono {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 32px;
+                    height: 32px;
+                    background-color: black;
+                    border-radius: 50%;
+                    cursor: pointer;
+
+                    .icon {
+                      font-size: 20px;
+                      color: white;
+                    }
+                  }
+                }
+              }
+            }
+
+            .fotos-subidas-mi-perfil {
+              width: 100%;
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              flex-wrap: wrap;
+
+              .contenedor-fotos-subidas-mi-perfil {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                width: auto;
+                height: fit-content;
+                width: 24%;
+                height: auto;
+                margin-bottom: 10px;
+
+                .imagen {
+                  width: 100%;
+                  cursor: pointer;
+                  display: flex;
+                  justify-content: center;
+                  align-items: flex-end;
+
+                  img {
+                    max-width: auto;
                     width: 100%;
+                  }
+                }
+
+                .nombre-fav-repost {
+                  margin: 12px 0 22px 0;
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+
+                  .nombre {
+                    display: flex;
+                    align-items: center;
+
+                    p {
+                      color: black;
+                    }
+                  }
+                }
+              }
+
+              .sin-posteos-ni-resposteos {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                margin: 1.4vw 0 0 0;
+
+                .texto {
+                  width: 100%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+
+                  p {
+                    color: black;
+                    font-weight: bolder;
+                    font-size: 28px;
+                    text-align: center;
+                  }
+                }
+
+                .imagen-sin-datos {
+                  width: 100%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  margin: -20px 0 0 0;
+                }
+              }
+
+              .boton-de-ver-mas {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-top: 2.2%;
+
+                button {
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  border-radius: 8px;
+                  background-color: black;
+                  color: white;
+                  padding: 8px 20px;
+                  cursor: pointer;
+                  border: none;
+                  font-size: 16px;
+                  font-weight: 600;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .footer-titular {
+        width: 100%;
+        background-color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .contenedor-footer {
+          width: calc(100% - 80px);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          padding: 10px 0;
+
+          .superior {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            border-bottom: 0.4px solid #c0c0c057;
+            justify-content: center;
+            padding: 20px 0;
+
+            .imagen-footer {
+              .img {
+                border-radius: 50%;
+              }
+            }
+
+            .texto {
+              margin: 0 0 0 10px;
+
+              h2 {
+                color: white;
+                font-weight: bolder;
+                font-size: 18px;
+              }
+            }
+          }
+
+          .inferior-footer {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+
+            .categorias {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              cursor: pointer;
+
+              .secciones {
+                margin: 0 20px 0 0;
+
+                p {
+                  color: #c0c0c0;
+                  font-size: 13px;
+                }
+
+                &:hover {
+                  p {
+                    transition: 0.2s ease-in-out;
+                    text-decoration: underline;
+                  }
+                }
+              }
+
+              .terminos {
+                p {
+                  color: #c0c0c0;
+                  font-size: 13px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.input-file {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: black;
+  color: black;
+  cursor: pointer;
+}
+
+@media (max-width: 991px) {
+  $altura-header-mobile: 50px;
+  $margin-top-footer-titular: 12px;
+
+  .estructura-con-dashboard {
+    width: 100%;
+    display: flex;
+    min-height: 100vh;
+
+    .contenedor-estructura-con-dashboard {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: auto;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+
+      .header-titular {
+        display: none;
+      }
+
+      .header-mobile {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        background-color: black;
+        padding: 2px 0;
+        height: 50px;
+
+        .contenedor-header-mobile {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          .parte {
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+
+            .imagen {
+              display: flex;
+              align-items: center;
+
+              .img {
+                border-radius: 50%;
+              }
+            }
+
+            .titulo {
+              display: flex;
+              align-items: center;
+              margin: 0 0 0 6px;
+
+              h1 {
+                color: white;
+                font-size: 11px;
+                font-weight: 600;
+              }
+            }
+          }
+
+          .parte {
+            display: flex;
+            align-items: center;
+
+            .menu {
+              cursor: pointer;
+              display: flex;
+              align-items: center;
+
+              .icon {
+                color: white;
+                font-size: 25px;
+              }
+            }
+          }
+        }
+      }
+
+      .contenido-interno {
+        width: 100%;
+        display: flex;
+        justify-content: auto;
+        flex-direction: column;
+        align-items: auto;
+
+        .footer-titular {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          .contenedor-footer {
+            width: calc(100% - 40px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 10px 0;
+
+            .superior {
+              width: 100%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              padding: $margin-top-footer-titular 0;
+
+              .imagen-footer {
+                .img {
+                  border-radius: 50%;
+                  width: 36px;
+                  height: 36px;
+                }
+              }
+
+              .texto {
+                margin: 0 0 0 8px;
+
+                h2 {
+                  font-size: 15px;
+                }
+              }
+            }
+
+            .inferior-footer {
+              width: 100%;
+              display: flex;
+              flex-direction: column;
+              justify-content: auto;
+              align-items: center;
+              padding: $margin-top-footer-titular 0;
+
+              .categorias {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                .secciones {
+                  margin: 0 12px;
+
+                  p {
+                    font-size: 13px;
+                  }
+                }
+
+                .terminos {
+                  display: flex;
+                  align-items: center;
+                  margin: 18px 0 0 0;
+
+                  p {
+                    font-weight: 600;
+                    font-size: 13px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 544px) and (max-width: 767px) {
+  .estructura-con-dashboard {
+    .contenedor-estructura-con-dashboard {
+      .contenido-interno {
+        .main-titular {
+          .contenedor-main-titular {
+            .seccion-perfil {
+              .editar {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 12px 0;
+
+                button {
+                  width: 130px;
+                  border-radius: 16px;
+                  font-size: 12px;
+                  border: none;
+                  padding: 6px 14px;
+                }
+              }
+
+              .imagen-nombre-perfil {
+                display: flex;
+                padding: 28px 0 36px 0;
+
+                .imagen-de-perfil {
+                  display: flex;
+                  margin: 0 15px 0 0;
+
+                  .img {
+                    width: 85px;
+                    height: 85px;
+                  }
+
+                  .foto-grande {
+                    display: none;
+                  }
+
+                  .foto-mediana {
+                    display: flex;
+                  }
+
+                  .foto-chica {
+                    display: none;
+                  }
+                }
+
+                .titulo-username {
+                  display: flex;
+                  align-items: center;
+
+                  .font-username {
+                    padding: 0 0 8px 0;
+                    font-size: 32px;
+                  }
+                }
+              }
+
+              .posteos-reposteos {
+                display: flex;
+                margin: 20px 0;
+
+                .pr {
+                  width: 100%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+
+                  .p {
+                    display: flex;
+                    align-items: center;
+
+                    .posteos {
+                      margin: 0 42px 0 0;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      height: 53px;
+
+                      p {
+                        font-size: 13px;
+                      }
+                    }
+                  }
+
+                  .subida-imagenes {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    .icono {
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      width: 32px;
+                      height: 32px;
+
+                      .icon {
+                        font-size: 20px;
+                      }
+                    }
+                  }
+                }
+              }
+
+              .fotos-subidas-mi-perfil {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                flex-wrap: wrap;
+
+                .contenedor-fotos-subidas-mi-perfil {
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: flex-end;
+                  width: 24%;
+                  height: 300px;
+
+                  .imagen {
+                    width: 100%;
+                    cursor: pointer;
+                    display: flex;
+                    justify-content: center;
+                    align-items: flex-end;
+
+                    img {
+                      max-width: 230px;
+                      width: 100%;
+                    }
+                  }
+
+                  .nombre-fav-repost {
+                    margin: 12px 0 22px 0;
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
 
-                    .parte {
-                        padding: 0 20px;
-                        display: flex;
-                        align-items: center;
-
-                        .imagen {
-                            display: flex;
-                            align-items: center;
-
-                            .img {
-                                border-radius: 50%;
-                            }
-                        }
-
-                        .titulo {
-                            display: flex;
-                            align-items: center;
-                            margin: 0 0 0 6px;
-
-                            h1 {
-                                color: white;
-                                font-size: 11px;
-                                font-weight: 600;
-                            }
-                        }
+                    .nombre {
+                      display: flex;
+                      align-items: center;
                     }
-
-                    .parte {
-                        display: flex;
-                        align-items: center;
-
-                        .menu {
-                            cursor: pointer;
-                            display: flex;
-                            align-items: center;
-
-                            .icon {
-                                color: white;
-                                font-size: 25px;
-                            }
-                        }
-                    }
+                  }
                 }
+              }
             }
+          }
+        }
+      }
+    }
+  }
+}
 
-            .contenido-interno {
+@media (max-width: 543px) {
+  .estructura-con-dashboard {
+    .contenedor-estructura-con-dashboard {
+      .contenido-interno {
+        .main-titular {
+          .contenedor-main-titular {
+            .seccion-perfil {
+              .editar {
                 width: 100%;
                 display: flex;
-                justify-content: auto;
-                flex-direction: column;
-                align-items: auto;
+                align-items: center;
+                justify-content: center;
+                padding: 12px 0;
 
-                .footer-titular {
-                    width: 100%;
+                button {
+                  width: 130px;
+                  border-radius: 16px;
+                  font-size: 12px;
+                  border: none;
+                  padding: 6px 14px;
+                }
+              }
+
+              .imagen-nombre-perfil {
+                display: flex;
+                padding: 20px 0 16px 0;
+
+                .imagen-de-perfil {
+                  display: flex;
+                  margin: 0 12px 0 0;
+
+                  .img {
+                    width: 74px;
+                    height: 74px;
+                  }
+
+                  .foto-grande {
+                    display: none;
+                  }
+
+                  .foto-mediana {
+                    display: none;
+                  }
+
+                  .foto-chica {
+                    display: flex;
+                  }
+                }
+
+                .titulo-username {
+                  display: flex;
+                  align-items: center;
+
+                  .font-username {
+                    padding: 0 0 8px 0;
+                    font-size: 28px;
+                  }
+                }
+              }
+
+              .posteos-reposteos {
+                display: flex;
+                margin: 20px 0;
+
+                .pr {
+                  width: 100%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+
+                  .p {
+                    display: flex;
+                    align-items: center;
+
+                    .posteos {
+                      margin: 0 42px 0 0;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      height: 53px;
+
+                      p {
+                        font-size: 13px;
+                      }
+                    }
+                  }
+
+                  .subida-imagenes {
                     display: flex;
                     justify-content: center;
                     align-items: center;
 
-                    .contenedor-footer {
-                        width: calc(100% - 40px);
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        flex-direction: column;
-                        padding: 10px 0;
+                    .icono {
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      width: 32px;
+                      height: 32px;
 
-                        .superior {
-                            width: 100%;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            padding: $margin-top-footer-titular 0;
-
-                            .imagen-footer {
-                                .img {
-                                    border-radius: 50%;
-                                    width: 36px;
-                                    height: 36px;
-                                }
-                            }
-
-                            .texto {
-                                margin: 0 0 0 8px;
-
-                                h2 {
-                                    font-size: 15px;
-                                }
-                            }
-                        }
-
-                        .inferior-footer {
-                            width: 100%;
-                            display: flex;
-                            flex-direction: column;
-                            justify-content: auto;
-                            align-items: center;
-                            padding: $margin-top-footer-titular 0;
-
-                            .categorias {
-                                display: flex;
-                                justify-content: center;
-                                align-items: center;
-
-                                .secciones {
-                                    margin: 0 12px;
-
-                                    p {
-                                        font-size: 13px;
-                                    }
-
-                                }
-
-                                .terminos {
-                                    display: flex;
-                                    align-items: center;
-                                    margin: 18px 0 0 0;
-
-                                    p {
-                                        font-weight: 600;
-                                        font-size: 13px;
-                                    }
-                                }
-
-                            }
-                        }
+                      .icon {
+                        font-size: 20px;
+                      }
                     }
+                  }
                 }
-            }
-        }
-    }
-}
+              }
 
-@media (min-width: 544px) and (max-width: 767px) {
-    .estructura-con-dashboard {
+              .fotos-subidas-mi-perfil {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                flex-wrap: wrap;
 
-        .contenedor-estructura-con-dashboard {
+                .contenedor-fotos-subidas-mi-perfil {
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: flex-end;
+                  width: 24%;
+                  height: 300px;
 
-            .contenido-interno {
+                  .imagen {
+                    width: 100%;
+                    cursor: pointer;
+                    display: flex;
+                    justify-content: center;
+                    align-items: flex-end;
 
-                .main-titular {
-
-                    .contenedor-main-titular {
-
-                        .seccion-perfil {
-
-                            .editar {
-                                width: 100%;
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
-                                padding: 12px 0;
-
-                                button {
-                                    width: 130px;
-                                    border-radius: 16px;
-                                    font-size: 12px;
-                                    border: none;
-                                    padding: 6px 14px;
-                                }
-                            }
-
-                            .imagen-nombre-perfil {
-                                display: flex;
-                                padding: 28px 0 36px 0;
-
-                                .imagen-de-perfil {
-                                    display: flex;
-                                    margin: 0 15px 0 0;
-
-                                    .img {
-                                        width: 85px;
-                                        height: 85px;
-                                    }
-
-                                    .foto-grande {
-                                        display: none;
-                                    }
-    
-                                    .foto-mediana {
-                                        display: flex;
-                                    }
-    
-                                    .foto-chica {
-                                        display: none;
-                                    }
-                                }
-
-                                .titulo-username {
-                                    display: flex;
-                                    align-items: center;
-
-                                    .font-username {
-                                        padding: 0 0 8px 0;
-                                        font-size: 32px;
-                                    }
-                                }
-                            }
-
-                            .posteos-reposteos {
-                                display: flex;
-                                margin: 20px 0;
-
-                                .pr {
-                                    width: 100%;
-                                    display: flex;
-                                    align-items: center;
-                                    justify-content: space-between;
-
-                                    .p {
-                                        display: flex;
-                                        align-items: center;
-
-                                        .posteos {
-                                            margin: 0 42px 0 0;
-                                            display: flex;
-                                            align-items: center;
-                                            justify-content: center;
-                                            height: 53px;
-
-                                            p {
-                                                font-size: 13px;
-                                            }
-                                        }
-                                    }
-
-                                    .subida-imagenes {
-                                        display: flex;
-                                        justify-content: center;
-                                        align-items: center;
-
-                                        .icono {
-                                            display: flex;
-                                            justify-content: center;
-                                            align-items: center;
-                                            width: 32px;
-                                            height: 32px;
-
-                                            .icon {
-                                                font-size: 20px;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-
-                            .fotos-subidas-mi-perfil {
-                                width: 100%;
-                                display: flex;
-                                align-items: center;
-                                justify-content: space-between;
-                                flex-wrap: wrap;
-
-                                .contenedor-fotos-subidas-mi-perfil {
-                                    display: flex;
-                                    flex-direction: column;
-                                    justify-content: flex-end;
-                                    width: 24%;
-                                    height: 300px;
-
-                                    .imagen {
-                                        width: 100%;
-                                        cursor: pointer;
-                                        display: flex;
-                                        justify-content: center;
-                                        align-items: flex-end;
-
-                                        img {
-                                            max-width: 230px;
-                                            width: 100%;
-                                        }
-                                    }
-
-                                    .nombre-fav-repost {
-                                        margin: 12px 0 22px 0;
-                                        display: flex;
-                                        justify-content: space-between;
-                                        align-items: center;
-
-                                        .nombre {
-                                            display: flex;
-                                            align-items: center;
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                    img {
+                      max-width: 230px;
+                      width: 100%;
                     }
-                }
-            }
-        }
-    }
-}
+                  }
 
-@media (max-width: 543px) {
-    .estructura-con-dashboard {
+                  .nombre-fav-repost {
+                    margin: 12px 0 22px 0;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
 
-        .contenedor-estructura-con-dashboard {
-
-            .contenido-interno {
-
-                .main-titular {
-
-                    .contenedor-main-titular {
-
-                        .seccion-perfil {
-
-                            .editar {
-                                width: 100%;
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
-                                padding: 12px 0;
-
-                                button {
-                                    width: 130px;
-                                    border-radius: 16px;
-                                    font-size: 12px;
-                                    border: none;
-                                    padding: 6px 14px;
-                                }
-                            }
-
-                            .imagen-nombre-perfil {
-                                display: flex;
-                                padding: 20px 0 16px 0;
-
-                                .imagen-de-perfil {
-                                    display: flex;
-                                    margin: 0 12px 0 0;
-
-                                    .img {
-                                        width: 74px;
-                                        height: 74px;
-                                    }
-
-                                    .foto-grande {
-                                        display: none;
-                                    }
-    
-                                    .foto-mediana {
-                                        display: none;
-                                    }
-    
-                                    .foto-chica {
-                                        display: flex;
-                                    }
-                                }
-
-                                .titulo-username {
-                                    display: flex;
-                                    align-items: center;
-
-                                    .font-username {
-                                        padding: 0 0 8px 0;
-                                        font-size: 28px;
-                                    }
-                                }
-                            }
-
-                            .posteos-reposteos {
-                                display: flex;
-                                margin: 20px 0;
-
-                                .pr {
-                                    width: 100%;
-                                    display: flex;
-                                    align-items: center;
-                                    justify-content: space-between;
-
-                                    .p {
-                                        display: flex;
-                                        align-items: center;
-
-                                        .posteos {
-                                            margin: 0 42px 0 0;
-                                            display: flex;
-                                            align-items: center;
-                                            justify-content: center;
-                                            height: 53px;
-
-                                            p {
-                                                font-size: 13px;
-                                            }
-                                        }
-                                    }
-
-                                    .subida-imagenes {
-                                        display: flex;
-                                        justify-content: center;
-                                        align-items: center;
-
-                                        .icono {
-                                            display: flex;
-                                            justify-content: center;
-                                            align-items: center;
-                                            width: 32px;
-                                            height: 32px;
-
-                                            .icon {
-                                                font-size: 20px;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-
-                            .fotos-subidas-mi-perfil {
-                                width: 100%;
-                                display: flex;
-                                align-items: center;
-                                justify-content: space-between;
-                                flex-wrap: wrap;
-
-                                .contenedor-fotos-subidas-mi-perfil {
-                                    display: flex;
-                                    flex-direction: column;
-                                    justify-content: flex-end;
-                                    width: 24%;
-                                    height: 300px;
-
-                                    .imagen {
-                                        width: 100%;
-                                        cursor: pointer;
-                                        display: flex;
-                                        justify-content: center;
-                                        align-items: flex-end;
-
-                                        img {
-                                            max-width: 230px;
-                                            width: 100%;
-                                        }
-                                    }
-
-                                    .nombre-fav-repost {
-                                        margin: 12px 0 22px 0;
-                                        display: flex;
-                                        justify-content: space-between;
-                                        align-items: center;
-
-                                        .nombre {
-                                            display: flex;
-                                            align-items: center;
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                    .nombre {
+                      display: flex;
+                      align-items: center;
                     }
+                  }
                 }
+              }
             }
+          }
         }
+      }
     }
+  }
 }
 
 // MEDIAS QUERIES DE ARRAY DE IMAGENES
 @media (min-width: 1192px) and (max-width: 1515px) {
-    .estructura-con-dashboard {
-        .contenedor-estructura-con-dashboard {
-            .contenido-interno {
-                .main-titular {
-                    width: calc(100% - 60px);
+  .estructura-con-dashboard {
+    .contenedor-estructura-con-dashboard {
+      .contenido-interno {
+        .main-titular {
+          width: calc(100% - 60px);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 40px;
+
+          .contenedor-main-titular {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            max-width: 1182px;
+
+            .seccion-perfil {
+              width: 100%;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+
+              .editar {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 20px 0;
+
+                button {
+                  width: 130px;
+                  border-radius: 16px;
+                  font-size: 13px;
+                  padding: 8px 16px;
+                }
+              }
+
+              .imagen-nombre-perfil {
+                display: flex;
+                padding: 40px 0 60px 0;
+
+                .imagen-de-perfil {
+                  display: flex;
+                  margin: 0 40px 0 0;
+                }
+
+                .titulo-username {
+                  display: flex;
+                  align-items: flex-start;
+
+                  .font-username {
+                    padding: 0 0 8px 0;
+                    font-size: 36px;
+                  }
+                }
+              }
+
+              .posteos-reposteos {
+                display: flex;
+                margin: 20px 0;
+
+                .pr {
+                  width: 100%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+
+                  .p {
                     display: flex;
                     align-items: center;
-                    justify-content: center;
-                    margin-bottom: 40px;
 
-                    .contenedor-main-titular {
-                        width: 100%;
-                        display: flex;
-                        justify-content: center;
-                        max-width: 1182px;
+                    .posteos {
+                      margin: 0 42px 0 0;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      height: 53px;
 
-                        .seccion-perfil {
-                            width: 100%;
-                            display: flex;
-                            flex-direction: column;
-                            justify-content: center;
-
-                            .editar {
-                                width: 100%;
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
-                                padding: 20px 0;
-
-                                button {
-                                    width: 130px;
-                                    border-radius: 16px;
-                                    font-size: 13px;
-                                    padding: 8px 16px;
-                                }
-                            }
-
-                            .imagen-nombre-perfil {
-                                display: flex;
-                                padding: 40px 0 60px 0;
-
-                                .imagen-de-perfil {
-                                    display: flex;
-                                    margin: 0 40px 0 0;
-                                }
-
-                                .titulo-username {
-                                    display: flex;
-                                    align-items: flex-start;
-
-                                    .font-username {
-                                        padding: 0 0 8px 0;
-                                        font-size: 36px;
-                                    }
-                                }
-                            }
-
-                            .posteos-reposteos {
-                                display: flex;
-                                margin: 20px 0;
-
-                                .pr {
-                                    width: 100%;
-                                    display: flex;
-                                    align-items: center;
-                                    justify-content: space-between;
-
-                                    .p {
-                                        display: flex;
-                                        align-items: center;
-
-                                        .posteos {
-                                            margin: 0 42px 0 0;
-                                            display: flex;
-                                            align-items: center;
-                                            justify-content: center;
-                                            height: 53px;
-
-                                            p {
-                                                font-size: 13px;
-                                            }
-                                        }
-                                    }
-
-                                    .subida-imagenes {
-                                        display: flex;
-                                        justify-content: center;
-                                        align-items: center;
-
-                                        .icono {
-                                            display: flex;
-                                            justify-content: center;
-                                            align-items: center;
-                                            width: 32px;
-                                            height: 32px;
-
-                                            .icon {
-                                                font-size: 20px;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-
-                            .fotos-subidas-mi-perfil {
-                                width: 100%;
-                                display: flex;
-                                align-items: center;
-                                justify-content: space-between;
-                                flex-wrap: wrap;
-
-                                .contenedor-fotos-subidas-mi-perfil {
-                                    display: flex;
-                                    flex-direction: column;
-                                    justify-content: flex-end;
-                                    width: 32%;
-                                    height: fit-content;
-                                    margin: 0 0 75px 0;
-
-                                    .imagen {
-                                        width: 100%;
-                                        display: flex;
-                                        justify-content: center;
-                                        align-items: flex-end;
-                                        height: fit-content;
-
-                                        img {
-                                            height: fit-content;
-                                            max-width: 1000px;
-                                            width: 100%;
-                                        }
-                                    }
-
-                                    .nombre-fav-repost {
-                                        margin: 12px 0 22px 0;
-                                        display: flex;
-                                        justify-content: space-between;
-                                        align-items: center;
-
-                                        .nombre {
-                                            display: flex;
-                                            align-items: center;
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                      p {
+                        font-size: 13px;
+                      }
                     }
+                  }
+
+                  .subida-imagenes {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    .icono {
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      width: 32px;
+                      height: 32px;
+
+                      .icon {
+                        font-size: 20px;
+                      }
+                    }
+                  }
                 }
+              }
+
+              .fotos-subidas-mi-perfil {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                flex-wrap: wrap;
+
+                .contenedor-fotos-subidas-mi-perfil {
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: flex-end;
+                  width: 32%;
+                  height: fit-content;
+                  margin: 0 0 75px 0;
+
+                  .imagen {
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: flex-end;
+                    height: fit-content;
+
+                    img {
+                      height: fit-content;
+                      max-width: 1000px;
+                      width: 100%;
+                    }
+                  }
+
+                  .nombre-fav-repost {
+                    margin: 12px 0 22px 0;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    .nombre {
+                      display: flex;
+                      align-items: center;
+                    }
+                  }
+                }
+              }
             }
+          }
         }
+      }
     }
+  }
 }
 
 @media (min-width: 770px) and (max-width: 1191px) {
-    .estructura-con-dashboard {
-        .contenedor-estructura-con-dashboard {
-            .contenido-interno {
-                .main-titular {
-                    width: calc(100% - 60px);
+  .estructura-con-dashboard {
+    .contenedor-estructura-con-dashboard {
+      .contenido-interno {
+        .main-titular {
+          width: calc(100% - 60px);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 40px;
+
+          .contenedor-main-titular {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            max-width: 1182px;
+
+            .seccion-perfil {
+              width: 100%;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+
+              .editar {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 50px 0;
+
+                button {
+                  width: 130px;
+                  border-radius: 16px;
+                  font-size: 13px;
+                  padding: 8px 16px;
+                }
+              }
+
+              .imagen-nombre-perfil {
+                display: flex;
+                padding: 40px 0 60px 0;
+
+                .imagen-de-perfil {
+                  display: flex;
+                  margin: 0 40px 0 0;
+                }
+
+                .titulo-username {
+                  display: flex;
+                  align-items: flex-start;
+
+                  .font-username {
+                    padding: 0 0 8px 0;
+                    font-size: 36px;
+                  }
+                }
+              }
+
+              .posteos-reposteos {
+                display: flex;
+                margin: 20px 0;
+
+                .pr {
+                  width: 100%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+
+                  .p {
                     display: flex;
                     align-items: center;
-                    justify-content: center;
-                    margin-bottom: 40px;
 
-                    .contenedor-main-titular {
-                        width: 100%;
-                        display: flex;
-                        justify-content: center;
-                        max-width: 1182px;
+                    .posteos {
+                      margin: 0 42px 0 0;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      height: 53px;
 
-                        .seccion-perfil {
-                            width: 100%;
-                            display: flex;
-                            flex-direction: column;
-                            justify-content: center;
-
-                            .editar {
-                                width: 100%;
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
-                                padding: 50px 0;
-
-                                button {
-                                    width: 130px;
-                                    border-radius: 16px;
-                                    font-size: 13px;
-                                    padding: 8px 16px;
-                                }
-                            }
-
-                            .imagen-nombre-perfil {
-                                display: flex;
-                                padding: 40px 0 60px 0;
-
-                                .imagen-de-perfil {
-                                    display: flex;
-                                    margin: 0 40px 0 0;
-                                }
-
-                                .titulo-username {
-                                    display: flex;
-                                    align-items: flex-start;
-
-                                    .font-username {
-                                        padding: 0 0 8px 0;
-                                        font-size: 36px;
-                                    }
-                                }
-                            }
-
-                            .posteos-reposteos {
-                                display: flex;
-                                margin: 20px 0;
-
-                                .pr {
-                                    width: 100%;
-                                    display: flex;
-                                    align-items: center;
-                                    justify-content: space-between;
-
-                                    .p {
-                                        display: flex;
-                                        align-items: center;
-
-                                        .posteos {
-                                            margin: 0 42px 0 0;
-                                            display: flex;
-                                            align-items: center;
-                                            justify-content: center;
-                                            height: 53px;
-
-                                            p {
-                                                font-size: 13px;
-                                            }
-                                        }
-                                    }
-
-                                    .subida-imagenes {
-                                        display: flex;
-                                        justify-content: center;
-                                        align-items: center;
-
-                                        .icono {
-                                            display: flex;
-                                            justify-content: center;
-                                            align-items: center;
-                                            width: 32px;
-                                            height: 32px;
-
-                                            .icon {
-                                                font-size: 20px;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-
-                            .fotos-subidas-mi-perfil {
-                                width: 100%;
-                                display: flex;
-                                align-items: center;
-                                justify-content: space-between;
-                                flex-wrap: wrap;
-
-                                .contenedor-fotos-subidas-mi-perfil {
-                                    display: flex;
-                                    flex-direction: column;
-                                    justify-content: flex-end;
-                                    width: 48%;
-                                    flex-direction: column;
-                                    height: fit-content;
-                                    margin: 0 0 25px 0;
-
-                                    .imagen {
-                                        width: 100%;
-                                        display: flex;
-                                        justify-content: center;
-                                        align-items: flex-end;
-                                        height: fit-content;
-
-                                        img {
-                                            // max-width: 230px;
-                                            height: fit-content;
-                                            max-width: 1000px;
-                                            width: 100%;
-                                        }
-                                    }
-
-                                    .nombre-fav-repost {
-                                        margin: 12px 0 22px 0;
-                                        display: flex;
-                                        justify-content: space-between;
-                                        align-items: center;
-
-                                        .nombre {
-                                            display: flex;
-                                            align-items: center;
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                      p {
+                        font-size: 13px;
+                      }
                     }
+                  }
+
+                  .subida-imagenes {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    .icono {
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      width: 32px;
+                      height: 32px;
+
+                      .icon {
+                        font-size: 20px;
+                      }
+                    }
+                  }
                 }
+              }
+
+              .fotos-subidas-mi-perfil {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                flex-wrap: wrap;
+
+                .contenedor-fotos-subidas-mi-perfil {
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: flex-end;
+                  width: 48%;
+                  flex-direction: column;
+                  height: fit-content;
+                  margin: 0 0 25px 0;
+
+                  .imagen {
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: flex-end;
+                    height: fit-content;
+
+                    img {
+                      // max-width: 230px;
+                      height: fit-content;
+                      max-width: 1000px;
+                      width: 100%;
+                    }
+                  }
+
+                  .nombre-fav-repost {
+                    margin: 12px 0 22px 0;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    .nombre {
+                      display: flex;
+                      align-items: center;
+                    }
+                  }
+                }
+              }
             }
+          }
         }
+      }
     }
+  }
 }
 
 @media (max-width: 769px) {
-    .estructura-con-dashboard {
-        .contenedor-estructura-con-dashboard {
-            .contenido-interno {
+  .estructura-con-dashboard {
+    .contenedor-estructura-con-dashboard {
+      .contenido-interno {
+        .main-titular {
+          width: calc(100% - 60px);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 40px;
 
-                .main-titular {
-                    width: calc(100% - 60px);
+          .contenedor-main-titular {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            max-width: 1182px;
+
+            .seccion-perfil {
+              width: 100%;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+
+              .editar {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 14px 0;
+
+                button {
+                  width: 130px;
+                  border-radius: 16px;
+                  font-size: 13px;
+                  padding: 8px 16px;
+                }
+              }
+
+              .imagen-nombre-perfil {
+                display: flex;
+                padding: 22px 0 14px 0;
+
+                .imagen-de-perfil {
+                  display: flex;
+                  margin: 0 40px 0 0;
+                }
+
+                .titulo-username {
+                  display: flex;
+                  align-items: flex-start;
+
+                  .font-username {
+                    padding: 0 0 8px 0;
+                    font-size: 32px;
+                  }
+                }
+              }
+
+              .posteos-reposteos {
+                display: flex;
+                margin: 20px 0;
+
+                .pr {
+                  width: 100%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+
+                  .p {
                     display: flex;
                     align-items: center;
-                    justify-content: center;
-                    margin-bottom: 40px;
 
-                    .contenedor-main-titular {
-                        width: 100%;
-                        display: flex;
-                        justify-content: center;
-                        max-width: 1182px;
+                    .posteos {
+                      margin: 0 42px 0 0;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      height: 53px;
 
-                        .seccion-perfil {
-                            width: 100%;
-                            display: flex;
-                            flex-direction: column;
-                            justify-content: center;
-
-                            .editar {
-                                width: 100%;
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
-                                padding: 14px 0;
-
-                                button {
-                                    width: 130px;
-                                    border-radius: 16px;
-                                    font-size: 13px;
-                                    padding: 8px 16px;
-                                }
-                            }
-
-                            .imagen-nombre-perfil {
-                                display: flex;
-                                padding: 22px 0 14px 0;
-
-                                .imagen-de-perfil {
-                                    display: flex;
-                                    margin: 0 40px 0 0;
-                                }
-
-                                .titulo-username {
-                                    display: flex;
-                                    align-items: flex-start;
-
-                                    .font-username {
-                                        padding: 0 0 8px 0;
-                                        font-size: 32px;
-                                    }
-                                }
-                            }
-
-                            .posteos-reposteos {
-                                display: flex;
-                                margin: 20px 0;
-
-                                .pr {
-                                    width: 100%;
-                                    display: flex;
-                                    align-items: center;
-                                    justify-content: space-between;
-
-                                    .p {
-                                        display: flex;
-                                        align-items: center;
-
-                                        .posteos {
-                                            margin: 0 42px 0 0;
-                                            display: flex;
-                                            align-items: center;
-                                            justify-content: center;
-                                            height: 53px;
-
-                                            p {
-                                                font-size: 13px;
-                                            }
-                                        }
-                                    }
-
-                                    .subida-imagenes {
-                                        display: flex;
-                                        justify-content: center;
-                                        align-items: center;
-
-                                        .icono {
-                                            display: flex;
-                                            justify-content: center;
-                                            align-items: center;
-                                            width: 32px;
-                                            height: 32px;
-
-                                            .icon {
-                                                font-size: 20px;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-
-                            .fotos-subidas-mi-perfil {
-                                width: 100%;
-                                display: flex;
-                                align-items: center;
-                                justify-content: space-between;
-                                flex-wrap: wrap;
-                                flex-direction: column;
-
-                                .contenedor-fotos-subidas-mi-perfil {
-                                    display: flex;
-                                    flex-direction: column;
-                                    justify-content: flex-end;
-                                    width: 100%;
-                                    height: auto;
-                                    margin: 0 0 14px 0;
-
-                                    .imagen {
-                                        width: 100%;
-                                        display: flex;
-                                        justify-content: center;
-                                        align-items: flex-end;
-                                        height: fit-content;
-
-                                        img {
-                                            max-width: 1000px;
-                                            width: 100%;
-                                        }
-                                    }
-
-                                    .nombre-fav-repost {
-                                        margin: 8px 10px 22px 10px;
-                                        display: flex;
-                                        justify-content: space-between;
-                                        align-items: center;
-
-                                        .nombre {
-                                            display: flex;
-                                            align-items: center;
-
-                                            p {
-                                                font-weight: 600;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                      p {
+                        font-size: 13px;
+                      }
                     }
+                  }
+
+                  .subida-imagenes {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    .icono {
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      width: 32px;
+                      height: 32px;
+
+                      .icon {
+                        font-size: 20px;
+                      }
+                    }
+                  }
                 }
+              }
+
+              .fotos-subidas-mi-perfil {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                flex-direction: column;
+
+                .contenedor-fotos-subidas-mi-perfil {
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: flex-end;
+                  width: 100%;
+                  height: auto;
+                  margin: 0 0 14px 0;
+
+                  .imagen {
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: flex-end;
+                    height: fit-content;
+
+                    img {
+                      max-width: 1000px;
+                      width: 100%;
+                    }
+                  }
+
+                  .nombre-fav-repost {
+                    margin: 8px 10px 22px 10px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    .nombre {
+                      display: flex;
+                      align-items: center;
+
+                      p {
+                        font-weight: 600;
+                      }
+                    }
+                  }
+                }
+              }
             }
+          }
         }
+      }
     }
+  }
 }

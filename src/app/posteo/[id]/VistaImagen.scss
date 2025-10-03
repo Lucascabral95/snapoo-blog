@@ -1,311 +1,399 @@
+$padding-desktop: 2vh 0 2vh 0;
+
 .vista-imagen {
-    width: calc(100% - 72px);
-    height: calc(100vh - 100px);
-    padding: 50px 36px;
-    background-color: white;
+  width: 100%;
+  height: fit-content;
+  padding: $padding-desktop;
+  background: #fafafa;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  .contenedor-vista-imagen {
+    width: 100%;
+    max-width: 614px;
+    background: white;
+    border: 1px solid #dbdbdb;
+    border-radius: 8px;
+    margin: 0 auto;
+    animation: fadeIn 0.3s ease;
+
+    .header-post {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 4px 14px 16px;
+      border-bottom: 1px solid #efefef;
+
+      .usuario-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        .avatar-link {
+          display: flex;
+          align-items: center;
+          transition: opacity 0.2s ease;
+
+          &:hover {
+            opacity: 0.7;
+          }
+        }
+
+        .username-link {
+          text-decoration: none;
+
+          .username {
+            font-size: 14px;
+            font-weight: 600;
+            color: #262626;
+            transition: opacity 0.2s ease;
+
+            &:hover {
+              opacity: 0.5;
+            }
+          }
+        }
+      }
+
+      .btn-close {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border: none;
+        border-radius: 50%;
+        background: transparent;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        .icon {
+          font-size: 24px;
+          color: #262626;
+        }
+
+        &:hover {
+          background: #fafafa;
+        }
+
+        &:active {
+          opacity: 0.5;
+        }
+      }
+    }
+
+    .imagen-container {
+      .skeleton-wrapper {
+        width: 100%;
+        height: 614px;
+        background: #fafafa;
+      }
+
+      .imagen-wrapper {
+        width: 100%;
+        max-height: 750px;
+        background: #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+
+        .imagen-posteo {
+          width: 100%;
+          height: auto;
+          max-height: 750px;
+          object-fit: contain;
+          display: block;
+        }
+      }
+    }
+
+    .acciones-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 16px;
+      border-bottom: 1px solid #efefef;
+
+      .btn-action {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        transition: all 0.1s ease;
+        padding: 8px;
+
+        .icon {
+          font-size: 28px;
+          color: #262626;
+        }
+
+        &:hover {
+          opacity: 0.5;
+        }
+
+        &:active {
+          opacity: 0.3;
+        }
+
+        &:disabled {
+          opacity: 0.3;
+          cursor: not-allowed;
+        }
+      }
+
+      .btn-like {
+        .icon-heart {
+          transition: all 0.1s ease;
+        }
+
+        &.liked {
+          .icon-heart {
+            color: #ed4956;
+            animation: likeAnimation 0.4s ease;
+          }
+        }
+      }
+
+      .btn-repost {
+        .icon-repost {
+          transition: all 0.2s ease;
+        }
+
+        &:hover .icon-repost {
+          color: #0095f6;
+        }
+
+        &.reposting .icon-repost {
+          animation: repostAnimation 0.6s ease infinite;
+        }
+      }
+    }
+
+    .posteo-info {
+      padding: 0 16px 12px;
+
+      .likes-section {
+        padding: 8px 0 4px;
+
+        .likes-text {
+          font-size: 14px;
+          font-weight: 600;
+          color: #262626;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+            Helvetica, Arial, sans-serif;
+        }
+      }
+
+      .descripcion-section {
+        padding: 4px 0;
+        line-height: 18px;
+
+        .username-bold {
+          font-size: 14px;
+          font-weight: 600;
+          color: #262626;
+          text-decoration: none;
+          margin-right: 4px;
+
+          &:hover {
+            opacity: 0.5;
+          }
+        }
+
+        .descripcion-text {
+          font-size: 14px;
+          color: #262626;
+          word-wrap: break-word;
+          white-space: pre-wrap;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+            Helvetica, Arial, sans-serif;
+        }
+      }
+
+      .fecha-section {
+        padding: 8px 0 0;
+
+        .fecha-text {
+          font-size: 10px;
+          color: #8e8e8e;
+          font-weight: 400;
+          letter-spacing: 0.2px;
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes likeAnimation {
+  0% {
+    transform: scale(1);
+  }
+  15% {
+    transform: scale(1.2);
+  }
+  30% {
+    transform: scale(0.95);
+  }
+  45%,
+  80% {
+    transform: scale(1);
+  }
+}
+
+@keyframes repostAnimation {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+}
+
+@media (min-width: 768px) {
+  .vista-imagen {
+    padding: 3vh 20px;
 
     .contenedor-vista-imagen {
-
-        .cont-icono {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            .icono-de-cierre {
-                width: 100%;
-                width: 34px;
-                height: 34px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                cursor: pointer;
-                border-radius: 8px;
-
-                .icono {
-                    color: black;
-                    font-size: 28px;
-                }
-            }
-
-            .icono-de-cierre-fav-repost {
-                width: fit-content;
-
-                .icon {
-                    width: 34px;
-                    height: 34px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    cursor: pointer;
-                    border-radius: 8px;
-
-                    .icono {
-                        color: black;
-                        font-size: 28px;
-                    }
-
-                    .icono-corazon {
-                        font-size: 24px;
-                        color: black;
-
-                    }
-
-                    &:hover {
-                        .icono-corazon {
-                            transition: 0.2s ease-in-out;
-                            color: red;
-                        }
-                    }
-                }
-            }
-        }
-
-        .imagen-de-posteo {
-            margin: 20px 0 0 0;
-            width: calc(100% - 120px);
-            padding: 0 60px;
-            overflow: hidden;
-
-            img {
-                width: auto;
-                height: auto;
-                max-width: 100%;
-                max-height: 700px;
-            }
-
-            .fecha-usuario-favoritos {
-                width: 100%;
-                display: flex;
-                flex-direction: column;
-                margin: 60 0 0 0;
-
-                .likes {
-                    display: flex;
-                    align-items: center;
-                    margin: 0 0 4px 0;
-
-                    .icono-like {
-                        display: flex;
-                        align-items: center;
-
-                        .icon {
-                            font-size: 20px;
-                            color: red;
-                        }
-                    }
-
-                    .cantidad-likes {
-                        display: flex;
-                        align-items: center;
-                        margin: 0 0 0 2px;
-
-                        p {
-                            font-size: 12.8px;
-                            color: black;
-                            font-weight: bolder;
-                        }
-                    }
-                }
-
-                .usuarios-favoritos {
-                    width: 100%;
-                    margin: 10px 0;
-                    display: flex;
-                    justify-content: flex-start;
-                    align-items: center;
-                    
-                    .perfil-usuario-posteo{
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        margin: 0 6px 0 0;
-                    }
-
-                    .usuario {
-                        width: fit-content;
-                        display: flex;
-                        align-items: center;
-
-                        p {
-                            color: black;
-                            font-weight: bolder;
-                            font-size: 13px;
-                        }
-                    }
-
-                    .iconos-de-interacciones {
-                        width: fit-content;
-                        display: flex;
-                        margin: 10px 0;
-
-                        .icono {
-                            margin: 0 0 0 10px;
-                            cursor: pointer;
-
-                            .icon {
-                                font-size: 24px;
-                                color: #c0c0c0;
-                            }
-
-                            &:hover {
-                                .icon {
-                                    transition: 0.2s;
-                                    color: black;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                .descripcion {
-                    width: 100%;
-                    margin: 0 0 10px 0;
-                    display: flex;
-                    align-items: center;
-
-                    .detalle {
-                        p {
-                            color: black;
-                            font-size: 14.8px;
-                            font-family: Arial, Helvetica, sans-serif;
-                        }
-                    }
-                }
-
-                .descripcion-fecha {
-                    .detalle {
-                        p {
-                            color: #c0c0c0;
-                            font-size: 13px;
-                        }
-                    }
-                }
-            }
-        }
+      margin-top: 0;
     }
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 768px) {
+  .vista-imagen {
+    padding: 2vh 20px;
+
+    .contenedor-vista-imagen {
+      max-width: 600px;
+    }
+  }
 }
 
 @media (max-width: 767px) {
+  .vista-imagen {
+    background: #fff;
+    height: fit-content;
+    padding: 2vw 0 6px 0;
 
-    .vista-imagen {
-        width: 100%;
-        height: fit-content;
-        padding: 16px 0px;
-        overflow: hidden;
+    .contenedor-vista-imagen {
+      max-width: 100%;
+      border: none;
+      border-radius: 0;
+      height: fit-content;
+      padding: 2vw 0 0px 0;
 
-        .contenedor-vista-imagen {
+      .header-post {
+        padding: 10px 4px 10px 16px;
+        position: sticky;
+        top: 0;
+        background: white;
+        z-index: 10;
+        border-bottom: 1px solid #dbdbdb;
 
-            .cont-icono {
-                width: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
+        .usuario-header {
+          gap: 10px;
 
-                .icono-de-cierre {
-                    width: 100%;
-                    width: 34px;
-                    height: 34px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    margin: 0 10px;
-
-                    .icono {
-                        font-size: 28px;
-                    }
-                }
-
-                .icono-de-cierre-fav-repost {
-                    width: fit-content;
-
-                    .icon {
-                        width: 34px;
-                        height: 34px;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-
-                        .icono {
-                            font-size: 28px;
-                        }
-
-                    }
-                }
-            }
-
-            .imagen-de-posteo {
-                padding: 0px;
-                margin: 20px 0 0 0;
-                width: auto;
-
-                img {
-                    width: 100%;
-                    height: auto;
-                }
-
-                .fecha-usuario-favoritos {
-                    width: 100%;
-                    display: flex;
-                    flex-direction: column;
-                    margin: 0 16px;
-
-                    .usuarios-favoritos {
-                        width: 100%;
-                        margin: 10px 0;
-                        display: flex;
-                        // justify-content: space-between;
-                        justify-content: flex-start;
-                        align-items: center;
-
-                        .usuario {
-                            width: fit-content;
-                            display: flex;
-                            align-items: center;
-
-                            p {
-                                font-size: 13px;
-                            }
-                        }
-
-                        .iconos-de-interacciones {
-                            width: fit-content;
-                            display: flex;
-                            margin: 10px 0;
-
-                            .icono {
-                                margin: 0 0 0 10px;
-
-                                .icon {
-                                    font-size: 24px;
-                                }
-
-                            }
-                        }
-                    }
-
-                    .descripcion {
-                        width: 100%;
-                        margin: 0 0 10px 0;
-                        display: flex;
-                        align-items: center;
-
-                        .detalle {
-                            p {
-                                font-size: 14.8px;
-                            }
-                        }
-                    }
-
-                    .descripcion-fecha {
-                        .detalle {
-                            p {
-                                font-size: 13px;
-                            }
-                        }
-                    }
-                }
-            }
+          .username-link .username {
+            font-size: 14px;
+          }
         }
+
+        .btn-close {
+          width: 36px;
+          height: 36px;
+
+          .icon {
+            font-size: 28px;
+          }
+        }
+      }
+
+      .imagen-container {
+        .imagen-wrapper {
+          max-height: 500px;
+          background: #000;
+
+          .imagen-posteo {
+            max-height: 500px;
+            width: 100%;
+          }
+        }
+      }
+
+      .acciones-bar {
+        padding: 4px 12px;
+
+        .btn-action {
+          width: 36px;
+          height: 36px;
+
+          .icon {
+            font-size: 26px;
+          }
+        }
+      }
+
+      .posteo-info {
+        padding: 0 16px 16px;
+
+        .likes-section {
+          padding: 8px 0 4px;
+
+          .likes-text {
+            font-size: 14px;
+          }
+        }
+
+        .descripcion-section {
+          .username-bold,
+          .descripcion-text {
+            font-size: 14px;
+          }
+        }
+
+        .fecha-section {
+          padding: 6px 0 0;
+
+          .fecha-text {
+            font-size: 10px;
+          }
+        }
+      }
     }
+  }
+}
+
+@media (max-width: 375px) {
+  .vista-imagen {
+    .contenedor-vista-imagen {
+      .imagen-container {
+        .imagen-wrapper {
+          max-height: 400px;
+
+          .imagen-posteo {
+            max-height: 400px;
+          }
+        }
+      }
+    }
+  }
 }

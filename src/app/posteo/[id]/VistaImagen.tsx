@@ -1,19 +1,151 @@
+// "use client";
+// import React from "react";
+// import { IoMdClose } from "react-icons/io";
+// import { BiRepost } from "react-icons/bi";
+// import { IoHeart, IoHeartOutline } from "react-icons/io5";
+// import Image from "next/image";
+// import moment from "moment";
+// import "moment/locale/es";
+// import Link from "next/link";
+// import { Toaster } from "react-hot-toast";
+// import Skeleton from "react-loading-skeleton";
+// import Avvvatars from "avvvatars-react";
+
+// import "./VistaImagen.scss";
+// import useVistaImagen from "@/presentation/hooks/useVistaImagen";
+
+// interface VistaImagenProps {
+//   url: string;
+//   descripcion: string;
+//   fecha: string;
+//   likes: number;
+//   usuario: string;
+//   id: string;
+//   username: string;
+//   loadingSkeleton: boolean;
+// }
+
+// const VistaImagen: React.FC<VistaImagenProps> = ({
+//   id,
+//   url,
+//   descripcion,
+//   fecha,
+//   likes,
+//   usuario,
+//   username,
+//   loadingSkeleton,
+// }): JSX.Element => {
+//   const { repostear, darLike, likeCount, hasLiked, isReposting, isLiking } =
+//     useVistaImagen({ id, likes });
+
+//   return (
+//     <div className="vista-imagen">
+//       <div className="contenedor-vista-imagen">
+//         <div className="header-actions">
+//           <button
+//             className="btn-action btn-close"
+//             onClick={() => window.history.back()}
+//             aria-label="Cerrar"
+//           >
+//             <IoMdClose className="icon" />
+//           </button>
+
+//           <div className="header-right-actions">
+//             <button
+//               className={`btn-action btn-like ${hasLiked ? "liked" : ""}`}
+//               onClick={darLike}
+//               disabled={isLiking}
+//               aria-label="Me gusta"
+//             >
+//               {hasLiked ? (
+//                 <IoHeart className="icon icon-heart" />
+//               ) : (
+//                 <IoHeartOutline className="icon icon-heart" />
+//               )}
+//             </button>
+//             <button
+//               className={`btn-action btn-repost ${
+//                 isReposting ? "reposting" : ""
+//               }`}
+//               onClick={repostear}
+//               disabled={isReposting}
+//               aria-label="Repostear"
+//             >
+//               <BiRepost className="icon icon-repost" />
+//             </button>
+//           </div>
+//         </div>
+
+//         <div className="imagen-container">
+//           {loadingSkeleton ? (
+//             <div className="skeleton-wrapper">
+//               <Skeleton width="100%" height={700} borderRadius={16} />
+//             </div>
+//           ) : url ? (
+//             <div className="imagen-wrapper">
+//               <Image
+//                 src={url}
+//                 alt={descripcion || "Imagen del posteo"}
+//                 className="imagen-posteo"
+//                 width={1280}
+//                 height={700}
+//                 style={{ userSelect: "none" }}
+//                 priority
+//               />
+//             </div>
+//           ) : null}
+
+//           <div className="posteo-info">
+//             <div className="stats-bar">
+//               <div className="likes-count">
+//                 <IoHeart className="icon-stat" />
+//                 <span>{likeCount.toLocaleString()}</span>
+//                 <span className="label">Me gusta</span>
+//               </div>
+//             </div>
+
+//             <div className="usuario-info">
+//               <Link href={`/usuario/${username}`} className="avatar-link">
+//                 <Avvvatars value={username} size={40} style="shape" />
+//               </Link>
+//               <Link href={`/usuario/${username}`} className="username-link">
+//                 <span className="username">{usuario}</span>
+//               </Link>
+//             </div>
+
+//             {descripcion && (
+//               <div className="descripcion-section">
+//                 <p className="descripcion-text">{descripcion}</p>
+//               </div>
+//             )}
+
+//             <div className="fecha-section">
+//               <p className="fecha-text">{moment(fecha).format("LL")}</p>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//       <Toaster position="bottom-center" />
+//     </div>
+//   );
+// };
+
+// export default VistaImagen;
 "use client";
 import React from "react";
-import "./VistaImagen.scss";
 import { IoMdClose } from "react-icons/io";
 import { BiRepost } from "react-icons/bi";
-import { IoHeart } from "react-icons/io5";
-import { MdFavorite } from "react-icons/md";
+import { IoHeart, IoHeartOutline } from "react-icons/io5";
 import Image from "next/image";
 import moment from "moment";
 import "moment/locale/es";
 import Link from "next/link";
-import axios from "axios";
-import toast, { Toaster } from "react-hot-toast";
-import { useSession } from "next-auth/react";
+import { Toaster } from "react-hot-toast";
 import Skeleton from "react-loading-skeleton";
 import Avvvatars from "avvvatars-react";
+
+import "./VistaImagen.scss";
+import useVistaImagen from "@/presentation/hooks/useVistaImagen";
 
 interface VistaImagenProps {
   url: string;
@@ -26,14 +158,6 @@ interface VistaImagenProps {
   loadingSkeleton: boolean;
 }
 
-interface IUser {
-  user: {
-    id: string;
-    email: string;
-    userName: string;
-  };
-}
-
 const VistaImagen: React.FC<VistaImagenProps> = ({
   id,
   url,
@@ -44,130 +168,111 @@ const VistaImagen: React.FC<VistaImagenProps> = ({
   username,
   loadingSkeleton,
 }): JSX.Element => {
-  const { data: session } = useSession() as { data: IUser | null };
-  const [likeCount, setLikeCount] = React.useState<number>(likes);
-
-  const repostear = async () => {
-    try {
-      const result = await axios.post(`/api/intereses`, {
-        rePosteos: id,
-        user: session?.user?.id,
-      });
-
-      if (result.status === 200) {
-        toast.success("Se reposteó posteo");
-      }
-    } catch (error: any) {
-      if (error.response) {
-        if (error.response.status === 400 || error.response.status === 404) {
-          toast.error("Ya reposteaste este posteo");
-        } else {
-          console.log(error.response.data.error);
-        }
-      }
-    }
-  };
-
-  const darLike = async () => {
-    try {
-      const result = await axios.put(`/api/posteos/?id=${id}`);
-
-      if (result.status === 200 || result.status === 201) {
-        toast.success("Like dado con exito");
-        setLikeCount(result.data.result.likes);
-      }
-    } catch (error: any) {
-      if (error.response) {
-        if (error.response.status === 400 || error.response.status === 404) {
-          console.log(error.response.data.error);
-        } else {
-          console.log(error.response.data.error);
-        }
-      }
-    }
-  };
+  const { repostear, darLike, likeCount, hasLiked, isReposting, isLiking } =
+    useVistaImagen({ id, likes });
 
   return (
     <div className="vista-imagen">
       <div className="contenedor-vista-imagen">
-        <div className="cont-icono">
-          <div
-            className="icono-de-cierre"
+        {/* Header con usuario */}
+        <div className="header-post">
+          <div className="usuario-header">
+            <Link href={`/usuario/perfil/${username}`} className="avatar-link">
+              <Avvvatars value={username} size={32} style="shape" />
+            </Link>
+            <Link
+              href={`/usuario/perfil/${username}`}
+              className="username-link"
+            >
+              <span className="username">{usuario}</span>
+            </Link>
+          </div>
+          <button
+            className="btn-close"
             onClick={() => window.history.back()}
+            aria-label="Cerrar"
           >
-            <IoMdClose className="icono" />
-          </div>
-          <div className="icono-de-cierre icono-de-cierre-fav-repost">
-            <div className="icon" onClick={darLike}>
-              <IoHeart className="icono-corazon" />
-            </div>
-            <div className="icon" onClick={repostear}>
-              <BiRepost className="icono" />
-            </div>
-          </div>
+            <IoMdClose className="icon" />
+          </button>
         </div>
-        <div className="imagen-de-posteo">
-          {loadingSkeleton ? (
-            <Skeleton width={1280} height={700} />
-          ) : url ? (
-            <Image
-              src={url}
-              alt="Imagen del posteo"
-              className="img-imagen-del-posteo"
-              style={{ userSelect: "none" }}
-              width={1280}
-              height={700}
-            />
-          ) : null}
 
-          <div className="fecha-usuario-favoritos">
-            <div className="likes">
-              <div className="icono-like">
-                <IoHeart className="icon" />
-              </div>
-              <div className="cantidad-likes">
-                {likeCount === undefined || likeCount === null ? (
-                  <p> Me gustas: {likes} </p>
-                ) : (
-                  <p> Me gustas: {likeCount} </p>
-                )}
-              </div>
+        {/* Imagen */}
+        <div className="imagen-container">
+          {loadingSkeleton ? (
+            <div className="skeleton-wrapper">
+              <Skeleton width="100%" height={614} />
             </div>
-            <div className="usuarios-favoritos">
-              <Link href={`/usuario/${username}`} className="perfil-usuario-posteo">
-                <Avvvatars value={username} size={22} style="shape" />
-              </Link>
-              <Link href={`/usuario/${username}`} className="usuario">
-                <p> {usuario} </p>
-              </Link>
-              <div
-                className="iconos-de-interacciones"
-                style={{ display: "none" }}
-              >
-                <div className="icono">
-                  <MdFavorite className="icon" />
-                </div>
-                <div className="icono">
-                  <BiRepost className="icon" />
-                </div>
-              </div>
+          ) : url ? (
+            <div className="imagen-wrapper">
+              <Image
+                src={url}
+                alt={descripcion || "Imagen del posteo"}
+                className="imagen-posteo"
+                width={1280}
+                height={700}
+                style={{ userSelect: "none" }}
+                priority
+              />
             </div>
-            {descripcion !== "" && (
-              <div className="descripcion">
-                <div className="detalle">
-                  <p> {descripcion} </p>
-                </div>
-              </div>
+          ) : null}
+        </div>
+
+        {/* Acciones debajo de la imagen */}
+        <div className="acciones-bar">
+          <button
+            className={`btn-action btn-like ${hasLiked ? "liked" : ""}`}
+            onClick={darLike}
+            disabled={isLiking}
+            aria-label="Me gusta"
+          >
+            {hasLiked ? (
+              <IoHeart className="icon icon-heart" />
+            ) : (
+              <IoHeartOutline className="icon icon-heart" />
             )}
-            <Toaster />
-            <div className="descripcion-fecha">
-              <div className="detalle">
-                <p> {moment(fecha).format("LL")} </p>
-              </div>
+          </button>
+
+          <button
+            className={`btn-action btn-repost ${
+              isReposting ? "reposting" : ""
+            }`}
+            onClick={repostear}
+            disabled={isReposting}
+            aria-label="Repostear"
+          >
+            <BiRepost className="icon icon-repost" />
+          </button>
+        </div>
+
+        {/* Info del post */}
+        <div className="posteo-info">
+          {/* Likes count */}
+          <div className="likes-section">
+            <span className="likes-text">
+              {likeCount.toLocaleString()} me gusta
+            </span>
+          </div>
+
+          {/* Descripción */}
+          {descripcion && (
+            <div className="descripcion-section">
+              <Link
+                href={`/usuario/perfil/${username}`}
+                className="username-bold"
+              >
+                {usuario}
+              </Link>
+              <span className="descripcion-text"> {descripcion}</span>
             </div>
+          )}
+
+          {/* Fecha */}
+          <div className="fecha-section">
+            <span className="fecha-text">{moment(fecha).fromNow()}</span>
           </div>
         </div>
       </div>
+      <Toaster position="bottom-center" />
     </div>
   );
 };
