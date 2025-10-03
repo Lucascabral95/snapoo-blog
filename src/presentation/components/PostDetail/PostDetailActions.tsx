@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { FaHeart, FaShare, FaBookmark } from "react-icons/fa";
-
+import styles from "./PostDetail.module.scss";
 
 interface PostDetailActionsProps {
   postId: string;

@@ -13,7 +13,6 @@ export class ApiError extends Error {
   }
 }
 
-// Códigos de estado que indican "sin datos" pero no son errores fatales
 const EMPTY_DATA_CODES = [400, 404] as const;
 
 export async function fetchApi<T>(
@@ -33,13 +32,11 @@ export async function fetchApi<T>(
       },
     });
 
-    // Manejar casos donde no hay datos (404, 400 para "sin resultados")
     if (EMPTY_DATA_CODES.includes(response.status as any)) {
       console.info(`No data found for ${endpoint}: ${response.status}`);
       return null;
     }
 
-    // Errores reales del servidor
     if (!response.ok) {
       throw new ApiError(
         response.status,
@@ -55,13 +52,11 @@ export async function fetchApi<T>(
       throw error;
     }
 
-    // Log pero no propagar errores de red
     console.error(`Network error fetching ${endpoint}:`, error);
     return null;
   }
 }
 
-// Versión con fallback para casos donde queremos devolver array vacío
 export async function fetchApiWithFallback<T>(
   endpoint: string,
   fallbackValue: T,

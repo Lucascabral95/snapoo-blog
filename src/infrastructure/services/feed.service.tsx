@@ -7,7 +7,6 @@ export async function getFeedPosts(): Promise<FeedPost[]> {
 
     if (response.status === 200 || response.status === 201) {
       const posts: FeedPost[] = response.data.result;
-      // Invertir orden para mostrar los más recientes primero
       return posts.reverse();
     }
 

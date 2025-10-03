@@ -12,5 +12,6 @@ export function transformPostToProps(post: Post): PostDetailProps {
     fecha: post.fecha,
     usuario: displayName,
     username: post.usuario?.userName || "",
+    loadingSkeleton: false,
   };
 }

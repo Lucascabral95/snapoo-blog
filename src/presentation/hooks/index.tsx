@@ -4,7 +4,6 @@ export * from "./useSearchPosts";
 export * from "./useFeedPost";
 export * from "./usePostDetail";
 export * from "./usePostActions";
-export * from "./useUserPorfile";
 export * from "./useRegisterForm";
 export * from "./useLoginForm";
 export * from "./useProfileSettings";

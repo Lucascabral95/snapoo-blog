@@ -27,7 +27,6 @@ export async function searchPostsClient(
             .includes(searchTerm);
           return matchesEmail || matchesUsername;
         } else {
-          // categoria === 'imagen'
           return post.descripcion?.toLowerCase().includes(searchTerm);
         }
       });

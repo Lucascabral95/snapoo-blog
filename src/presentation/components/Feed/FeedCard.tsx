@@ -1,17 +1,17 @@
 import Link from "next/link";
 import Image from "next/image";
-import { FaHeart, FaComment } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
 import type { FeedPost } from "@/infrastructure/types";
-import { getDisplayName } from "@/infrastructure/services/post.service";
 
 import styles from "./Feed.module.scss";
+import { getDisplayUsername } from "@/infrastructure/services";
 
 interface FeedCardProps {
   post: FeedPost;
 }
 
 export default function FeedCard({ post }: FeedCardProps) {
-  const displayName = getDisplayName(post);
+  const displayName = getDisplayUsername(post);
 
   return (
     <Link href={`/posteos/${post._id}`} className={styles.feedCard}>
@@ -24,19 +24,16 @@ export default function FeedCard({ post }: FeedCardProps) {
           className={styles.image}
         />
 
-        {/* Overlay con información */}
         <div className={styles.overlay}>
           <div className={styles.stats}>
             <div className={styles.stat}>
               <FaHeart />
               <span>{post.likes}</span>
             </div>
-            {/* Opcional: agregar comentarios si tienes ese dato */}
           </div>
         </div>
       </div>
 
-      {/* Información del post */}
       <div className={styles.cardInfo}>
         <p className={styles.author}>{displayName}</p>
         {post.descripcion && (
