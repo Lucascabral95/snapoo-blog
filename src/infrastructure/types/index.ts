@@ -8,3 +8,4 @@ export * from "./feed.types";
 export * from "./search.types";
 export * from "./auth.types";
 export * from "./profileSettings.types";
+export * from "./gallery.types";

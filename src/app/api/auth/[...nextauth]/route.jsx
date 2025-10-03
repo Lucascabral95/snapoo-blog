@@ -60,7 +60,7 @@ const authOptions = {
     async session({ session, token }) {
       session.user.id = token.id || null;
       session.user.saludo = "Hola Developer Beginner";
-      session.user.userName = token.userName; 
+      session.user.userName = token.userName;
       return session;
     },
     async jwt({ token, user }) {

@@ -3,7 +3,8 @@
 import { useFeedPosts } from "@/presentation/hooks";
 import FeedSkeleton from "./FeedSkeleton";
 import FeedError from "./FeedError";
-import EstructuraImagenes from "@/components/EstructuraImagenes/EstructuraImagenes";
+//import EstructuraImagenes from "@/components/EstructuraImagenes/EstructuraImagenes";
+import EstructuraImagenes from "@/presentation/components/SecondaryComponents/Gallery/EstructuraImagenes";
 import "./Feed.scss";
 
 export default function FeedContainer() {

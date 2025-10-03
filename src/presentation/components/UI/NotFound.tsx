@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
-import "@/app/App.scss";
+
+import "./NotFound.scss";
 
 interface Props {
   contenido: string;

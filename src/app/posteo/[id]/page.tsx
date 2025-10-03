@@ -1,11 +1,11 @@
 "use client";
-
 import { useParams } from "next/navigation";
+
 import { usePostDetail } from "@/presentation/hooks/usePostDetail";
 import { getDisplayUsername } from "@/infrastructure/services/post.service";
 import VistaImagen from "./VistaImagen";
-import EstructuraConDashboard from "@/components/EstructuraConDashboard/EstructuraConDashboard";
-import NotFoundComponent from "@/components/NotFound/NotFound";
+import NotFoundComponent from "@/presentation/components/UI/NotFound";
+import EstructuraConDashboard from "@/presentation/components/SecondaryComponents/EstructuraConDashboard/EstructuraConDashboard";
 
 export default function PostDetailContainer() {
   const { id } = useParams<{ id: string }>();

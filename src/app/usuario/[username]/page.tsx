@@ -1,7 +1,8 @@
 import React from "react";
 import axios from "axios";
-import UserProfile from "@/components/UserProfile/UserProfile";
-import NotFoundComponent from "@/components/NotFound/NotFound";
+
+import UserProfile from "@/presentation/components/UserProfile/UserProfile";
+import NotFoundComponent from "@/presentation/components/UI/NotFound";
 
 type Username = {
   params: Promise<{

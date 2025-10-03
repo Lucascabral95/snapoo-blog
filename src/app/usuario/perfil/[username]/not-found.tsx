@@ -1,4 +1,4 @@
-import NotFoundComponent from "@/components/NotFound/NotFound";
+import NotFoundComponent from "@/presentation/components/UI/NotFound";
 
 export default function NotFound() {
   return (

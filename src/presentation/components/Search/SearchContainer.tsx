@@ -1,12 +1,13 @@
 "use client";
-
 import { useState } from "react";
-import type { SearchCategory } from "@/infrastructure/types";
+
 import SearchBar from "./SearchBar";
 import SearchCategories from "./SearchCategories";
 import { useDebounce } from "@/presentation/hooks/useDebounce";
 import { useSearchPosts } from "@/presentation/hooks/useSearchPosts";
-import EstructuraImagenes from "@/components/EstructuraImagenes/EstructuraImagenes";
+import type { SearchCategory } from "@/infrastructure/types";
+// import EstructuraImagenes from "@/components/EstructuraImagenes/EstructuraImagenes";
+import EstructuraImagenes from "@/presentation/components/SecondaryComponents/Gallery/EstructuraImagenes";
 
 export default function SearchContainer() {
   const [input, setInput] = useState<string>("");

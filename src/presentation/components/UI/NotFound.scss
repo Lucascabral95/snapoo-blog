@@ -1,0 +1,44 @@
+.not-found {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 200px);
+
+  .contenedor-not-found {
+    width: 100%;
+
+    .titulo-de-pagina {
+      h2 {
+        text-align: center;
+      }
+    }
+
+    .imagen-de-pagina {
+      display: flex;
+      align-items: center;
+      margin: 20px 0 0 0;
+      justify-content: center;
+
+      .img {
+        width: auto;
+        height: auto;
+      }
+    }
+  }
+}
+
+@media (max-width: 991) {
+  .not-found {
+    height: calc(100vh - 211px);
+
+    .contenedor-not-found {
+      .imagen-de-pagina {
+        .img {
+          width: 100%;
+          height: auto;
+        }
+      }
+    }
+  }
+}

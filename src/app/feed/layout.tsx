@@ -1,6 +1,8 @@
-import EstructuraConDashboard from "@/components/EstructuraConDashboard/EstructuraConDashboard";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+
+// import EstructuraConDashboard from "@/components/EstructuraConDashboard/EstructuraConDashboard";
+import EstructuraConDashboard from "@/presentation/components/SecondaryComponents/EstructuraConDashboard/EstructuraConDashboard";
 
 interface FeedLayoutProps {
   children: ReactNode;

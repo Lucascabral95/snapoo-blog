@@ -7,3 +7,4 @@ export * from "./usePostActions";
 export * from "./useRegisterForm";
 export * from "./useLoginForm";
 export * from "./useProfileSettings";
+export * from "./useImageUpload";

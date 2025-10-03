@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
-import EstructuraConDashboard from "@/components/EstructuraConDashboard/EstructuraConDashboard";
+
+// import EstructuraConDashboard from "@/components/EstructuraConDashboard/EstructuraConDashboard";
+import EstructuraConDashboard from "@/presentation/components/SecondaryComponents/EstructuraConDashboard/EstructuraConDashboard";
 
 export const metadata: Metadata = {
   title: "Publicación | Snapoo",
@@ -12,7 +14,5 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <EstructuraConDashboard>{children}</EstructuraConDashboard>
-  );
+  return <EstructuraConDashboard>{children}</EstructuraConDashboard>;
 }

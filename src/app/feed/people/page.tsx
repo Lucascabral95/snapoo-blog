@@ -2,7 +2,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-import EstructuraImagenes from "@/components/EstructuraImagenes/EstructuraImagenes";
+//import EstructuraImagenes from "@/components/EstructuraImagenes/EstructuraImagenes";
+import EstructuraImagenes from "@/presentation/components/SecondaryComponents/Gallery/EstructuraImagenes";
 import "../Feed.scss";
 
 const People: React.FC = () => {
