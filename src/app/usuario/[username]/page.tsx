@@ -20,6 +20,8 @@ async function obtenerImagenes(username: string) {
 
       return filtro;
     }
+
+    return [];
   } catch (error: any) {
     console.log(`Se produjo un error en el servidor: ${error}`);
     return [];
@@ -35,8 +37,14 @@ async function obtenerReposteos(username: string) {
         (posteo: any) => posteo.user.userName === username
       );
 
-      return busquedaUsuario[0].rePosteos.reverse();
+      if (busquedaUsuario.length > 0 && busquedaUsuario[0]?.rePosteos) {
+        return busquedaUsuario[0].rePosteos.reverse();
+      }
+
+      return [];
     }
+
+    return [];
   } catch (error) {
     console.log(`Se produjo un error en el servidor: ${error}`);
     return [];
@@ -52,19 +60,26 @@ async function obtenerUsuario(username: string) {
     if (results.status === 200 || results.status === 201) {
       return results.data.result;
     }
+
+    return [];
   } catch (error: any) {
-    if (error.response.status === 404 || error.response.status === 500) {
+    if (error.response?.status === 404 || error.response?.status === 500) {
       return [];
     }
+    return [];
   }
 }
 
 const PerfilUsuario: React.FC<Username> = async ({ params }) => {
   const { username } = await params;
-  const dataPosteos = await obtenerImagenes(username);
-  const userName = await obtenerUsuario(username);
+
+  const [dataPosteos, userName, rePosteos] = await Promise.all([
+    obtenerImagenes(username),
+    obtenerUsuario(username),
+    obtenerReposteos(username),
+  ]);
+
   const datosDelUsuario = userName.userName;
-  const rePosteos = await obtenerReposteos(username);
 
   return (
     <>

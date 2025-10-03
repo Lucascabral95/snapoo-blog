@@ -1,62 +1,36 @@
 "use client";
-import React, { useState, useEffect } from "react";
+
 import { useParams } from "next/navigation";
-import axios from "axios";
+import { usePostDetail } from "@/presentation/hooks/usePostDetail";
+import { getDisplayUsername } from "@/infrastructure/services/post.service";
 import VistaImagen from "./VistaImagen";
-import NotFoundComponent from "@/components/NotFound/NotFound";
 import EstructuraConDashboard from "@/components/EstructuraConDashboard/EstructuraConDashboard";
+import NotFoundComponent from "@/components/NotFound/NotFound";
 
-const Posteos: React.FC = () => {
+export default function PostDetailContainer() {
   const { id } = useParams<{ id: string }>();
-  const [dataPosteos, setDataPosteos] = useState<any>(null);
-  const [error, setError] = useState<boolean>(false);
-  const [loadingSkeleton, setLoadingSkeleton] = useState<boolean>(true);
+  const { post, isLoading, error } = usePostDetail(id);
 
-  useEffect(() => {
-    const obtenerPosteo = async () => {
-      try {
-        const result = await axios.get(`/api/posteos?id=${id}`);
+  if (error) {
+    return (
+      <EstructuraConDashboard>
+        <NotFoundComponent contenido="Posteo no encontrado" />
+      </EstructuraConDashboard>
+    );
+  }
 
-        if (result.status === 200) {
-          setDataPosteos(result.data.result);
-          setLoadingSkeleton(false);
-        }
-      } catch (error: any) {
-        if (error.response) {
-          if (error.response.status === 404 || error.response.status === 500) {
-            setError(true);
-            console.log(`No se encontro el posteo solicitado`);
-          }
-        } else {
-          setError(true);
-          console.log(error);
-        }
-      }
-    };
-
-    obtenerPosteo();
-  }, [id]);
+  const displayUsername = post ? getDisplayUsername(post) : "";
 
   return (
-    <>
-      {error ? (
-        <EstructuraConDashboard>
-          <NotFoundComponent contenido="Posteo no encontrado" />
-        </EstructuraConDashboard>
-      ) : (
-        <VistaImagen
-          id={dataPosteos?._id}
-          url={dataPosteos?.imagen}
-          likes={dataPosteos?.likes}
-          descripcion={dataPosteos?.descripcion}
-          fecha={dataPosteos?.fecha}
-          usuario={dataPosteos?.usuario?.userName === "" ? dataPosteos?.usuario?.email : dataPosteos?.usuario?.userName}
-          username={dataPosteos?.usuario?.userName}
-          loadingSkeleton={loadingSkeleton}
-        />
-      )}
-    </>
+    <VistaImagen
+      id={post?._id || ""}
+      url={post?.imagen || ""}
+      likes={post?.likes || 0}
+      descripcion={post?.descripcion || ""}
+      fecha={post?.fecha || ""}
+      usuario={displayUsername}
+      username={post?.usuario?.userName || ""}
+      loadingSkeleton={isLoading}
+    />
   );
-};
-
-export default Posteos;
+}

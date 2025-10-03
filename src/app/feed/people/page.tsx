@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+
 import EstructuraImagenes from "@/components/EstructuraImagenes/EstructuraImagenes";
 import "../Feed.scss";
 
@@ -55,10 +56,10 @@ const People: React.FC = () => {
           </div>
           <div className="busqueda-categorias">
             <div className="cats">
-                <p> Usuarios </p>
+              <p> Usuarios </p>
             </div>
             <div className="cats">
-                <p> Imagenes </p>
+              <p> Imagenes </p>
             </div>
           </div>
         </div>

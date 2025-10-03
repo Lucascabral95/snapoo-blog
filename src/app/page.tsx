@@ -2,10 +2,11 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import "./App.scss";
 import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
 import { useSession, signOut } from "next-auth/react";
 import Skeleton from "react-loading-skeleton";
+
+import "./App.scss";
 
 interface User {
   user: {
@@ -50,7 +51,11 @@ const Home: React.FC = () => {
             </div>
             <div className="botones-de-login-register">
               {loadingSkeleton ? (
-                <Skeleton width={144} height={32} baseColor="rgba(224, 224, 224, 0.2)"  />
+                <Skeleton
+                  width={144}
+                  height={32}
+                  baseColor="rgba(224, 224, 224, 0.2)"
+                />
               ) : session?.user?.email ? (
                 <div
                   className="bot"
@@ -61,16 +66,14 @@ const Home: React.FC = () => {
                     className="boton-ingreso-register"
                     style={{ display: "flex" }}
                   >
-                    {" "}
-                    Cerrar sesión{" "}
+                    Cerrar sesión
                   </div>
                 </div>
               ) : (
                 <>
                   <div className="bot">
                     <Link href="/feed/login" className="boton-ingreso-login">
-                      {" "}
-                      Iniciar sesión{" "}
+                      Iniciar sesión
                     </Link>
                   </div>
                   <div className="bot">
@@ -78,8 +81,7 @@ const Home: React.FC = () => {
                       href="/feed/register"
                       className="boton-ingreso-register"
                     >
-                      {" "}
-                      Registrate{" "}
+                      Registrate
                     </Link>
                   </div>
                 </>
@@ -95,15 +97,13 @@ const Home: React.FC = () => {
             </div>
             <div className="subtitulo">
               <p>
-                {" "}
                 Uníte a nuestra comunidad de creadores visuales y explora un
-                mundo de posibilidades{" "}
+                mundo de posibilidades
               </p>
             </div>
             <div className="boton-acceder-gratis">
               <Link href="/feed/" className="link-acceder-gratis">
-                {" "}
-                Comenzá gratis{" "}
+                Comenzá gratis
               </Link>
             </div>
           </div>

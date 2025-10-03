@@ -11,7 +11,7 @@ import Avvvatars from "avvvatars-react";
 
 interface UserProfileProps {
   dataPosteos: any[] | [];
-  datosDelUsuario: string;
+  datosDelUsuario: any;
   rePosteos: any[] | [];
 }
 

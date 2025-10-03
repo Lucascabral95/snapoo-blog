@@ -1,25 +1,12 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
-import "./App.scss";
+import { geistSans, geistMono } from "@/infrastructure/config/fonts";
+import { siteMetadata } from "@/infrastructure/config/metadata";
 import Provider from "@/Provider";
-import 'react-loading-skeleton/dist/skeleton.css'
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
+import "react-loading-skeleton/dist/skeleton.css";
+import "./App.scss";
 
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
-
-export const metadata: Metadata = {
-  title: "Snapoo Blog",
-  description: "Descubre los perfiles de nuestros usuarios, sus mejores imágenes y galerías personalizadas en este blog. Inspírate con fotografías únicas y conecta con una comunidad creativa.",
-};
+export const metadata: Metadata = siteMetadata;
 
 export default function RootLayout({
   children,
@@ -27,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="es">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
