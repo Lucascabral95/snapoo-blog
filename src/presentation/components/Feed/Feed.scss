@@ -79,110 +79,132 @@
   }
 }
 
-.fotos-subidas-mi-perfil {
+.fotos-subidas-mi-perfil.masonry {
   width: 100%;
   columns: 4;
-  column-gap: 4px;
+  column-gap: 24px;
   padding: 0;
   margin: 0 auto;
 
-  .contenedor-fotos-subidas-mi-perfil {
-    display: inline-block;
+  @media (max-width: 1200px) {
+    columns: 3;
+    column-gap: 16px;
+  }
+  @media (max-width: 900px) {
+    columns: 2;
+    column-gap: 12px;
+  }
+  @media (max-width: 600px) {
+    columns: 1;
+    column-gap: 0;
+  }
+}
+
+.masonry-item {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 24px;
+  break-inside: avoid;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s;
+  cursor: pointer;
+  @media (max-width: 600px) {
     width: 100%;
-    margin-bottom: 4px;
-    break-inside: avoid;
-    position: relative;
-    overflow: hidden;
-    background: #fafafa;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
+    margin-bottom: 16px;
+    border-radius: 0;
+    box-shadow: none;
+  }
 
-    &:hover {
-      transform: scale(1.02);
-      z-index: 10;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-
-      .imagen img {
-        filter: brightness(0.95);
-      }
-
-      .nombre-fav-repost {
-        opacity: 1;
-      }
+  &:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+    z-index: 2;
+    .imagen img {
+      filter: brightness(0.95);
     }
+    .nombre-fav-repost {
+      opacity: 1;
+    }
+  }
 
-    .imagen {
+  .imagen {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
       width: 100%;
       height: auto;
-      overflow: hidden;
-      background: #000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      img {
-        width: 100%;
-        height: auto;
-        display: block;
-        object-fit: cover;
-        transition: all 0.3s ease;
-      }
-    }
-
-    .nombre-fav-repost {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 8px 12px;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-
-      .nombre {
-        p {
-          margin: 0;
-          color: white;
-          font-size: 13px;
-          font-weight: 600;
-          text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
-        }
+      display: block;
+      object-fit: cover;
+      border-radius: 16px;
+      transition: all 0.3s ease;
+      @media (max-width: 600px) {
+        border-radius: 0;
       }
     }
   }
 
-  .boton-de-ver-mas {
-    width: 100%;
-    column-span: all;
-    display: flex;
-    justify-content: center;
-    padding: 32px 0;
-    break-inside: avoid;
+  .nombre-fav-repost {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 8px 12px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
 
-    button {
-      padding: 12px 32px;
-      font-size: 14px;
-      font-weight: 600;
-      color: #262626;
-      background: white;
-      border: 2px solid #dbdbdb;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-        Helvetica, Arial, sans-serif;
-
-      &:hover {
-        background: #262626;
+    .nombre {
+      p {
+        margin: 0;
         color: white;
-        border-color: #262626;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        font-size: 13px;
+        font-weight: 600;
+        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
       }
+    }
+  }
+}
 
-      &:active {
-        transform: translateY(0);
-      }
+.boton-de-ver-mas {
+  width: 100%;
+  column-span: all;
+  display: flex;
+  justify-content: center;
+  padding: 32px 0;
+  break-inside: avoid;
+
+  button {
+    padding: 12px 32px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #262626;
+    background: white;
+    border: 2px solid #dbdbdb;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Helvetica, Arial, sans-serif;
+
+    &:hover {
+      background: #262626;
+      color: white;
+      border-color: #262626;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    &:active {
+      transform: translateY(0);
     }
   }
 }

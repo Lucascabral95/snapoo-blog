@@ -1,46 +1,139 @@
+<p align="center">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png" alt="React Logo" width="180"/>
+</p>
+
 # Snapoo Blog
+
+## Descripción general
+
+**Snapoo Blog** es una red social de fotografía desarrollada en Next.js y TypeScript, donde los usuarios pueden crear perfiles, compartir imágenes, interactuar y descubrir contenido visual. El proyecto implementa arquitectura modular, autenticación segura, almacenamiento en la nube y una UI moderna y responsiva con SCSS y Tailwind CSS.
+
+---
+
+## ⚙️ Características Principales
+
+- **Autenticación y Autorización:** Inicio de sesión con Google/email, gestión de sesiones seguras con NextAuth.js.
+- **Gestión de Imágenes:** Subida, manipulación y almacenamiento eficiente en Cloudinary.
+- **Perfiles de Usuario:** Visualización de fotos propias, reposts y detalles de usuario.
+- **Interacción Social:** Likes, reposts y comentarios en publicaciones.
+- **Feed Dinámico:** Descubrimiento de contenido, búsqueda y filtrado avanzado.
+- **UI Responsive:** Diseño profesional tipo masonry, animaciones suaves y experiencia optimizada en mobile.
+- **Gestión de Errores y Feedback:** Manejo global de errores y notificaciones contextuales.
+- **Optimización de Performance:** SSR, lazy loading y caching inteligente con Next.js.
+- **Seguridad:** Validación de datos y protección de rutas.
+- **Testing Extensivo:** Pruebas unitarias y de integración.
+- **Documentación:** Documentación clara de la API y componentes.
+
+---
+
+## 🚀 Tecnologías Utilizadas
+
+- **Framework:** [Next.js](https://nextjs.org/), [React](https://react.dev/), [TypeScript](https://www.typescriptlang.org/)
+- **Base de Datos:** [MongoDB](https://www.mongodb.com/)
+- **Gestión de Estado:** React Context
+- **Estilos:** [Tailwind CSS](https://tailwindcss.com/), [SCSS](https://sass-lang.com/)
+- **Autenticación:** [NextAuth.js](https://next-auth.js.org/), [Google OAuth](https://developers.google.com/identity/protocols/oauth2)
+- **Media:** [Cloudinary](https://cloudinary.com/)
+- **Validación:** [Zod](https://zod.dev/)
+- **Testing:** [Jest](https://jestjs.io/), [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
+- **Linting & Formatting:** [ESLint](https://eslint.org/), [Prettier](https://prettier.io/)
+
+---
+
+## Tabla de contenidos
+
+- [Instalación](#instalación)
+- [Uso](#uso)
+- [Estructura del proyecto](#estructura-del-proyecto)
+- [Contribuciones](#contribuciones)
+- [Licencia](#licencia)
+- [Contacto](#contacto)
+
+---
 
 ## Instalación
 
-Instalar snapoo con npm
+1. **Cloná el repositorio:**
 
 ```bash
-  git clone https://github.com/Lucascabral95/snapoo-blog.git
-  cd snapoo
-  npm install 
-  npm run dev
+git clone https://github.com/Lucascabral95/snapoo-blog.git
+cd snapoo
 ```
- 
-## 🌟 Descripción
 
-Un blog donde los usuarios pueden crear su perfil, compartir sus fotos y conectarse con otros a través de su pasión por la fotografía.
+2. **Instalá las dependencias:**
 
-## ⚙️ Características Principales:
+```bash
+npm install
+```
 
-- **Subida de Fotos en Cloudinary**: Los usuarios pueden subir imágenes acompañadas de un comentario. Estas imágenes se gestionan de manera eficiente y segura a través de Cloudinary, una plataforma de gestión de medios en la nube. Cloudinary permite almacenar, manipular y servir las imágenes de manera rápida y escalable, garantizando un rendimiento óptimo incluso con un gran volumen de fotos.
-- **Almacenamiento de Datos en MongoDB**: Los datos de cada usuario, como su perfil, las fotos subidas y las interacciones (me gusta, reposts), se almacenan de manera persistente en MongoDB, asegurando que toda la información esté organizada y fácilmente accesible.
-- **Secciones Dinámicas**: Cada usuario tiene su propio perfil donde puede ver sus fotos subidas, así como las publicaciones de otros usuarios que han sido republicadas. Además, cada post tiene una sección dinámica donde los usuarios pueden interactuar con el contenido, dándole "me gusta" o repostearlo, lo que fomenta la participación y la interacción social.
-- **Autenticación Segura**: La plataforma ofrece autenticación segura, permitiendo a los usuarios acceder a sus cuentas mediante Google o con su propio correo electrónico, todo gestionado por NextAuth.js, que asegura un proceso de inicio de sesión confiable y sin complicaciones.
-- **Interactividad en Publicaciones**: Los usuarios pueden interactuar con las publicaciones de otros, dándoles "me gusta" o repostearlas, creando una experiencia social más dinámica y personalizada.
+3. **Configurá las variables de entorno:**
 
-## 📄 Conclusión:
+```bash
+cp .env.template .env.local
+```
 
-**Snapoo Blog**: Este blog demuestra mis habilidades en desarrollo web, integrando funcionalidades avanzadas como la gestión de imágenes en Cloudinary, almacenamiento de datos en MongoDB y autenticación segura con NextAuth.js. Ofrece una experiencia interactiva y fluida, permitiendo a los usuarios subir, compartir y reaccionar a contenido, mientras mantiene un alto rendimiento y seguridad. Este proyecto refleja mi capacidad para crear soluciones escalables y centradas en el usuario.
+4. **Compilá el proyecto:**
 
-## 🚀 Tecnologías Utilizadas 
+```bash
+npm run dev
+```
 
-- **Next.js**: Framework de React que permite la construcción de aplicaciones web y APIs con funcionalidades de renderizado del lado del servidor.
-- **MongoDB**: Base de datos NoSQL que almacena los mensajes y datos de usuario de forma persistente.
-- **SASS**: Para estilos y diseño responsivo, asegurando una buena experiencia en diferentes dispositivos.
-- **NextAuth.js**: Librería de autenticación que soporta múltiples métodos de inicio de sesión, incluyendo Google.
-- **Cloudinary**: Plataforma de gestión de medios en la nube, que permite cargar, almacenar, manipular y servir imágenes, videos y otros archivos multimedia en aplicaciones web.
-- **Zod**: Biblioteca de validación y parsing de esquemas para TypeScript y JavaScript, que permite definir y validar datos con tipos seguros de manera sencilla y eficaz.
-- **TypeScript**: Superset de JavaScript que añade tipado estático y otras funcionalidades avanzadas, mejorando la calidad y el mantenimiento del código en aplicaciones grandes y complejas.
+## Uso
+
+La aplicación estará disponible en:
+
+`http://localhost:3000`
+
+## Estructura del proyecto
+
+```bash
+├── src/
+│   ├── app/
+│   │   ├── api/                  # Rutas de API
+│   │   ├── feed/                 # Feed principal y subrutas
+│   │   ├── usuario/              # Perfil de usuario
+│   │   ├── posteo/               # Detalle de posteos
+│   │   ├── fonts/                # Fuentes personalizadas
+│   │   ├── globals.css           # Estilos globales
+│   │   ├── layout.tsx            # Layout principal
+│   │   └── page.tsx              # Página de inicio
+│   ├── DAO/                      # Acceso a datos
+│   ├── infrastructure/           # Configuración, interfaces, servicios
+│   ├── models/                   # Modelos de datos
+│   ├── presentation/             # Componentes de UI
+│   └── services/                 # Lógica de negocio
+├── public/                       # Assets estáticos
+├── .eslintrc.js                  # Configuración de ESLint
+├── next.config.js                 # Configuración de Next.js
+├── package.json                  # Dependencias y scripts
+├── tailwind.config.js            # Configuración de Tailwind
+├── tsconfig.json                 # Configuración de TypeScript
+└── README.md                     # Documentación
+```
+
+## Contribuciones
+
+¡Las contribuciones son bienvenidas! Seguí estos pasos:
+
+1. Hacé un fork del repositorio.
+2. Creá una rama para tu feature o fix (`git checkout -b feature/nueva-funcionalidad`).
+3. Realizá tus cambios y escribí pruebas si es necesario.
+4. Hacé commit y push a tu rama (`git commit -m "feat: agrega nueva funcionalidad"`).
+5. Abrí un Pull Request describiendo tus cambios.
+
+---
+
+## Licencia
+
+Este proyecto está bajo la licencia **MIT**.
+
+---
 
 ## 📬 Contacto
 
-Si tenés alguna pregunta o sugerencia, no dudes en contactarme a través de lucassimple@hotmail.com o https://github.com/Lucascabral95
+- **Autor:** Lucas Cabral
+- **LinkedIn:** [https://www.linkedin.com/in/lucas-gastón-cabral/](https://www.linkedin.com/in/lucas-gastón-cabral/)
+- **Portfolio:** [https://portfolio-web-dev-git-main-lucascabral95s-projects.vercel.app/](https://portfolio-web-dev-git-main-lucascabral95s-projects.vercel.app/)
+- **Github:** [https://github.com/Lucascabral95](https://github.com/Lucascabral95/)
 
-### Notas: 
-
-- Añadí secciones como **Tecnologías Utilizadas**, **Descripción**, **Conclusión**, **Características Principales** y **Contacto** para hacer el README más completo.
+---
