@@ -11,10 +11,12 @@ import Tabs from "@/presentation/components/UI/Tabs";
 import { useUploadModal } from "@/presentation/context/UploadModalContext";
 import type { GalleryPost } from "@/infrastructure/types/gallery.types";
 import styles from "./UserProfile.module.scss";
+import ModerationMenu from "@/presentation/components/Moderation/ModerationMenu";
 
 interface UserProfileProps {
   dataPosteos: GalleryPost[];
   datosDelUsuario: string;
+  userId?: string;
   rePosteos: GalleryPost[];
 }
 
@@ -23,6 +25,7 @@ type Section = "posteos" | "compartidos";
 export default function UserProfile({
   dataPosteos: initialPosteos,
   datosDelUsuario,
+  userId,
   rePosteos,
 }: UserProfileProps) {
   const { data: session } = useSession();
@@ -51,6 +54,7 @@ export default function UserProfile({
                 Editar perfil
               </Button>
             ) : null}
+            {!isOwnProfile && userId ? <ModerationMenu targetType="user" targetId={userId} userId={userId} /> : null}
           </div>
 
           <div className={styles.stats}>

@@ -1,6 +1,7 @@
 import mongo from "@/services/mongoDB";
 import Posteos from "@/models/Posteos";
 import Usuarios from "@/models/Usuario";
+import { getBlockedUserIds } from "@/infrastructure/moderation/visibility";
 
 class DAOPosteos {
   constructor() {
@@ -17,9 +18,10 @@ class DAOPosteos {
     }
   }
 
-  async getAll(): Promise<any> {
+  async getAll(viewerId?: string): Promise<any> {
     try {
-      const posteos = await Posteos.find().populate("usuario");
+      const hiddenUsers = await getBlockedUserIds(viewerId);
+      const posteos = await Posteos.find({ moderationState: { $ne: "removed" }, usuario: { $nin: hiddenUsers } }).populate("usuario");
       return posteos;
     } catch (error) {
       console.error("Error al obtener todos los posteos:", error);
@@ -27,9 +29,10 @@ class DAOPosteos {
     }
   }
 
-  async getPosteoByID(id: string): Promise<any> {
+  async getPosteoByID(id: string, viewerId?: string): Promise<any> {
     try {
-      const posteo = await Posteos.findOne({ _id: id }).populate("usuario");
+      const hiddenUsers = await getBlockedUserIds(viewerId);
+      const posteo = await Posteos.findOne({ _id: id, moderationState: { $ne: "removed" }, usuario: { $nin: hiddenUsers } }).populate("usuario");
       return posteo;
     } catch (error) {
       console.error("Error al obtener el posteo:", error);
@@ -37,9 +40,10 @@ class DAOPosteos {
     }
   }
 
-  async getAllWithoutPopulate(): Promise<any> {
+  async getAllWithoutPopulate(viewerId?: string): Promise<any> {
     try {
-      return await Posteos.find();
+      const hiddenUsers = await getBlockedUserIds(viewerId);
+      return await Posteos.find({ moderationState: { $ne: "removed" }, usuario: { $nin: hiddenUsers } });
     } catch (error) {
       console.error("Error al obtener todos los posteos:", error);
       throw error;

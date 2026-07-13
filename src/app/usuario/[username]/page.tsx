@@ -90,6 +90,7 @@ const PerfilUsuario: React.FC<Username> = async ({ params }) => {
         <UserProfile
           dataPosteos={dataPosteos}
           datosDelUsuario={datosDelUsuario}
+          userId={String(userName._id || "")}
           rePosteos={rePosteos}
         />
       )}

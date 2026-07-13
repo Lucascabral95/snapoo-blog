@@ -12,6 +12,7 @@ import { useSession } from "next-auth/react";
 import useVistaImagen from "@/presentation/hooks/useVistaImagen";
 import { useComments } from "@/presentation/hooks";
 import Button from "@/presentation/components/UI/Button";
+import ModerationMenu from "@/presentation/components/Moderation/ModerationMenu";
 import styles from "./VistaImagen.module.scss";
 
 interface VistaImagenProps {
@@ -55,7 +56,7 @@ export default function VistaImagen({
         {loadingSkeleton ? (
           <Skeleton width="100%" height={614} />
         ) : url ? (
-          <Image src={url} alt={descripcion || "Imagen del posteo"} width={900} height={1100} priority />
+          <Image src={id ? `/api/media/posts/${id}` : url} alt={descripcion || "Imagen del posteo"} width={900} height={1100} priority unoptimized />
         ) : null}
       </div>
 
@@ -70,6 +71,7 @@ export default function VistaImagen({
             </Link>
             {username && <div className={styles.authorHandle}>@{username}</div>}
           </div>
+          <ModerationMenu targetType="post" targetId={id} />
         </div>
 
         <div className={styles.sideBody}>
@@ -112,6 +114,7 @@ export default function VistaImagen({
                 <span className={styles.commentUser}>{comment.emisor}</span>{" "}
                 <span className={styles.commentText}>{comment.contenido}</span>
               </div>
+              <ModerationMenu targetType="comment" targetId={comment._id} />
             </div>
           ))}
         </div>
