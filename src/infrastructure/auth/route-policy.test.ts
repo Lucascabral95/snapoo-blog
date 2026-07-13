@@ -14,4 +14,10 @@ describe("route policy", () => {
         expect(isProtectedRoute("/usuario/perfil/snapoo")).toBe(true);
         expect(isProtectedRoute("/posteo/123")).toBe(false);
     });
+
+    it("keeps password-recovery and email-verification pages reachable without a session", () => {
+        expect(isProtectedRoute("/feed/forgot-password")).toBe(false);
+        expect(isProtectedRoute("/feed/reset-password")).toBe(false);
+        expect(isProtectedRoute("/feed/verify-email")).toBe(false);
+    });
 });

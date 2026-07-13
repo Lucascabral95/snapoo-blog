@@ -1,50 +1,31 @@
+import { Search } from "lucide-react";
 import type { FeedPost } from "@/infrastructure/types";
 import FeedGrid from "@/presentation/components/Feed/FeedGrid";
+import StateBlock from "@/presentation/components/UI/StateBlock";
 
 import styles from "./Search.module.scss";
 
 interface SearchResultsProps {
   posts: FeedPost[];
   query: string;
-  category: string;
 }
 
-export default function SearchResults({
-  posts,
-  query,
-  category,
-}: SearchResultsProps) {
+export default function SearchResults({ posts, query }: SearchResultsProps) {
   if (!query || query.trim() === "") {
     return (
-      <div className={styles.emptyState}>
-        <p className={styles.emptyMessage}>
-          Ingresa un término de búsqueda para comenzar
-        </p>
-      </div>
-    );
-  }
-
-  if (posts.length === 0) {
-    return (
-      <div className={styles.emptyState}>
-        <p className={styles.emptyMessage}>
-          No se encontraron resultados para {query}
-        </p>
-        <p className={styles.emptyHint}>
-          Intenta con otros términos de búsqueda
-        </p>
-      </div>
+      <StateBlock
+        icon={<Search size={22} />}
+        title="Buscá fotos, personas o intereses"
+        description="Ingresá un término para empezar a explorar."
+      />
     );
   }
 
   return (
     <div className={styles.resultsContainer}>
-      <div className={styles.resultsHeader}>
-        <p className={styles.resultsCount}>
-          {posts.length} {posts.length === 1 ? "resultado" : "resultados"} para
-          {query}
-        </p>
-      </div>
+      <p className={styles.resultsCount}>
+        {posts.length} {posts.length === 1 ? "resultado" : "resultados"} para &ldquo;{query}&rdquo;
+      </p>
       <FeedGrid posts={posts} />
     </div>
   );

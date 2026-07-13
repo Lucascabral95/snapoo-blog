@@ -1,41 +1,34 @@
 "use client";
 
-import "./EstructuraConDashboard.scss";
-import React, { useState } from "react";
+import { useState } from "react";
+import type { ReactNode } from "react";
 import DashboardHeaderDesktop from "../../Layouts/DashboardHeader/DashboardHeaderDesktop";
 import DashboardHeaderMobile from "../../Layouts/DashboardHeader/DashboardHeaderMobile";
 import DashboardFooter from "../../Layouts/DashboardHeader/DashboardFooter/DashboardFooter";
 import MenuHamburguesa from "../../MenuHamburguesa/MenuHamburguesa";
+import { UploadModalProvider } from "@/presentation/context/UploadModalContext";
+import UploadModal from "@/presentation/components/SubidaImagenes/UploadModal";
+import styles from "./EstructuraConDashboard.module.scss";
 
 interface EstructuraConDashboardProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
-export default function EstructuraConDashboard({
-  children,
-}: EstructuraConDashboardProps) {
-  const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false);
+export default function EstructuraConDashboard({ children }: EstructuraConDashboardProps) {
+  const [isOpenMenu, setIsOpenMenu] = useState(false);
 
   return (
-    <div className="estructura-con-dashboard">
-      <div className="contenedor-estructura-con-dashboard">
+    <UploadModalProvider>
+      <div className={styles.shell}>
         <DashboardHeaderDesktop />
-
         {isOpenMenu && <MenuHamburguesa setIsOpenMenu={setIsOpenMenu} />}
+        <DashboardHeaderMobile isMenuOpen={isOpenMenu} onToggleMenu={() => setIsOpenMenu((open) => !open)} />
 
-        <DashboardHeaderMobile
-          isMenuOpen={isOpenMenu}
-          onToggleMenu={() => setIsOpenMenu(!isOpenMenu)}
-        />
+        <main className={styles.content}>{children}</main>
 
-        <div className="contenido-interno">
-          <main className="main-titular">
-            <div className="contenedor-main-titular">{children}</div>
-          </main>
-
-          <DashboardFooter />
-        </div>
+        <DashboardFooter />
+        <UploadModal />
       </div>
-    </div>
+    </UploadModalProvider>
   );
 }

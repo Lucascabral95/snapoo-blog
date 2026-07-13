@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { geistSans, geistMono } from "@/infrastructure/config/fonts";
+import { fontDisplay, fontBody, fontMono } from "@/infrastructure/config/fonts";
 import { siteMetadata } from "@/infrastructure/config/metadata";
 import Provider from "@/Provider";
 
 import "react-loading-skeleton/dist/skeleton.css";
-import "./App.scss";
+import "./globals.css";
 
 export const metadata: Metadata = siteMetadata;
 
@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${fontDisplay.variable} ${fontBody.variable} ${fontMono.variable} antialiased`}
       >
         <Provider>{children}</Provider>
       </body>

@@ -1,7 +1,10 @@
 import React, { ChangeEvent } from "react";
+import { Upload, X } from "lucide-react";
 
 import { useImageUpload } from "@/presentation/hooks";
-import "./SubidaImagenes.scss";
+import { Field, Textarea } from "@/presentation/components/UI/Field";
+import Button from "@/presentation/components/UI/Button";
+import styles from "./SubidaImagenes.module.scss";
 
 interface SubidaImagenesProps {
   setIsOpenSubida: React.Dispatch<React.SetStateAction<boolean>> | (() => void);
@@ -18,8 +21,7 @@ const SubidaImagenes: React.FC<SubidaImagenesProps> = ({
   setComentario,
   isUploading = false,
 }) => {
-  const { imagePreview, handleFileChange, clearPreview } =
-    useImageUpload(setFile);
+  const { imagePreview, handleFileChange, clearPreview } = useImageUpload(setFile);
 
   const handleClose = () => {
     if (!isUploading) {
@@ -49,41 +51,34 @@ const SubidaImagenes: React.FC<SubidaImagenesProps> = ({
   };
 
   return (
-    <div className="subida-dee-imagenes" onClick={handleBackdropClick}>
-      <div className="contenedor-subida-imagenes">
-        <div className="subtitulo">
-          <h2>Subir a Snapoo</h2>
+    <div className={styles.backdrop} onClick={handleBackdropClick}>
+      <div className={styles.modal}>
+        <div className={styles.header}>
+          <h2 className={styles.title}>Subir a Snapoo</h2>
+          <button type="button" className={styles.closeButton} onClick={handleClose} disabled={isUploading} aria-label="Cerrar">
+            <X size={18} />
+          </button>
         </div>
 
-        <div className="preview-container">
+        <div className={styles.previewContainer}>
           {imagePreview ? (
-            <div className="preview-wrapper">
-              <img src={imagePreview} alt="Preview" className="image-preview" />
+            <div className={styles.previewWrapper}>
+              {/* eslint-disable-next-line @next/next/no-img-element -- blob: preview URL, no remote optimization possible */}
+              <img src={imagePreview} alt="Preview" className={styles.imagePreview} />
               <button
                 type="button"
-                className="remove-image"
+                className={styles.removeImage}
                 onClick={clearPreview}
                 aria-label="Eliminar imagen"
                 disabled={isUploading}
               >
-                ✕
+                <X size={14} />
               </button>
             </div>
           ) : (
-            <label htmlFor="file" className="upload-label">
-              <div className="upload-placeholder">
-                <svg
-                  width="48"
-                  height="48"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                  <polyline points="17 8 12 3 7 8" />
-                  <line x1="12" y1="3" x2="12" y2="15" />
-                </svg>
+            <label htmlFor="file" className={styles.uploadLabel}>
+              <div className={styles.uploadPlaceholder}>
+                <Upload size={32} />
                 <span>Seleccionar imagen</span>
               </div>
             </label>
@@ -95,39 +90,28 @@ const SubidaImagenes: React.FC<SubidaImagenesProps> = ({
             id="file"
             accept="image/*"
             onChange={handleFileChange}
-            className="file-input"
+            className={styles.fileInput}
             disabled={isUploading}
           />
         </div>
 
-        <div className="descripcion">
-          <textarea
-            name="descripcion"
-            id="descripcion"
+        <Field>
+          <Textarea
+            rows={2}
             placeholder="Escribí una descripción..."
             onChange={handleComentarioChange}
             maxLength={500}
             disabled={isUploading}
           />
-        </div>
+        </Field>
 
-        <div className="botones">
-          <button
-            type="button"
-            className="cancelar"
-            onClick={handleClose}
-            disabled={isUploading}
-          >
-            CANCELAR
-          </button>
-          <button
-            type="button"
-            onClick={handlePublish}
-            className="subir"
-            disabled={!imagePreview || isUploading}
-          >
-            {isUploading ? "SUBIENDO..." : "SUBIR"}
-          </button>
+        <div className={styles.actions}>
+          <Button variant="secondary" onClick={handleClose} disabled={isUploading}>
+            Cancelar
+          </Button>
+          <Button variant="primary" onClick={handlePublish} disabled={!imagePreview || isUploading}>
+            {isUploading ? "Subiendo..." : "Subir"}
+          </Button>
         </div>
       </div>
     </div>

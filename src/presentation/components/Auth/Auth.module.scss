@@ -1,0 +1,121 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.title {
+  font-family: var(--font-display), sans-serif;
+  font-size: 21px;
+  margin: 0 0 4px;
+}
+
+.subtitle {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12.5px;
+}
+
+.link {
+  color: var(--accent);
+
+  &:hover {
+    color: var(--accent-hover);
+  }
+}
+
+.divider {
+  text-align: center;
+  color: var(--text-faint);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.foot {
+  text-align: center;
+  font-size: 12.5px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.alertBanner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--danger-soft);
+  color: var(--danger);
+  padding: 10px 12px;
+  border-radius: var(--r-sm);
+  font-size: 12px;
+  font-weight: 500;
+
+  svg {
+    flex: none;
+  }
+}
+
+.successBanner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--success-soft);
+  color: var(--success);
+  padding: 10px 12px;
+  border-radius: var(--r-sm);
+  font-size: 12px;
+  font-weight: 500;
+
+  svg {
+    flex: none;
+  }
+}
+
+.otpRow {
+  display: flex;
+  gap: 9px;
+
+  @media (max-width: 768px) {
+    gap: 6px;
+  }
+}
+
+.otpBox {
+  width: 46px;
+  height: 54px;
+  text-align: center;
+  font-size: 19px;
+  font-family: var(--font-mono), monospace;
+  font-weight: 600;
+  border: 1.5px solid var(--border-strong);
+  border-radius: var(--r-sm);
+
+  &:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+
+  @media (max-width: 768px) {
+    width: 37px;
+    height: 44px;
+    font-size: 16px;
+  }
+}
+
+.otpErr {
+  border-color: var(--danger);
+  background: var(--danger-soft);
+}
+
+.otpTimer {
+  font-family: var(--font-mono), monospace;
+  color: var(--text-faint);
+}

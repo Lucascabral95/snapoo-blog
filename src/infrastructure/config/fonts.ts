@@ -1,15 +1,22 @@
-import localFont from 'next/font/local';
+import { Space_Grotesk, IBM_Plex_Sans, IBM_Plex_Mono } from 'next/font/google';
 
-export const geistSans = localFont({
-    src: '../../app/fonts/GeistVF.woff',
-    variable: '--font-geist-sans',
-    weight: '100 900',
+export const fontDisplay = Space_Grotesk({
+    subsets: ['latin'],
+    weight: ['500', '600', '700'],
+    variable: '--font-display',
     display: 'swap',
 });
 
-export const geistMono = localFont({
-    src: '../../app/fonts/GeistMonoVF.woff',
-    variable: '--font-geist-mono',
-    weight: '100 900',
+export const fontBody = IBM_Plex_Sans({
+    subsets: ['latin'],
+    weight: ['400', '500', '600', '700'],
+    variable: '--font-body',
+    display: 'swap',
+});
+
+export const fontMono = IBM_Plex_Mono({
+    subsets: ['latin'],
+    weight: ['500', '600'],
+    variable: '--font-mono',
     display: 'swap',
 });

@@ -1,0 +1,54 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.input,
+.textarea,
+.select {
+  font-family: var(--font-body), sans-serif;
+  font-size: 13.5px;
+  padding: 10px 12px;
+  border: 1.5px solid var(--border-strong);
+  border-radius: var(--r-sm);
+  background: #fff;
+  color: var(--text);
+  width: 100%;
+
+  &:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+}
+
+.err {
+  border-color: var(--danger);
+  background: var(--danger-soft);
+}
+
+.hint {
+  font-size: 11px;
+  color: var(--text-faint);
+}
+
+.hintError {
+  font-size: 11px;
+  color: var(--danger);
+}
+
+.checkboxRow {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12.5px;
+  color: var(--text-muted);
+  cursor: pointer;
+}

@@ -21,3 +21,10 @@ export interface PostDetailProps {
   username: string;
   loadingSkeleton: boolean;
 }
+
+export interface PostComment {
+  _id: string;
+  contenido: string;
+  emisor: string;
+  usuario?: { userName?: string };
+}

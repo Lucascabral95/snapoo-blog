@@ -1,19 +1,14 @@
 import DashboardLogo from "./DashboardLogo";
 import DashboardNav from "./DashboardNav";
 import DashboardAuthButtons from "./DashboardAuthButtons";
+import styles from "./DashboardHeader.module.scss";
 
 export default function DashboardHeaderDesktop() {
   return (
-    <header className="header-titular">
-      <div className="div-superior">
-        <div className="div-logo">
-          <DashboardLogo />
-          <DashboardNav />
-        </div>
-        <div className="parte-inferior">
-          <DashboardAuthButtons />
-        </div>
-      </div>
+    <header className={styles.header}>
+      <DashboardLogo />
+      <DashboardNav />
+      <DashboardAuthButtons />
     </header>
   );
 }

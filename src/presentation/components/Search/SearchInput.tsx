@@ -1,10 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { FaSearch, FaTimes } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { Search, X } from "lucide-react";
 import { useSearchQuery } from "@/presentation/hooks/useSearchQuery";
 import { useDebounce } from "@/presentation/hooks/useDebounce";
-
 import styles from "./Search.module.scss";
 
 export default function SearchInput() {
@@ -12,14 +11,14 @@ export default function SearchInput() {
   const [inputValue, setInputValue] = useState(query);
   const debouncedValue = useDebounce(inputValue, 500);
 
-  // Sincronizar debounced value con URL
   useEffect(() => {
     setQuery(debouncedValue);
-  }, [debouncedValue, setQuery]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debouncedValue]);
 
-  // Sincronizar input con query de URL (para navegación back/forward)
   useEffect(() => {
     setInputValue(query);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
 
   const handleClear = () => {
@@ -29,22 +28,18 @@ export default function SearchInput() {
 
   return (
     <div className={styles.searchInput}>
-      <FaSearch className={styles.searchIcon} />
+      <Search size={14} className={styles.searchIcon} />
       <input
         type="text"
         value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
+        onChange={(event) => setInputValue(event.target.value)}
         placeholder="Buscar publicaciones, usuarios..."
         className={styles.input}
         autoComplete="off"
       />
       {inputValue && (
-        <button
-          onClick={handleClear}
-          className={styles.clearButton}
-          aria-label="Limpiar búsqueda"
-        >
-          <FaTimes />
+        <button type="button" onClick={handleClear} className={styles.clearButton} aria-label="Limpiar búsqueda">
+          <X size={14} />
         </button>
       )}
     </div>

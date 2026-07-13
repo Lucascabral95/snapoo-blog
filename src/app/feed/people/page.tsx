@@ -1,85 +1,16 @@
-// "use client";
-// import React, { useEffect, useState } from "react";
-// import axios from "axios";
-
-// import EstructuraImagenes from "@/presentation/components/SecondaryComponents/Gallery/EstructuraImagenes";
-// import "../Feed.scss";
-
-// const People: React.FC = () => {
-//   const [categoriaSeleccionada, setCategoriaSeleccionada] =
-//     useState<string>("usuario");
-//   const [posteos, setPosteos] = useState<any[]>([]);
-//   const [input, setInput] = useState<string>("");
-
-//   useEffect(() => {
-//     const obtenerDatos = async () => {
-//       try {
-//         const result = await axios.get(`/api/posteos`);
-
-//         if (result.status === 200 || result.status === 201) {
-//           if (input.trim() === "") {
-//             setPosteos([]);
-//           } else {
-//             let posteosFiltrados = result.data.result.filter(
-//               (pos: any) =>
-//                 pos.descripcion.toLowerCase().includes(input.toLowerCase()) ||
-//                 pos.usuario.email.toLowerCase().includes(input.toLowerCase())
-//             );
-//             setPosteos(posteosFiltrados);
-//           }
-//         }
-//       } catch (error: any) {
-//         if (error.response) {
-//           if (error.response.status === 404) {
-//             console.log("Error 404: ", error.response.data.error);
-//           }
-//         } else {
-//           console.log("Error de servidor o red no disponible");
-//         }
-//       }
-//     };
-
-//     obtenerDatos();
-//   }, [input, categoriaSeleccionada]);
-
-//   return (
-//     <div className="seccion-perfil seccion-perfil-inicio">
-//       <div className="busqueda">
-//         <div className="contenedor-de-busqueda">
-//           <div className="input-busqueda">
-//             <input
-//               type="text"
-//               onChange={(e) => setInput(e.target.value)}
-//               placeholder="Buscar"
-//               name="input"
-//             />
-//           </div>
-//           <div className="busqueda-categorias">
-//             <div className="cats">
-//               <p> Usuarios </p>
-//             </div>
-//             <div className="cats">
-//               <p> Imagenes </p>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-
-//       <EstructuraImagenes posteos={posteos} />
-//     </div>
-//   );
-// };
-
-// export default People;
-
 "use client";
-import React, { useEffect, useState, useMemo } from "react";
-import axios from "axios";
-import { useDebounce } from "@/presentation/hooks/useDebounce";
-import EstructuraImagenes from "@/presentation/components/SecondaryComponents/Gallery/EstructuraImagenes";
-import "../Feed.scss";
 
-type Category = "usuarios" | "imagenes";
+import { useEffect, useMemo, useState } from "react";
+import axios from "axios";
+import { Search, Users } from "lucide-react";
+import Avvvatars from "avvvatars-react";
+import Skeleton from "react-loading-skeleton";
+import { useDebounce } from "@/presentation/hooks/useDebounce";
+import Card from "@/presentation/components/UI/Card";
+import Button from "@/presentation/components/UI/Button";
+import StateBlock from "@/presentation/components/UI/StateBlock";
+import searchStyles from "@/presentation/components/Search/Search.module.scss";
+import styles from "./People.module.scss";
 
 interface Post {
   _id: string;
@@ -91,89 +22,94 @@ interface Post {
   };
 }
 
-export default function People() {
-  const [categoria, setCategoria] = useState<Category>("imagenes");
-  const [todosLosPosteos, setTodosLosPosteos] = useState<Post[]>([]);
-  const [input, setInput] = useState<string>("");
-  const [isLoading, setIsLoading] = useState(false);
+interface Creator {
+  userName: string;
+  email: string;
+}
+
+export default function PeoplePage() {
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [input, setInput] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
   const debouncedInput = useDebounce(input, 300);
 
   useEffect(() => {
-    const cargarPosteos = async () => {
-      if (todosLosPosteos.length > 0) return;
-
+    const loadPosts = async () => {
       setIsLoading(true);
       try {
         const { data } = await axios.get("/api/posteos");
-        if (data?.result) {
-          setTodosLosPosteos(data.result);
-        }
-      } catch (error: any) {
-        console.error("Error al cargar posteos:", error);
+        if (data?.result) setPosts(data.result);
+      } catch (error) {
+        console.error("Error al cargar creadores:", error);
       } finally {
         setIsLoading(false);
       }
     };
 
-    cargarPosteos();
+    loadPosts();
   }, []);
 
-  const posteosFiltrados = useMemo(() => {
-    if (!debouncedInput.trim()) return [];
-
-    const searchTerm = debouncedInput.toLowerCase();
-
-    console.log(`searchTerm es ${searchTerm}`);
-
-    return todosLosPosteos.filter((post) => {
-      const descripcionMatch = post.descripcion
-        ?.toLowerCase()
-        .includes(searchTerm);
-      const emailMatch = post.usuario?.email
-        ?.toLowerCase()
-        .includes(searchTerm);
-      const usernameMatch = post.usuario?.userName
-        ?.toLowerCase()
-        .includes(searchTerm);
-
-      return descripcionMatch || emailMatch || usernameMatch;
+  const creators = useMemo(() => {
+    const byUsername = new Map<string, Creator>();
+    posts.forEach((post) => {
+      const userName = post.usuario?.userName;
+      if (userName && !byUsername.has(userName)) {
+        byUsername.set(userName, { userName, email: post.usuario.email });
+      }
     });
-  }, [debouncedInput, todosLosPosteos]);
+    return Array.from(byUsername.values());
+  }, [posts]);
+
+  const filteredCreators = useMemo(() => {
+    const term = debouncedInput.trim().toLowerCase();
+    if (!term) return creators;
+    return creators.filter(
+      (creator) => creator.userName.toLowerCase().includes(term) || creator.email.toLowerCase().includes(term),
+    );
+  }, [creators, debouncedInput]);
 
   return (
-    <div className="seccion-perfil seccion-perfil-inicio">
-      <div className="busqueda">
-        <div className="contenedor-de-busqueda">
-          <div className="input-busqueda">
-            <input
-              type="text"
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="Buscar usuarios o imágenes..."
-              value={input}
-              name="input"
-            />
-          </div>
-          <div className="busqueda-categorias">
-            <div
-              className={`cats ${categoria === "usuarios" ? "active" : ""}`}
-              onClick={() => setCategoria("usuarios")}
-            >
-              <p>Usuarios</p>
-            </div>
-            <div
-              className={`cats ${categoria === "imagenes" ? "active" : ""}`}
-              onClick={() => setCategoria("imagenes")}
-            >
-              <p>Imágenes</p>
-            </div>
-          </div>
+    <div className={searchStyles.page}>
+      <div className={searchStyles.header}>
+        <div className={searchStyles.searchInput}>
+          <Search size={14} className={searchStyles.searchIcon} />
+          <input
+            type="text"
+            value={input}
+            onChange={(event) => setInput(event.target.value)}
+            placeholder="Buscar personas..."
+            className={searchStyles.input}
+            autoComplete="off"
+          />
         </div>
       </div>
 
       {isLoading ? (
-        <div className="loading-state">Cargando...</div>
+        <div className={styles.grid}>
+          {Array.from({ length: 8 }).map((_, index) => (
+            <Skeleton key={index} height={92} borderRadius={16} />
+          ))}
+        </div>
+      ) : filteredCreators.length === 0 ? (
+        <StateBlock
+          icon={<Users size={22} />}
+          title="No encontramos creadores"
+          description="Probá con otro nombre de usuario o email."
+        />
       ) : (
-        <EstructuraImagenes posteos={posteosFiltrados} />
+        <div className={styles.grid}>
+          {filteredCreators.map((creator) => (
+            <Card key={creator.userName} className={styles.card}>
+              <Avvvatars value={creator.userName} size={44} />
+              <div className={styles.info}>
+                <p className={styles.name}>{creator.userName}</p>
+              </div>
+              <Button href={`/usuario/${creator.userName}`} variant="secondary" size="sm">
+                Ver perfil
+              </Button>
+            </Card>
+          ))}
+        </div>
       )}
     </div>
   );

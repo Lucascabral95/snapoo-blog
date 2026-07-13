@@ -1,4 +1,4 @@
-import PostDetailSkeleton from "@/presentation/components/PostDetail/PostDetailSkeleton";
+import PostDetailSkeleton from "./PostDetailSkeleton";
 
 export default function Loading() {
   return <PostDetailSkeleton />;
