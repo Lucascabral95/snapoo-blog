@@ -45,25 +45,12 @@ function useVistaImagen({ id, likes }: UseImagenProps) {
             });
 
             if (result.status === 200) {
-                toast.success("¡Reposteado exitosamente!", {
-                    icon: "🔄",
-                    style: {
-                        borderRadius: "12px",
-                        background: "#333",
-                        color: "#fff",
-                    },
-                });
+                toast.success("¡Reposteado exitosamente!", { icon: "🔄" });
             }
         } catch (error: any) {
             if (error.response) {
                 if (error.response.status === 400 || error.response.status === 404) {
-                    toast.error("Ya reposteaste este posteo", {
-                        style: {
-                            borderRadius: "12px",
-                            background: "#333",
-                            color: "#fff",
-                        },
-                    });
+                    toast.error("Ya reposteaste este posteo");
                 } else {
                     console.error(error.response.data.error);
                 }
@@ -93,13 +80,7 @@ function useVistaImagen({ id, likes }: UseImagenProps) {
             setHasLiked(previousHasLiked);
             setLikeCount(previousLikeCount);
 
-            toast.error("Error al dar like", {
-                style: {
-                    borderRadius: "12px",
-                    background: "#333",
-                    color: "#fff",
-                },
-            });
+            toast.error("Error al dar like");
             console.error(error.response?.data?.error);
         } finally {
             setIsLiking(false);

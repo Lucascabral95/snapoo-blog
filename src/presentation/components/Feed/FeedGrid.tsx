@@ -1,7 +1,9 @@
+import { SearchX } from "lucide-react";
 import type { FeedPost } from "@/infrastructure/types";
 
 import styles from "./Feed.module.scss";
 import FeedCard from "./FeedCard";
+import StateBlock from "@/presentation/components/UI/StateBlock";
 
 interface FeedGridProps {
   posts: FeedPost[];
@@ -10,14 +12,11 @@ interface FeedGridProps {
 export default function FeedGrid({ posts }: FeedGridProps) {
   if (posts.length === 0) {
     return (
-      <div className={styles.emptyState}>
-        <p className={styles.emptyMessage}>
-          No hay publicaciones disponibles en este momento
-        </p>
-        <p className={styles.emptyHint}>
-          ¡Sé el primero en compartir algo increíble!
-        </p>
-      </div>
+      <StateBlock
+        icon={<SearchX size={22} />}
+        title="No se encontraron resultados"
+        description="Probá con otro término de búsqueda o categoría."
+      />
     );
   }
 

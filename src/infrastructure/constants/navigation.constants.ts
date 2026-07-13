@@ -1,30 +1,15 @@
-import { TbWorld } from 'react-icons/tb';
-import { RiUserSmileFill } from 'react-icons/ri';
-import { FaMagnifyingGlass } from 'react-icons/fa6';
+import { Grid2x2, Search, Users } from 'lucide-react';
 
-export const NAVIGATION_LINKS = [
-    {
-        href: '/feed',
-        icon: TbWorld,
-        label: 'INICIO',
-    },
-    {
-        href: (username: string) => `/usuario/perfil/${username}`,
-        icon: RiUserSmileFill,
-        label: 'PERFIL',
-        requiresUsername: true,
-    },
-    {
-        href: '/feed/people',
-        icon: FaMagnifyingGlass,
-        label: 'BUSQUEDA',
-    },
+export const NAV_LINKS = [
+    { href: '/feed', icon: Grid2x2, label: 'Feed' },
+    { href: '/feed/buscar', icon: Search, label: 'Buscar' },
+    { href: '/feed/people', icon: Users, label: 'Personas' },
 ] as const;
 
 export const SOCIAL_LINKS = [
     {
         href: 'https://github.com/Lucascabral95',
-        label: 'Github',
+        label: 'GitHub',
     },
     {
         href: 'https://www.instagram.com/lucascabral95/',
@@ -32,13 +17,12 @@ export const SOCIAL_LINKS = [
     },
     {
         href: 'https://www.linkedin.com/in/lucas-gastón-cabral/',
-        label: 'Linkedin',
+        label: 'LinkedIn',
     },
 ] as const;
 
 export const BRAND_INFO = {
     name: 'Snapoo',
     logo: '/img/logo-snapoo.png',
-    copyright: '2024 Lucas Cabral Dev - Todos los derechos reservados',
+    copyright: '2024 Snapoo — Todos los derechos reservados',
 } as const;
-

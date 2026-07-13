@@ -1,106 +1,70 @@
 "use client";
 
+import type { Dispatch, SetStateAction } from "react";
 import { motion } from "framer-motion";
-import React from "react";
-import { TbWorld } from "react-icons/tb";
-import { RiUserSmileFill } from "react-icons/ri";
-import { FaMagnifyingGlass } from "react-icons/fa6";
-import { PiNut } from "react-icons/pi";
-import { signOut, useSession, signIn } from "next-auth/react";
 import Link from "next/link";
-import "./MenuHamburguesa.scss";
+import { signIn, signOut, useSession } from "next-auth/react";
+import { X } from "lucide-react";
+import { BRAND_INFO, NAV_LINKS } from "@/infrastructure/constants/navigation.constants";
+import styles from "./MenuHamburguesa.module.scss";
 
 interface MenuHamburguesaProps {
-  setIsOpenMenu: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsOpenMenu: Dispatch<SetStateAction<boolean>>;
 }
 
-interface User {
-  user: {
-    email: string;
-    avatar: string;
-    userName: string;
-    id: string;
-    saludo: string;
-  };
-}
-
-const MENU_ANIMATION = {
-  initial: { opacity: 0, x: 100 },
+const DRAWER_ANIMATION = {
+  initial: { opacity: 0, x: 40 },
   animate: { opacity: 1, x: 0 },
-  exit: { opacity: 0, x: 100 },
-  transition: { duration: 0.4 },
+  exit: { opacity: 0, x: 40 },
+  transition: { duration: 0.25 },
 };
 
-const NAVIGATION_LINKS = [
-  { href: "/feed", icon: TbWorld, label: "INICIO" },
-  {
-    href: "/usuario/perfil",
-    icon: RiUserSmileFill,
-    label: "PERFIL",
-    requiresUsername: true,
-  },
-  { href: "/feed/people", icon: FaMagnifyingGlass, label: "BUSQUEDA" },
-];
-
-export default function MenuHamburguesa({
-  setIsOpenMenu,
-}: MenuHamburguesaProps) {
-  const { data: session } = useSession() as { data: User | null };
-
+export default function MenuHamburguesa({ setIsOpenMenu }: MenuHamburguesaProps) {
+  const { data: session } = useSession();
   const handleClose = () => setIsOpenMenu(false);
-  const isAuthenticated = !!session?.user?.saludo;
 
   return (
-    <div className="menu-hamburguesa">
-      <div className="contenedor-menu-hamburguesa">
-        <motion.div {...MENU_ANIMATION} className="secciones">
-          {NAVIGATION_LINKS.map((link) => {
-            const href = link.requiresUsername
-              ? `${link.href}/${session?.user?.userName}`
-              : link.href;
-            const Icon = link.icon;
-
-            return (
-              <Link
-                key={link.label}
-                href={href}
-                className="seccion"
-                onClick={handleClose}
-              >
-                <div className="icono">
-                  <Icon className="icon" />
-                </div>
-                <div className="texto">
-                  <p> {link.label} </p>
-                </div>
-              </Link>
-            );
-          })}
-        </motion.div>
-
-        <motion.div {...MENU_ANIMATION} className="ajustes">
-          <Link
-            href="/feed/ajustes"
-            className="ajustes-interior"
-            onClick={handleClose}
-          >
-            <div className="icono">
-              <PiNut className="icon" />
-            </div>
-            <div className="texto">
-              <p> AJUSTES </p>
-            </div>
-          </Link>
-        </motion.div>
-
-        <motion.div {...MENU_ANIMATION} className="cerrar-sesion">
-          {isAuthenticated ? (
-            <button onClick={() => signOut()}> CERRAR SESION </button>
-          ) : (
-            <button onClick={() => signIn()}> INICIAR SESION </button>
-          )}
-        </motion.div>
+    <motion.div {...DRAWER_ANIMATION} className={styles.drawer}>
+      <div className={styles.top}>
+        <span className={styles.logo}>{BRAND_INFO.name}</span>
+        <button type="button" className={styles.close} onClick={handleClose} aria-label="Cerrar menú">
+          <X size={18} />
+        </button>
       </div>
-    </div>
+
+      {NAV_LINKS.map((link) => (
+        <Link key={link.href} href={link.href} className={styles.link} onClick={handleClose}>
+          {link.label}
+        </Link>
+      ))}
+
+      {session?.user && (
+        <Link
+          href={`/usuario/perfil/${session.user.userName ?? ""}`}
+          className={styles.link}
+          onClick={handleClose}
+        >
+          Perfil
+        </Link>
+      )}
+
+      <Link href="/feed/ajustes" className={styles.link} onClick={handleClose}>
+        Ajustes
+      </Link>
+
+      {session?.user ? (
+        <button
+          type="button"
+          className={`${styles.link} ${styles.logout}`}
+          onClick={() => signOut()}
+        >
+          Cerrar sesión
+        </button>
+      ) : (
+        <button type="button" className={styles.link} onClick={() => signIn()}>
+          Iniciar sesión
+        </button>
+      )}
+    </motion.div>
   );
 }

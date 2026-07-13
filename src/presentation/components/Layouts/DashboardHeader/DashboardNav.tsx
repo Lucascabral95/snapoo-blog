@@ -1,44 +1,30 @@
 "use client";
 
 import Link from "next/link";
-import { useSession } from "next-auth/react";
-import { NAVIGATION_LINKS } from "@/infrastructure/constants/navigation.constants";
-
-interface IUser {
-  user: {
-    email: string;
-    userName: string;
-    avatar?: string;
-    id: string;
-  };
-}
+import { usePathname } from "next/navigation";
+import { NAV_LINKS } from "@/infrastructure/constants/navigation.constants";
+import styles from "./DashboardHeader.module.scss";
 
 export default function DashboardNav() {
-  const { data: session } = useSession() as { data: IUser | null };
+  const pathname = usePathname();
 
   return (
-    <div className="categorias">
-      {NAVIGATION_LINKS.map((link: any) => {
-        const href =
-          (link.requiresUsername as any) && session?.user?.userName
-            ? link.href(session.user.userName)
-            : typeof link.href === "string"
-            ? link.href
-            : "/feed";
-
+    <nav className={styles.nav}>
+      {NAV_LINKS.map((link) => {
+        const isActive = pathname === link.href;
         const Icon = link.icon;
 
         return (
-          <Link key={link.label} href={href} className="cat">
-            <div className="icono">
-              <Icon className="icon" />
-            </div>
-            <div className="texto">
-              <p> {link.label} </p>
-            </div>
+          <Link
+            key={link.href}
+            href={link.href}
+            className={[styles.navItem, isActive && styles.on].filter(Boolean).join(" ")}
+          >
+            <Icon size={15} />
+            {link.label}
           </Link>
         );
       })}
-    </div>
+    </nav>
   );
 }

@@ -1,0 +1,51 @@
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 28px 48px;
+
+  @media (max-width: 768px) {
+    padding: 16px 16px 32px;
+  }
+}
+
+.pageHeader {
+  margin-bottom: 20px;
+}
+
+.pageTitle {
+  font-family: var(--font-display), sans-serif;
+  font-size: 24px;
+  margin: 0 0 4px;
+}
+
+.pageSubtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.card {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.row {
+  display: flex;
+  gap: 16px;
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+  }
+
+  > * {
+    flex: 1;
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+}

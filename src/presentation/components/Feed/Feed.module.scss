@@ -1,53 +1,26 @@
-.feedContainer {
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
-}
-
-.feedHeader {
-  margin-bottom: 2rem;
-  text-align: center;
-}
-
-.feedTitle {
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
-  font-weight: 700;
-  color: #111;
-  margin-bottom: 0.5rem;
-}
-
-.feedSubtitle {
-  font-size: 1.125rem;
-  color: #6b7280;
-}
-
-// Grid de posts
 .feedGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
 
   @media (max-width: 640px) {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 0.75rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
   }
 }
 
-// Card individual
 .feedCard {
   display: block;
-  background: white;
-  border-radius: 12px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s, box-shadow 0.2s;
   text-decoration: none;
   color: inherit;
+  transition: box-shadow 0.15s ease;
 
   &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--shadow-sm);
 
     .overlay {
       opacity: 1;
@@ -58,9 +31,9 @@
 .imageWrapper {
   position: relative;
   width: 100%;
-  padding-bottom: 100%; // Aspect ratio 1:1
+  padding-bottom: 100%;
   overflow: hidden;
-  background: #f3f4f6;
+  background: var(--surface-2);
 }
 
 .image {
@@ -70,79 +43,46 @@
 .overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 55%, rgba(0, 0, 0, 0.55));
   display: flex;
   align-items: flex-end;
-  padding: 1rem;
+  padding: 10px;
   opacity: 0;
-  transition: opacity 0.2s;
+  transition: opacity 0.15s ease;
+
+  @media (max-width: 640px) {
+    opacity: 1;
+  }
 }
 
 .stats {
   display: flex;
-  gap: 1rem;
-  color: white;
+  gap: 10px;
+  color: #fff;
+  font-size: 11.5px;
   font-weight: 600;
-}
 
-.stat {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-
-  svg {
-    font-size: 1.25rem;
+  span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
   }
 }
 
 .cardInfo {
-  padding: 1rem;
+  padding: 9px 11px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .author {
+  font-size: 12px;
   font-weight: 600;
-  color: #111;
-  margin-bottom: 0.25rem;
-  font-size: 0.875rem;
-}
-
-.description {
-  font-size: 0.875rem;
-  color: #6b7280;
-  line-height: 1.4;
+  color: var(--text);
   margin: 0;
 }
 
-// Empty state
 .emptyState {
   grid-column: 1 / -1;
-  text-align: center;
-  padding: 4rem 1rem;
-}
-
-.emptyMessage {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #374151;
-  margin-bottom: 0.5rem;
-}
-
-.emptyHint {
-  font-size: 1rem;
-  color: #9ca3af;
-}
-
-// Skeleton
-.skeletonCard {
-  background: white;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.skeletonInfo {
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
 }

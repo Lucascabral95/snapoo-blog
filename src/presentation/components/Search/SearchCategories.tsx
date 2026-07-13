@@ -1,28 +1,24 @@
 "use client";
 
 import type { SearchCategory } from "@/infrastructure/types";
+import Tabs from "@/presentation/components/UI/Tabs";
 
 interface SearchCategoriesProps {
   selected: SearchCategory;
   onChange: (category: SearchCategory) => void;
 }
 
-const CATEGORIES: Array<{ id: SearchCategory; label: string }> = [
-  { id: "usuario", label: "Usuarios" },
-  { id: "imagen", label: "Imagenes" },
+const CATEGORIES: Array<{ key: SearchCategory; label: string }> = [
+  { key: "usuario", label: "Usuarios" },
+  { key: "imagen", label: "Imágenes" },
 ];
 
-export default function SearchCategories({
-  selected,
-  onChange,
-}: SearchCategoriesProps) {
+export default function SearchCategories({ selected, onChange }: SearchCategoriesProps) {
   return (
-    <div className="busqueda-categorias">
-      {CATEGORIES.map((cat) => (
-        <div key={cat.id} className="cats" onClick={() => onChange(cat.id)}>
-          <p>{cat.label}</p>
-        </div>
-      ))}
-    </div>
+    <Tabs
+      items={CATEGORIES.map((c) => ({ key: c.key, label: c.label }))}
+      activeKey={selected}
+      onChange={(key) => onChange(key as SearchCategory)}
+    />
   );
 }

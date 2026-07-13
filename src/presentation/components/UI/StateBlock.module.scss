@@ -1,0 +1,39 @@
+.block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 70px 20px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.icon {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--r-full);
+  background: var(--surface-2);
+  color: var(--text-faint);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.err {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.title {
+  font-family: var(--font-display), sans-serif;
+  font-size: 16px;
+  color: var(--text);
+  margin: 0;
+}
+
+.description {
+  font-size: 13px;
+  margin: 0;
+  max-width: 320px;
+}

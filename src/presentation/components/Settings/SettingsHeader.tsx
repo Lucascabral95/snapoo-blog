@@ -1,22 +1,10 @@
-"use client";
-import { PiHeadCircuitLight } from "react-icons/pi";
-import React from "react";
-import { LuLogOut } from "react-icons/lu";
-import { signOut } from "next-auth/react";
+import styles from "./Settings.module.scss";
 
 export default function SettingsHeader() {
   return (
-    <div className="mi-info">
-      <div className="icono">
-        <PiHeadCircuitLight className="icon" />
-      </div>
-      <div
-        className="icono"
-        style={{ cursor: "pointer" }}
-        onClick={() => signOut()}
-      >
-        <LuLogOut className="icon" />
-      </div>
+    <div className={styles.pageHeader}>
+      <h1 className={styles.pageTitle}>Ajustes</h1>
+      <p className={styles.pageSubtitle}>Configurá tu perfil y tus datos personales</p>
     </div>
   );
 }

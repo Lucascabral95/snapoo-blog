@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
+import toast from 'react-hot-toast';
 import type { PersonalData } from '@/infrastructure/types';
 import {
     obtenerDatosPersonales,
@@ -88,6 +89,9 @@ export function useProfileSettings() {
 
         if (result.success) {
             setHayDatos(true);
+            toast.success('Cambios guardados con éxito');
+        } else {
+            toast.error('No se pudieron guardar los cambios');
         }
     };
 
@@ -106,6 +110,9 @@ export function useProfileSettings() {
                 bio: '',
             });
             setHayDatos(false);
+            toast.success('Datos restablecidos');
+        } else {
+            toast.error('No se pudieron restablecer los datos');
         }
     };
 

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import { FaHeart } from "react-icons/fa";
+import { Heart } from "lucide-react";
+import Avvvatars from "avvvatars-react";
 import type { FeedPost } from "@/infrastructure/types";
 
 import styles from "./Feed.module.scss";
@@ -26,22 +27,17 @@ export default function FeedCard({ post }: FeedCardProps) {
 
         <div className={styles.overlay}>
           <div className={styles.stats}>
-            <div className={styles.stat}>
-              <FaHeart />
-              <span>{post.likes}</span>
-            </div>
+            <span>
+              <Heart size={13} />
+              {post.likes}
+            </span>
           </div>
         </div>
       </div>
 
       <div className={styles.cardInfo}>
+        <Avvvatars value={displayName} size={20} />
         <p className={styles.author}>{displayName}</p>
-        {post.descripcion && (
-          <p className={styles.description}>
-            {post.descripcion.slice(0, 60)}
-            {post.descripcion.length > 60 && "..."}
-          </p>
-        )}
       </div>
     </Link>
   );

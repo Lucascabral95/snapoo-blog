@@ -1,0 +1,138 @@
+.header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 0 28px;
+  height: 64px;
+  background: var(--ink);
+  color: #fff;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display), sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: #fff;
+  flex: none;
+}
+
+.logoMark {
+  border-radius: 7px;
+  flex: none;
+}
+
+.nav {
+  display: flex;
+  gap: 2px;
+  margin-left: 6px;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: var(--r-full);
+  font-family: var(--font-body), sans-serif;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.65);
+  background: none;
+
+  &:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.08);
+  }
+}
+
+.on {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto;
+}
+
+.search {
+  flex: 1;
+  max-width: 340px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.5);
+
+  svg {
+    position: absolute;
+    left: 12px;
+  }
+}
+
+.searchInput {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--r-full);
+  padding: 8px 14px 8px 34px;
+  color: #fff;
+  font-size: 12.5px;
+  font-family: var(--font-body), sans-serif;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+.avatarWrap {
+  position: relative;
+}
+
+.avatarButton {
+  border: 0;
+  background: none;
+  padding: 0;
+  border-radius: var(--r-full);
+  cursor: pointer;
+  display: block;
+  line-height: 0;
+}
+
+.dropdown {
+  position: absolute;
+  right: 0;
+  top: 44px;
+  z-index: 20;
+}
+
+.headerMobile {
+  display: none;
+
+  @media (max-width: 768px) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    height: 56px;
+    background: var(--ink);
+    color: #fff;
+  }
+}
+
+.hamb {
+  background: none;
+  border: 0;
+  color: #fff;
+  padding: 6px;
+  cursor: pointer;
+  display: flex;
+}

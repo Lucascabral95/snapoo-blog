@@ -1,0 +1,50 @@
+.drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.logo {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--ink);
+}
+
+.close {
+  background: none;
+  border: 0;
+  color: var(--ink);
+  cursor: pointer;
+  padding: 6px;
+}
+
+.link {
+  display: block;
+  width: 100%;
+  padding: 14px 4px;
+  font-family: var(--font-body), sans-serif;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--text);
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  background: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.logout {
+  color: var(--danger);
+}

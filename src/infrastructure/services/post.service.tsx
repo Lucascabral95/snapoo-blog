@@ -1,5 +1,5 @@
 import axios from "axios";
-import type { Post } from "@/infrastructure/types";
+import type { Post, PostComment } from "@/infrastructure/types";
 
 export async function getPostById(id: string): Promise<Post | null> {
   try {
@@ -63,6 +63,21 @@ export async function repostPost(
     }
     throw error;
   }
+}
+
+export async function getComments(postId: string): Promise<PostComment[]> {
+  try {
+    const result = await axios.get(`/api/comentarios?post=${postId}`);
+    return result.data.result || [];
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+}
+
+export async function createComment(postId: string, contenido: string): Promise<PostComment> {
+  const result = await axios.post("/api/comentarios", { posteo: postId, contenido });
+  return result.data.result;
 }
 
 export function getDisplayUsername(post: Post): string {

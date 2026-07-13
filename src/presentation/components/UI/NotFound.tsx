@@ -1,31 +1,22 @@
-import React from "react";
-import Image from "next/image";
-
-import "./NotFound.scss";
+import { SearchX } from "lucide-react";
+import Button from "./Button";
+import StateBlock from "./StateBlock";
 
 interface Props {
   contenido: string;
 }
 
-const NotFoundComponent: React.FC<Props> = ({ contenido }) => {
+export default function NotFoundComponent({ contenido }: Props) {
   return (
-    <div className="not-found">
-      <div className="contenedor-not-found">
-        <div className="titulo-de-pagina">
-          <h2> {contenido} </h2>
-        </div>
-        <div className="imagen-de-pagina">
-          <Image
-            className="img"
-            src="/img/bad-request.jpg"
-            alt="Logo"
-            width="380"
-            height="230"
-          />
-        </div>
-      </div>
-    </div>
+    <StateBlock
+      icon={<SearchX size={22} />}
+      title={contenido}
+      description="Puede que se haya eliminado o el link esté roto."
+      action={
+        <Button href="/feed" variant="primary">
+          Volver al feed
+        </Button>
+      }
+    />
   );
-};
-
-export default NotFoundComponent;
+}

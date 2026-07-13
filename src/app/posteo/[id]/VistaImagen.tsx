@@ -1,151 +1,18 @@
-// "use client";
-// import React from "react";
-// import { IoMdClose } from "react-icons/io";
-// import { BiRepost } from "react-icons/bi";
-// import { IoHeart, IoHeartOutline } from "react-icons/io5";
-// import Image from "next/image";
-// import moment from "moment";
-// import "moment/locale/es";
-// import Link from "next/link";
-// import { Toaster } from "react-hot-toast";
-// import Skeleton from "react-loading-skeleton";
-// import Avvvatars from "avvvatars-react";
-
-// import "./VistaImagen.scss";
-// import useVistaImagen from "@/presentation/hooks/useVistaImagen";
-
-// interface VistaImagenProps {
-//   url: string;
-//   descripcion: string;
-//   fecha: string;
-//   likes: number;
-//   usuario: string;
-//   id: string;
-//   username: string;
-//   loadingSkeleton: boolean;
-// }
-
-// const VistaImagen: React.FC<VistaImagenProps> = ({
-//   id,
-//   url,
-//   descripcion,
-//   fecha,
-//   likes,
-//   usuario,
-//   username,
-//   loadingSkeleton,
-// }): JSX.Element => {
-//   const { repostear, darLike, likeCount, hasLiked, isReposting, isLiking } =
-//     useVistaImagen({ id, likes });
-
-//   return (
-//     <div className="vista-imagen">
-//       <div className="contenedor-vista-imagen">
-//         <div className="header-actions">
-//           <button
-//             className="btn-action btn-close"
-//             onClick={() => window.history.back()}
-//             aria-label="Cerrar"
-//           >
-//             <IoMdClose className="icon" />
-//           </button>
-
-//           <div className="header-right-actions">
-//             <button
-//               className={`btn-action btn-like ${hasLiked ? "liked" : ""}`}
-//               onClick={darLike}
-//               disabled={isLiking}
-//               aria-label="Me gusta"
-//             >
-//               {hasLiked ? (
-//                 <IoHeart className="icon icon-heart" />
-//               ) : (
-//                 <IoHeartOutline className="icon icon-heart" />
-//               )}
-//             </button>
-//             <button
-//               className={`btn-action btn-repost ${
-//                 isReposting ? "reposting" : ""
-//               }`}
-//               onClick={repostear}
-//               disabled={isReposting}
-//               aria-label="Repostear"
-//             >
-//               <BiRepost className="icon icon-repost" />
-//             </button>
-//           </div>
-//         </div>
-
-//         <div className="imagen-container">
-//           {loadingSkeleton ? (
-//             <div className="skeleton-wrapper">
-//               <Skeleton width="100%" height={700} borderRadius={16} />
-//             </div>
-//           ) : url ? (
-//             <div className="imagen-wrapper">
-//               <Image
-//                 src={url}
-//                 alt={descripcion || "Imagen del posteo"}
-//                 className="imagen-posteo"
-//                 width={1280}
-//                 height={700}
-//                 style={{ userSelect: "none" }}
-//                 priority
-//               />
-//             </div>
-//           ) : null}
-
-//           <div className="posteo-info">
-//             <div className="stats-bar">
-//               <div className="likes-count">
-//                 <IoHeart className="icon-stat" />
-//                 <span>{likeCount.toLocaleString()}</span>
-//                 <span className="label">Me gusta</span>
-//               </div>
-//             </div>
-
-//             <div className="usuario-info">
-//               <Link href={`/usuario/${username}`} className="avatar-link">
-//                 <Avvvatars value={username} size={40} style="shape" />
-//               </Link>
-//               <Link href={`/usuario/${username}`} className="username-link">
-//                 <span className="username">{usuario}</span>
-//               </Link>
-//             </div>
-
-//             {descripcion && (
-//               <div className="descripcion-section">
-//                 <p className="descripcion-text">{descripcion}</p>
-//               </div>
-//             )}
-
-//             <div className="fecha-section">
-//               <p className="fecha-text">{moment(fecha).format("LL")}</p>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//       <Toaster position="bottom-center" />
-//     </div>
-//   );
-// };
-
-// export default VistaImagen;
 "use client";
-import React from "react";
-import { IoMdClose } from "react-icons/io";
-import { BiRepost } from "react-icons/bi";
-import { IoHeart, IoHeartOutline } from "react-icons/io5";
+
+import { FormEvent, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import moment from "moment";
 import "moment/locale/es";
-import Link from "next/link";
-import { Toaster } from "react-hot-toast";
 import Skeleton from "react-loading-skeleton";
 import Avvvatars from "avvvatars-react";
-
-import "./VistaImagen.scss";
+import { Heart, MessageCircle, Repeat, X } from "lucide-react";
+import { useSession } from "next-auth/react";
 import useVistaImagen from "@/presentation/hooks/useVistaImagen";
+import { useComments } from "@/presentation/hooks";
+import Button from "@/presentation/components/UI/Button";
+import styles from "./VistaImagen.module.scss";
 
 interface VistaImagenProps {
   url: string;
@@ -158,7 +25,7 @@ interface VistaImagenProps {
   loadingSkeleton: boolean;
 }
 
-const VistaImagen: React.FC<VistaImagenProps> = ({
+export default function VistaImagen({
   id,
   url,
   descripcion,
@@ -167,114 +34,102 @@ const VistaImagen: React.FC<VistaImagenProps> = ({
   usuario,
   username,
   loadingSkeleton,
-}): JSX.Element => {
-  const { repostear, darLike, likeCount, hasLiked, isReposting, isLiking } =
-    useVistaImagen({ id, likes });
+}: VistaImagenProps) {
+  const { repostear, darLike, likeCount, hasLiked, isReposting, isLiking } = useVistaImagen({ id, likes });
+  const { comments, isPosting, addComment } = useComments(id);
+  const { data: session } = useSession();
+  const [commentText, setCommentText] = useState("");
+
+  const handleSubmitComment = async (event: FormEvent) => {
+    event.preventDefault();
+    await addComment(commentText);
+    setCommentText("");
+  };
 
   return (
-    <div className="vista-imagen">
-      <div className="contenedor-vista-imagen">
-        {/* Header con usuario */}
-        <div className="header-post">
-          <div className="usuario-header">
-            <Link href={`/usuario/perfil/${username}`} className="avatar-link">
-              <Avvvatars value={username} size={32} style="shape" />
+    <div className={styles.postLayout}>
+      <div className={styles.imageSide}>
+        <button type="button" className={styles.closeButton} onClick={() => window.history.back()} aria-label="Cerrar">
+          <X size={18} />
+        </button>
+        {loadingSkeleton ? (
+          <Skeleton width="100%" height={614} />
+        ) : url ? (
+          <Image src={url} alt={descripcion || "Imagen del posteo"} width={900} height={1100} priority />
+        ) : null}
+      </div>
+
+      <div className={styles.side}>
+        <div className={styles.sideHeader}>
+          <Link href={`/usuario/perfil/${username}`}>
+            <Avvvatars value={username || usuario} size={40} />
+          </Link>
+          <div>
+            <Link href={`/usuario/perfil/${username}`} className={styles.authorName}>
+              {usuario}
             </Link>
-            <Link
-              href={`/usuario/perfil/${username}`}
-              className="username-link"
-            >
-              <span className="username">{usuario}</span>
-            </Link>
+            {username && <div className={styles.authorHandle}>@{username}</div>}
           </div>
-          <button
-            className="btn-close"
-            onClick={() => window.history.back()}
-            aria-label="Cerrar"
-          >
-            <IoMdClose className="icon" />
-          </button>
         </div>
 
-        {/* Imagen */}
-        <div className="imagen-container">
-          {loadingSkeleton ? (
-            <div className="skeleton-wrapper">
-              <Skeleton width="100%" height={614} />
-            </div>
-          ) : url ? (
-            <div className="imagen-wrapper">
-              <Image
-                src={url}
-                alt={descripcion || "Imagen del posteo"}
-                className="imagen-posteo"
-                width={1280}
-                height={700}
-                style={{ userSelect: "none" }}
-                priority
-              />
-            </div>
-          ) : null}
+        <div className={styles.sideBody}>
+          {descripcion && <p className={styles.description}>{descripcion}</p>}
+          {fecha && <span className={styles.date}>{moment(fecha).fromNow()}</span>}
         </div>
 
-        {/* Acciones debajo de la imagen */}
-        <div className="acciones-bar">
+        <div className={styles.actions}>
           <button
-            className={`btn-action btn-like ${hasLiked ? "liked" : ""}`}
+            type="button"
+            className={[styles.actionButton, hasLiked && styles.liked].filter(Boolean).join(" ")}
             onClick={darLike}
             disabled={isLiking}
-            aria-label="Me gusta"
           >
-            {hasLiked ? (
-              <IoHeart className="icon icon-heart" />
-            ) : (
-              <IoHeartOutline className="icon icon-heart" />
-            )}
+            <Heart size={15} fill={hasLiked ? "currentColor" : "none"} />
+            {likeCount.toLocaleString()}
           </button>
+
+          <span className={styles.actionButton}>
+            <MessageCircle size={15} />
+            {comments.length}
+          </span>
 
           <button
-            className={`btn-action btn-repost ${
-              isReposting ? "reposting" : ""
-            }`}
+            type="button"
+            className={styles.actionButton}
             onClick={repostear}
             disabled={isReposting}
-            aria-label="Repostear"
           >
-            <BiRepost className="icon icon-repost" />
+            <Repeat size={15} />
+            Repostear
           </button>
         </div>
 
-        {/* Info del post */}
-        <div className="posteo-info">
-          {/* Likes count */}
-          <div className="likes-section">
-            <span className="likes-text">
-              {likeCount.toLocaleString()} me gusta
-            </span>
-          </div>
-
-          {/* Descripción */}
-          {descripcion && (
-            <div className="descripcion-section">
-              <Link
-                href={`/usuario/perfil/${username}`}
-                className="username-bold"
-              >
-                {usuario}
-              </Link>
-              <span className="descripcion-text"> {descripcion}</span>
+        <div className={styles.comments}>
+          {comments.map((comment) => (
+            <div key={comment._id} className={styles.comment}>
+              <Avvvatars value={comment.emisor} size={32} />
+              <div>
+                <span className={styles.commentUser}>{comment.emisor}</span>{" "}
+                <span className={styles.commentText}>{comment.contenido}</span>
+              </div>
             </div>
-          )}
-
-          {/* Fecha */}
-          <div className="fecha-section">
-            <span className="fecha-text">{moment(fecha).fromNow()}</span>
-          </div>
+          ))}
         </div>
+
+        <form className={styles.commentInputRow} onSubmit={handleSubmitComment}>
+          <Avvvatars value={session?.user?.userName ?? session?.user?.email ?? "Vos"} size={28} />
+          <input
+            className={styles.commentInput}
+            placeholder="Agregá un comentario..."
+            value={commentText}
+            onChange={(event) => setCommentText(event.target.value)}
+            maxLength={1000}
+          />
+          <Button type="submit" size="sm" disabled={isPosting || !commentText.trim()}>
+            Publicar
+          </Button>
+        </form>
       </div>
-      <Toaster position="bottom-center" />
     </div>
   );
-};
-
-export default VistaImagen;
+}

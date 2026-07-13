@@ -1,53 +1,34 @@
 "use client";
-import React from "react";
 
 import { useProfileSettings } from "@/presentation/hooks/useProfileSettings";
+import Card from "@/presentation/components/UI/Card";
+import Button from "@/presentation/components/UI/Button";
 import SettingsHeader from "./SettingsHeader";
 import SettingsForm from "./SettingsForm";
-import "./Login.scss";
+import styles from "./Settings.module.scss";
 
 export default function SettingsContainer() {
-  const {
-    formData,
-    email,
-    hayDatos,
-    loading,
-    handleChange,
-    handleSubmit,
-    handleReset,
-  } = useProfileSettings();
+  const { formData, email, hayDatos, loading, handleChange, handleSubmit, handleReset } = useProfileSettings();
 
   return (
-    <div className="seccion-perfil seccion-perfil-c-ajustes">
-      <div className="seccion-perfil-ajustes">
-        <SettingsHeader />
+    <div className={styles.page}>
+      <SettingsHeader />
 
-        <div className="linea-limitadora">
-          <div className="linea"></div>
+      <Card className={styles.card}>
+        <SettingsForm formData={formData} email={email} hayDatos={hayDatos} loading={loading} onChange={handleChange} />
+
+        <div className={styles.actions}>
+          {hayDatos ? (
+            <Button variant="secondary" onClick={handleReset}>
+              Restablecer datos
+            </Button>
+          ) : (
+            <Button variant="primary" onClick={handleSubmit}>
+              Guardar cambios
+            </Button>
+          )}
         </div>
-
-        <div className="perfil">
-          <p>Mi perfil</p>
-        </div>
-
-        <SettingsForm
-          formData={formData}
-          email={email}
-          hayDatos={hayDatos}
-          loading={loading}
-          onChange={handleChange}
-        />
-
-        {hayDatos ? (
-          <div className="boton-restablecer-cambios">
-            <button onClick={handleReset}>Restablecer datos</button>
-          </div>
-        ) : (
-          <div className="boton-guardar-cambios">
-            <button onClick={handleSubmit}>Guardar cambios</button>
-          </div>
-        )}
-      </div>
+      </Card>
     </div>
   );
 }
