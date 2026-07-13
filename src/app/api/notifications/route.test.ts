@@ -1,0 +1,7 @@
+﻿import { beforeEach, describe, expect, it, vi } from "vitest";
+const state = vi.hoisted(() => ({ user: { id: "507f1f77bcf86cd799439011" } as any, find: vi.fn(), countDocuments: vi.fn(), updateMany: vi.fn() }));
+vi.mock("@/infrastructure/auth/session", () => ({ getAuthenticatedUser: vi.fn(async () => state.user) }));
+vi.mock("@/services/mongoDB", () => ({ default: vi.fn(async () => undefined) }));
+vi.mock("@/models/UserNotification", () => ({ default: { find: state.find, countDocuments: state.countDocuments, updateMany: state.updateMany } }));
+import { GET, PATCH } from "./route";
+describe("notifications API", () => { beforeEach(() => { state.find.mockReturnValue({ populate: () => ({ populate: () => ({ sort: () => ({ skip: () => ({ limit: () => ({ lean: async () => [{ _id: "n1" }] }) }) }) }) }) }); state.countDocuments.mockResolvedValue(2); state.updateMany.mockResolvedValue({}); }); it("returns unread count and page", async () => { const data = await (await GET(new Request("http://localhost/api/notifications?page=1"))).json(); expect(data.unread).toBe(2); expect(data.result).toHaveLength(1); }); it("marks one notification read", async () => { await PATCH(new Request("http://localhost/api/notifications", { method: "PATCH", body: JSON.stringify({ notificationId: "n1" }) })); expect(state.updateMany).toHaveBeenCalledWith(expect.objectContaining({ _id: "n1" }), expect.anything()); }); });

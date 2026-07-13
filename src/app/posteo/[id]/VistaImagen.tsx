@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { FormEvent, useState } from "react";
 import Image from "next/image";
@@ -40,6 +40,8 @@ export default function VistaImagen({
   const { comments, isPosting, addComment } = useComments(id);
   const { data: session } = useSession();
   const [commentText, setCommentText] = useState("");
+  const [replyTo, setReplyTo] = useState<string | undefined>();
+  const [replyText, setReplyText] = useState("");
 
   const handleSubmitComment = async (event: FormEvent) => {
     event.preventDefault();
@@ -107,14 +109,14 @@ export default function VistaImagen({
         </div>
 
         <div className={styles.comments}>
-          {comments.map((comment) => (
+          {comments.filter((comment) => !comment.parentComment).map((comment) => (
             <div key={comment._id} className={styles.comment}>
               <Avvvatars value={comment.emisor} size={32} />
               <div>
                 <span className={styles.commentUser}>{comment.emisor}</span>{" "}
                 <span className={styles.commentText}>{comment.contenido}</span>
               </div>
-              <ModerationMenu targetType="comment" targetId={comment._id} />
+              <div><ModerationMenu targetType="comment" targetId={comment._id} /><button type="button" onClick={() => setReplyTo(comment._id)}>Responder</button>{comments.filter((reply) => reply.parentComment === comment._id).map((reply) => <div key={reply._id} className={styles.comment}><Avvvatars value={reply.emisor} size={28} /><div><span className={styles.commentUser}>{reply.emisor}</span>{" "}<span className={styles.commentText}>{reply.contenido}</span></div></div>)}</div>
             </div>
           ))}
         </div>
@@ -123,7 +125,7 @@ export default function VistaImagen({
           <Avvvatars value={session?.user?.userName ?? session?.user?.email ?? "Vos"} size={28} />
           <input
             className={styles.commentInput}
-            placeholder="Agregá un comentario..."
+            placeholder="AgregÃ¡ un comentario..."
             value={commentText}
             onChange={(event) => setCommentText(event.target.value)}
             maxLength={1000}
@@ -136,3 +138,4 @@ export default function VistaImagen({
     </div>
   );
 }
+

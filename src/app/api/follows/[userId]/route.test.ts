@@ -1,0 +1,9 @@
+﻿import { beforeEach, describe, expect, it, vi } from "vitest";
+const state = vi.hoisted(() => ({ user: { id: "507f1f77bcf86cd799439011", userName: "ana" } as any, create: vi.fn(), findOneAndDelete: vi.fn() }));
+vi.mock("@/infrastructure/auth/session", () => ({ getAuthenticatedUser: vi.fn(async () => state.user) }));
+vi.mock("@/services/mongoDB", () => ({ default: vi.fn(async () => undefined) }));
+vi.mock("@/models/Usuario", () => ({ default: { exists: vi.fn(async () => true) } }));
+vi.mock("@/models/UserFollow", () => ({ default: { exists: vi.fn(async () => false), create: state.create, findOneAndDelete: state.findOneAndDelete } }));
+vi.mock("@/infrastructure/social/notifications", () => ({ usersAreBlocked: vi.fn(async () => false), createSocialNotification: vi.fn(async () => undefined), removeGroupedSocialNotification: vi.fn(async () => undefined) }));
+import { DELETE, GET, PUT } from "./route";
+describe("follow API", () => { beforeEach(() => { state.create.mockReset().mockResolvedValue({}); state.findOneAndDelete.mockReset().mockResolvedValue({}); }); it("returns state", async () => { const r = await GET(new Request("http://localhost"), { params: Promise.resolve({ userId: "507f1f77bcf86cd799439012" }) }); expect((await r.json()).result.following).toBe(false); }); it("does not duplicate persistence calls when the database reports a duplicate", async () => { state.create.mockRejectedValueOnce({ code: 11000 }); const params = { params: Promise.resolve({ userId: "507f1f77bcf86cd799439012" }) }; const r = await PUT(new Request("http://localhost"), params); expect(r.status).toBe(200); expect(state.create).toHaveBeenCalledTimes(1); }); it("deletes a follow", async () => { const r = await DELETE(new Request("http://localhost"), { params: Promise.resolve({ userId: "507f1f77bcf86cd799439012" }) }); expect(r.status).toBe(200); expect(state.findOneAndDelete).toHaveBeenCalled(); }); });

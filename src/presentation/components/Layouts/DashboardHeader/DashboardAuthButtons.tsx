@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -10,6 +10,7 @@ import { Dropdown, DropdownDivider, DropdownItem } from "@/presentation/componen
 import { useClickOutside } from "@/presentation/hooks";
 import { useUploadModal } from "@/presentation/context/UploadModalContext";
 import styles from "./DashboardHeader.module.scss";
+import NotificationBell from "./NotificationBell";
 
 export default function DashboardAuthButtons() {
   const { data: session } = useSession();
@@ -27,7 +28,7 @@ export default function DashboardAuthButtons() {
   if (!session?.user) {
     return (
       <Button href="/login" variant="primary" size="sm" pill>
-        Iniciar sesión
+        Iniciar sesiÃ³n
       </Button>
     );
   }
@@ -44,6 +45,7 @@ export default function DashboardAuthButtons() {
         />
       </form>
 
+      <NotificationBell />
       <Button type="button" variant="primary" size="sm" pill icon={<Upload size={14} />} onClick={openUploadModal}>
         Subir
       </Button>
@@ -53,7 +55,7 @@ export default function DashboardAuthButtons() {
           type="button"
           className={styles.avatarButton}
           onClick={() => setIsMenuOpen((open) => !open)}
-          aria-label="Menú de usuario"
+          aria-label="MenÃº de usuario"
         >
           <Avvvatars value={session.user.userName ?? session.user.email ?? "Snapoo"} size={34} />
         </button>
@@ -64,7 +66,7 @@ export default function DashboardAuthButtons() {
               <DropdownItem href={profileHref}>Mi perfil</DropdownItem>
               <DropdownItem href="/feed/ajustes">Ajustes</DropdownItem>
               <DropdownDivider />
-              <DropdownItem onClick={() => signOut()}>Cerrar sesión</DropdownItem>
+              <DropdownItem onClick={() => signOut()}>Cerrar sesiÃ³n</DropdownItem>
             </Dropdown>
           </div>
         )}
@@ -72,3 +74,6 @@ export default function DashboardAuthButtons() {
     </div>
   );
 }
+
+
+

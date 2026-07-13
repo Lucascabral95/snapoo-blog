@@ -1,7 +1,8 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 import { Pencil, Upload } from "lucide-react";
+import axios from "axios";
 import { useSession } from "next-auth/react";
 import Avvvatars from "avvvatars-react";
 
@@ -32,12 +33,16 @@ export default function UserProfile({
   const { openUploadModal } = useUploadModal();
   const [seccionSeleccionada, setSeccionSeleccionada] = useState<Section>("posteos");
   const [posteos, setPosteos] = useState(initialPosteos);
+  const [following, setFollowing] = useState(false);
+  const [followBusy, setFollowBusy] = useState(false);
+  const isOwnProfile = session?.user?.userName === datosDelUsuario;
+  useEffect(() => { if (!isOwnProfile && userId) axios.get(`/api/follows/${userId}`).then((response) => setFollowing(Boolean(response.data.result?.following))).catch(() => undefined); }, [userId, isOwnProfile]);
+  const toggleFollow = async () => { if (!userId || followBusy) return; setFollowBusy(true); try { const response = following ? await axios.delete(`/api/follows/${userId}`) : await axios.put(`/api/follows/${userId}`); setFollowing(Boolean(response.data.result?.following)); } finally { setFollowBusy(false); } };
 
   useEffect(() => {
     setPosteos(initialPosteos);
   }, [initialPosteos]);
 
-  const isOwnProfile = session?.user?.userName === datosDelUsuario;
   const posteosActuales = seccionSeleccionada === "posteos" ? posteos : rePosteos;
 
   return (
@@ -54,7 +59,7 @@ export default function UserProfile({
                 Editar perfil
               </Button>
             ) : null}
-            {!isOwnProfile && userId ? <ModerationMenu targetType="user" targetId={userId} userId={userId} /> : null}
+            {!isOwnProfile && userId ? <><Button variant="primary" size="sm" onClick={toggleFollow} disabled={followBusy}>{following ? "Dejar de seguir" : "Seguir"}</Button><ModerationMenu targetType="user" targetId={userId} userId={userId} /></> : null}
           </div>
 
           <div className={styles.stats}>
@@ -93,3 +98,7 @@ export default function UserProfile({
     </div>
   );
 }
+
+
+
+
