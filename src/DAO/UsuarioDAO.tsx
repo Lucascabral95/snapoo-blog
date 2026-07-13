@@ -2,95 +2,57 @@ import Usuarios from "../models/Usuario";
 import mongo from "@/services/mongoDB";
 import bcrypt from "bcrypt";
 
-interface IUsuarios {
+export interface UserRecord {
+  _id?: unknown;
   email: string;
   password?: string;
   userName?: string;
   avatar?: string;
+  emailVerifiedAt?: Date;
 }
 
 class DAOUsuarios {
-  constructor() {
-    this.initializeDB();
+  async getAll(): Promise<UserRecord[]> {
+    await mongo();
+    return Usuarios.find().select("email userName avatar").lean<UserRecord[]>();
   }
 
-  async initializeDB(): Promise<void> {
-    try {
-      await mongo();
-    } catch (error) {
-      console.error("Error al conectar a la base de datos:", error);
-      throw new Error("No se pudo conectar a la base de datos.");
-    }
+  async getUserByEmail(email: string): Promise<UserRecord | null> {
+    await mongo();
+    return Usuarios.findOne({ email }).select("+password email userName avatar emailVerifiedAt").lean<UserRecord>();
   }
 
-  async getAll(): Promise<IUsuarios[]> {
-    try {
-      await mongo();
-      return await Usuarios.find();
-    } catch (error) {
-      console.error("Error al obtener todos los usuarios:", error);
-      throw new Error("No se pudo obtener la lista de usuarios.");
-    }
+  async getUserByUserName(userName: string): Promise<UserRecord | null> {
+    await mongo();
+    return Usuarios.findOne({ userName }).select("email userName avatar").lean<UserRecord>();
   }
 
-  async getUserByEmail(email: string): Promise<IUsuarios | null> {
-    try {
-      await mongo();
-      return await Usuarios.findOne({ email: email });
-    } catch (error) {
-      console.error("Error al obtener el usuario:", error);
-      throw error;
-    }
+  async createUser(user: UserRecord): Promise<UserRecord> {
+    await mongo();
+    const data = { ...user };
+    if (data.password) data.password = await bcrypt.hash(data.password, 12);
+    return Usuarios.create(data);
   }
 
-  async getUserByUserName(userName: string): Promise<IUsuarios | null> {
-    try {
-      await mongo();
-      const usuario = await Usuarios.findOne({ userName: userName });
-
-      if (!usuario) {
-        throw { error: "El usuario no se encuentra registrado.", status: 400 };
-      }
-
-      return usuario;
-    } catch (error) {
-      console.error("Error al obtener el usuario:", error);
-      throw error;
-    }
+  async getUserByID(id: string): Promise<UserRecord | null> {
+    await mongo();
+    return Usuarios.findOne({ _id: id }).select("email userName avatar emailVerifiedAt").lean<UserRecord>();
   }
 
-  async createUser(user: IUsuarios): Promise<IUsuarios> {
-    try {
-      if (user.password) {
-        const hashedPassword = await bcrypt.hash(user.password, 10);
-        user.password = hashedPassword;
-      }
-
-      const newUser = new Usuarios(user);
-      return await newUser.save();
-    } catch (error) {
-      console.error("Error al crear el usuario:", error);
-      throw error;
-    }
+  async markEmailVerified(id: string): Promise<void> {
+    await mongo();
+    await Usuarios.updateOne({ _id: id }, { $set: { emailVerifiedAt: new Date() } });
   }
 
-  async getUserByID(id: string): Promise<IUsuarios | null> {
-    try {
-      await mongo();
-      return await Usuarios.findOne({ _id: id });
-    } catch (error) {
-      console.error("Error al obtener el usuario:", error);
-      throw error;
-    }
+  async updatePassword(id: string, password: string): Promise<void> {
+    await mongo();
+    const passwordHash = await bcrypt.hash(password, 12);
+    await Usuarios.updateOne({ _id: id }, { $set: { password: passwordHash } });
   }
 
-  async deleteUserByID(id: string): Promise<IUsuarios | null> {
-    try {
-      return await Usuarios.findOneAndDelete({ _id: id });
-    } catch (error) {
-      console.error("Error al eliminar el usuario:", error);
-      throw error;
-    }
+  async deleteUserByID(id: string): Promise<UserRecord | null> {
+    await mongo();
+    return Usuarios.findOneAndDelete({ _id: id }).select("email userName avatar").lean<UserRecord>();
   }
 }
 

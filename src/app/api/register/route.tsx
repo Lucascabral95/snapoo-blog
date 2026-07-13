@@ -1,43 +1,13 @@
 import { NextResponse } from "next/server";
 import DAOUsuarios from "@/DAO/UsuarioDAO";
 
-export async function POST(req: Request) {
-  try {
-    const { email, password, avatar } = await req.json();
-
-    const userName = `User-${Math.random().toString(36).substring(2, 8)}`;
-
-    if (!email) {
-      return NextResponse.json({ error: "Faltan datos" }, { status: 400 });
-    }
-
-    const emailRepetido = await DAOUsuarios.getUserByEmail(email); 
-    if (emailRepetido) {
-      return NextResponse.json({ error: "Email ya registrado" }, { status: 400 });
-    }
-
-    const user = await DAOUsuarios.createUser({ email, password, avatar, userName });
-    return NextResponse.json({ result: user }, { status: 200 });
-
-  } catch (error) {
-    return NextResponse.json({ error: error }, { status: 500 });
-  }
+export async function POST() {
+  return NextResponse.json({ code: "DEPRECATED", message: "Usá /api/auth/register/start para iniciar el registro seguro." }, { status: 410 });
 }
 
 export async function GET(req: Request) {
-  try {
-     const username = new URL(req.url).searchParams.get("username");
-
-     if (username) {
-      const resultados = await DAOUsuarios.getUserByUserName(username);
-      
-      return NextResponse.json({ result: resultados }, { status: 200 });
-     }
-
-    const resultados = await DAOUsuarios.getAll();
-    
-    return NextResponse.json({ result: resultados }, { status: 200 });
-  } catch (error) {
-    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
-  }
+  const username = new URL(req.url).searchParams.get("username")?.trim();
+  if (!username) return NextResponse.json({ code: "VALIDATION_ERROR", message: "Falta el username." }, { status: 400 });
+  const user = await DAOUsuarios.getUserByUserName(username);
+  return user ? NextResponse.json({ result: { id: String(user._id), userName: user.userName, avatar: user.avatar || "" } }) : NextResponse.json({ code: "NOT_FOUND", message: "Usuario no encontrado." }, { status: 404 });
 }

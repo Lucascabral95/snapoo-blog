@@ -1,56 +1,35 @@
-import mongo from "@/services/mongoDB"
+import mongo from "@/services/mongoDB";
 import Comentarios from "@/models/Comentarios";
-import mongoose from "mongoose";
 
-interface IComentarios {
-    emisor: string
-    likes: number
-    posteo: string
-    usuario: mongoose.Schema.Types.ObjectId
-    contenido: string
+export interface CommentRecord {
+  _id?: unknown;
+  emisor: string;
+  likes: number;
+  posteo: string;
+  usuario: unknown;
+  contenido: string;
 }
 
 class DAOComentarios {
-    constructor() {
-        this.inizializeDB();
-    }
+  async createComentario(data: CommentRecord): Promise<CommentRecord> {
+    await mongo();
+    return Comentarios.create(data);
+  }
 
-    async inizializeDB(): Promise<void> {
-        try {
-            await mongo();
-        } catch (error) {
-            console.log(error);
-        }
-    }
+  async getComentarios(post: string): Promise<CommentRecord[]> {
+    await mongo();
+    return Comentarios.find({ posteo: post }).populate("usuario", "avatar userName").lean<CommentRecord[]>();
+  }
 
-    async createComentario(data: IComentarios): Promise<IComentarios> {
-        try {
-            return await Comentarios.create(data);
-        } catch (error) {
-            console.error("Error al crear el comentario:", error);
-            throw error;
-        }
-    }
+  async getComentarioByID(id: string): Promise<CommentRecord | null> {
+    await mongo();
+    return Comentarios.findById(id).lean<CommentRecord>();
+  }
 
-    async getComentarios(post: string): Promise<IComentarios[] | null> { 
-        try {
-            const comentarios = await Comentarios.find({ posteo: post })
-                .populate("usuario", "email avatar userName");
-            return comentarios;
-        } catch (error) {
-            console.error("Error al obtener los comentarios:", error);
-            return null;
-        }
-    }
-
-    async deleteComentarioByID(id: string): Promise<IComentarios | null> {
-        try {
-            return await Comentarios.findOneAndDelete({ _id: id });
-        } catch (error) {
-            console.error("Error al eliminar el posteo:", error);
-            throw error;
-        }
-    }
+  async deleteComentarioByID(id: string): Promise<CommentRecord | null> {
+    await mongo();
+    return Comentarios.findOneAndDelete({ _id: id }).lean<CommentRecord>();
+  }
 }
 
 const daoComentarios = new DAOComentarios();

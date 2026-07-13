@@ -1,11 +1,3 @@
-import type { Metadata } from "next";
-import RegisterContainer from "@/presentation/components/Auth/RegisterContainer";
+import { redirect } from "next/navigation";
 
-export const metadata: Metadata = {
-  title: "Registro | Snapoo",
-  description: "Crea una cuenta en Snapoo y comienza a compartir tus momentos",
-};
-
-export default function RegisterPage() {
-  return <RegisterContainer />;
-}
+export default function LegacyRegisterPage() { redirect("/register"); }

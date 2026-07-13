@@ -8,62 +8,34 @@ import { RegisterSchema } from '@/infrastructure/types';
 import { registerUser } from '@/infrastructure/services/auth.service';
 
 export function useRegisterForm() {
-    const router = useRouter();
-    const [formData, setFormData] = useState<RegisterUser>({
-        email: '',
-        password: '',
-    });
-    const [errors, setErrors] = useState<RegisterFormErrors>({});
-    const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+  const [formData, setFormData] = useState<RegisterUser>({ email: '', userName: '', password: '', confirmPassword: '' });
+  const [errors, setErrors] = useState<RegisterFormErrors>({});
+  const [isLoading, setIsLoading] = useState(false);
 
-    const handleChange = (field: keyof RegisterUser, value: string) => {
-        setFormData((prev) => ({ ...prev, [field]: value }));
-    };
+  const handleChange = (field: keyof RegisterUser, value: string) => setFormData((previous) => ({ ...previous, [field]: value }));
 
-    const handleSubmit = async (event: React.FormEvent) => {
-        event.preventDefault();
-        setIsLoading(true);
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    const parsed = RegisterSchema.safeParse(formData);
+    if (!parsed.success) {
+      const nextErrors: RegisterFormErrors = {};
+      parsed.error.issues.forEach((issue) => { const field = issue.path[0]; if (typeof field === 'string') nextErrors[field] = issue.message; });
+      setErrors(nextErrors);
+      return;
+    }
 
-        try {
-            const verificacion = RegisterSchema.safeParse(formData);
+    setIsLoading(true);
+    setErrors({});
+    try {
+      const result = await registerUser(parsed.data);
+      if (!result.success) { setErrors({ email: result.error }); return; }
+      toast.success('Registro exitoso. Ya podés iniciar sesión.', { duration: 1800, position: 'top-center' });
+      setTimeout(() => router.push('/feed/login'), 1800);
+    } catch {
+      toast.error('No se pudo completar el registro.', { duration: 2500, position: 'top-center' });
+    } finally { setIsLoading(false); }
+  };
 
-            if (verificacion.success) {
-                const result = await registerUser(formData);
-
-                if (result.success) {
-                    setFormData({ email: '', password: '' });
-                    setErrors({});
-                    toast.success('Registro con éxito', {
-                        duration: 1500,
-                        position: 'top-center',
-                    });
-                    setTimeout(() => {
-                        router.push('/feed/login');
-                    }, 1600);
-                } else {
-                    setErrors({ email: result.error });
-                }
-            } else {
-                const formattedErrors: RegisterFormErrors = {};
-                verificacion.error.errors.forEach((err) => {
-                    if (err.path[0]) {
-                        formattedErrors[err.path[0] as string] = err.message;
-                    }
-                });
-                setErrors(formattedErrors);
-            }
-        } catch (error) {
-            console.error('Error en registro:', error);
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
-    return {
-        formData,
-        errors,
-        isLoading,
-        handleChange,
-        handleSubmit,
-    };
+  return { formData, errors, isLoading, handleChange, handleSubmit };
 }

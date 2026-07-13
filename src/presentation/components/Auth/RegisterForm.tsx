@@ -6,65 +6,28 @@ import type { RegisterUser, RegisterFormErrors } from "@/infrastructure/types";
 interface RegisterFormProps {
   formData: RegisterUser;
   errors: RegisterFormErrors;
-  onSubmit: (e: React.FormEvent) => void;
+  isLoading?: boolean;
+  onSubmit: (event: React.FormEvent) => void;
   onChange: (field: keyof RegisterUser, value: string) => void;
 }
 
-export default function RegisterForm({
-  formData,
-  errors,
-  onSubmit,
-  onChange,
-}: RegisterFormProps) {
+export default function RegisterForm({ formData, errors, isLoading, onSubmit, onChange }: RegisterFormProps) {
+  const field = (name: keyof RegisterUser, label: string, type: string, autocomplete: string) => (
+    <div className="contenedor-input">
+      <div className="label"><label htmlFor={`register-${name}`}>{label}</label></div>
+      <input id={`register-${name}`} name={name} type={type} autoComplete={autocomplete} value={formData[name]} onChange={(event) => onChange(name, event.target.value)} required aria-invalid={Boolean(errors[name])} aria-describedby={errors[name] ? `error-${name}` : undefined} />
+      {errors[name] && <p id={`error-${name}`} className="error" role="alert">{errors[name]}</p>}
+    </div>
+  );
+
   return (
-    <form className="contenedor-de-input" onSubmit={onSubmit}>
-      <div className="contenedor-input">
-        <div className="label">
-          <label htmlFor="email">Email</label>
-        </div>
-        <input
-          name="email"
-          type="email"
-          value={formData.email}
-          onChange={(e) => onChange("email", e.target.value)}
-          placeholder="Ejemplo@hotmail.com"
-          id="email"
-          required
-        />
-      </div>
-      {errors.email && (
-        <div style={{ color: "red" }} className="error">
-          {errors.email}
-        </div>
-      )}
-
-      <div className="contenedor-input">
-        <div className="label">
-          <label htmlFor="password">Contraseña</label>
-        </div>
-        <input
-          type="password"
-          value={formData.password}
-          onChange={(e) => onChange("password", e.target.value)}
-          placeholder="********"
-          name="password"
-          id="password"
-          required
-        />
-      </div>
-      <p className="caracteres-obligatorios">
-        La contraseña debe tener al menos 8 caracteres y contener al menos un
-        carácter de puntuación.
-      </p>
-      {errors.password && (
-        <div style={{ color: "red" }} className="error">
-          {errors.password}
-        </div>
-      )}
-
-      <div className="contenedor-de-logueo">
-        <button type="submit"> Registrarte </button>
-      </div>
+    <form className="contenedor-de-input" onSubmit={onSubmit} noValidate>
+      {field('userName', 'Nombre de usuario', 'text', 'username')}
+      {field('email', 'Email', 'email', 'email')}
+      {field('password', 'Contraseña', 'password', 'new-password')}
+      {field('confirmPassword', 'Repetí tu contraseña', 'password', 'new-password')}
+      <p className="caracteres-obligatorios">Usá entre 12 y 128 caracteres.</p>
+      <div className="contenedor-de-logueo"><button type="submit" disabled={isLoading}>{isLoading ? 'Creando cuenta…' : 'Registrarte'}</button></div>
     </form>
   );
 }

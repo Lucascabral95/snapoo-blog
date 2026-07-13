@@ -1,61 +1,56 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import toast from 'react-hot-toast';
-import type { LoginUser, AuthFormErrors } from '@/infrastructure/types';
-import { LoginSchema } from '@/infrastructure/types';
-import { loginUser } from '@/infrastructure/services/auth.service';
+import type { FormEvent } from "react";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import { LoginSchema, type AuthFormErrors, type LoginUser } from "@/infrastructure/types";
+import { loginUser } from "@/infrastructure/services/auth.service";
+
+function validationErrors(issues: Array<{ path: PropertyKey[]; message: string }>): AuthFormErrors {
+    return Object.fromEntries(issues.map((issue) => [String(issue.path[0]), issue.message]));
+}
 
 export function useLoginForm() {
     const router = useRouter();
-    const [formData, setFormData] = useState<LoginUser>({
-        email: '',
-        password: '',
-    });
+    const [formData, setFormData] = useState<LoginUser>({ email: "", password: "" });
     const [errors, setErrors] = useState<AuthFormErrors>({});
     const [isLoading, setIsLoading] = useState(false);
 
     const handleChange = (field: keyof LoginUser, value: string) => {
-        setFormData((prev) => ({ ...prev, [field]: value }));
+        setFormData((previous) => ({ ...previous, [field]: value }));
+        setErrors((previous) => ({ ...previous, [field]: undefined }));
     };
 
-    const handleSubmit = async (event: React.FormEvent) => {
+    const handleSubmit = async (event: FormEvent) => {
         event.preventDefault();
+        const validation = LoginSchema.safeParse(formData);
+
+        if (!validation.success) {
+            setErrors(validationErrors(validation.error.issues));
+            return;
+        }
+
+        setErrors({});
         setIsLoading(true);
+        const toastId = toast.loading("Verificando credenciales...", { position: "top-center" });
 
         try {
-            const verificacion = LoginSchema.safeParse(formData);
+            const result = await loginUser(validation.data);
 
-            if (verificacion.success) {
-                const result = await loginUser(formData);
-
-                if (result.success) {
-                    router.push('/feed');
-                } else {
-                    toast.error(result.error || 'Error al iniciar sesión', {
-                        duration: 2500,
-                        position: 'top-center',
-                    });
-                }
-            } else {
-                console.log(verificacion.error.errors);
+            if (!result.success) {
+                toast.error(result.error || "No se pudo iniciar sesion.", { id: toastId });
+                return;
             }
-        } catch (error: any) {
-            toast.error('Error inesperado', {
-                duration: 2500,
-                position: 'top-center',
-            });
+
+            toast.success("Sesion iniciada. Redirigiendo...", { id: toastId });
+            router.replace("/feed");
+        } catch {
+            toast.error("No se pudo iniciar sesion. Intentalo nuevamente.", { id: toastId });
         } finally {
             setIsLoading(false);
         }
     };
 
-    return {
-        formData,
-        errors,
-        isLoading,
-        handleChange,
-        handleSubmit,
-    };
+    return { formData, errors, isLoading, handleChange, handleSubmit };
 }

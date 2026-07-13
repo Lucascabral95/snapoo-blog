@@ -1,13 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-
-// import EstructuraConDashboard from "@/components/EstructuraConDashboard/EstructuraConDashboard";
 import EstructuraConDashboard from "@/presentation/components/SecondaryComponents/EstructuraConDashboard/EstructuraConDashboard";
-
-interface LayoutPerfilProps {
-  children: ReactNode;
-  params: Promise<{ username: string }>;
-}
 
 export const metadata: Metadata = {
   title: {
@@ -15,7 +8,7 @@ export const metadata: Metadata = {
     default: "Perfil de Usuario | Snapoo",
   },
   description:
-    "Descubre los perfiles de nuestros usuarios, sus mejores imágenes y galerías personalizadas. Inspírate con fotografías únicas y conecta con una comunidad creativa.",
+    "Descubre los perfiles de nuestros usuarios, sus mejores imágenes y galerías personalizadas.",
   keywords: [
     "perfil de usuario",
     "galería fotográfica",
@@ -44,6 +37,6 @@ export const metadata: Metadata = {
   },
 };
 
-export default function LayoutPerfil({ children }: LayoutPerfilProps) {
+export default function LayoutPerfil({ children }: { children: ReactNode }) {
   return <EstructuraConDashboard>{children}</EstructuraConDashboard>;
 }
