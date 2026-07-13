@@ -1,0 +1,3 @@
+﻿export type SocialEvent = { type: "post_like" | "user_follow" | "post_comment" | "comment_reply"; resourceId: string; createdAt: Date };
+export function canGroupSocialEvents(first: SocialEvent, second: SocialEvent): boolean { return (first.type === "post_like" || first.type === "user_follow") && first.type === second.type && first.resourceId === second.resourceId && Math.abs(first.createdAt.getTime() - second.createdAt.getTime()) <= 86_400_000; }
+export function socialGroupLabel(names: string[]): string { if (names.length === 0) return "Alguien"; if (names.length === 1) return names[0]; if (names.length === 2) return `${names[0]} y ${names[1]}`; return `${names[0]}, ${names[1]} y ${names.length - 2} personas más`; }

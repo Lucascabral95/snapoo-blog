@@ -1,79 +1,15 @@
-import { NextResponse } from "next/server";
+﻿import { NextResponse } from "next/server";
 import DAOPosteos from "@/DAO/PosteosDAO";
 import { getAuthenticatedUser } from "@/infrastructure/auth/session";
+import mongo from "@/services/mongoDB";
+import Posteos from "@/models/Posteos";
+import PostLike from "@/models/PostLike";
+import { createSocialNotification, removeGroupedSocialNotification, usersAreBlocked } from "@/infrastructure/social/notifications";
 
-function unauthorized() {
-  return NextResponse.json({ code: "UNAUTHORIZED", message: "Sesión requerida." }, { status: 401 });
-}
+function unauthorized() { return NextResponse.json({ code: "UNAUTHORIZED", message: "Sesión requerida." }, { status: 401 }); }
+export async function GET(req: Request) { try { const id = new URL(req.url).searchParams.get("id"); const viewer = await getAuthenticatedUser(); const result = id ? await DAOPosteos.getPosteoByID(id, viewer?.id) : await DAOPosteos.getAll(viewer?.id); let liked = false; if (id && viewer) { await mongo(); liked = Boolean(await PostLike.exists({ user: viewer.id, post: id })); } return NextResponse.json({ result: result || [], liked }); } catch { return NextResponse.json({ code: "POST_LOOKUP_ERROR", message: "No se pudieron obtener los posteos." }, { status: 500 }); } }
+export async function POST(req: Request) { const user = await getAuthenticatedUser(); if (!user) return unauthorized(); try { const body = await req.json(); if (typeof body.imagen !== "string" || !body.imagen.trim()) return NextResponse.json({ code: "VALIDATION_ERROR", message: "La imagen es obligatoria." }, { status: 400 }); const posteo = await DAOPosteos.createPost({ usuario: user.id, imagen: body.imagen, descripcion: typeof body.descripcion === "string" ? body.descripcion.slice(0, 2000) : "", likes: 0, comentarios: [] }); return NextResponse.json({ result: posteo }, { status: 201 }); } catch { return NextResponse.json({ code: "POST_CREATE_ERROR", message: "No se pudo crear el posteo." }, { status: 500 }); } }
+export async function DELETE(req: Request) { const user = await getAuthenticatedUser(); if (!user) return unauthorized(); const id = new URL(req.url).searchParams.get("id"); if (!id) return NextResponse.json({ code: "VALIDATION_ERROR", message: "Falta el id." }, { status: 400 }); try { const posteo = await DAOPosteos.getPosteoByID(id); if (!posteo) return NextResponse.json({ code: "NOT_FOUND", message: "Posteo no encontrado." }, { status: 404 }); if (String(posteo.usuario?._id || posteo.usuario) !== user.id) return NextResponse.json({ code: "FORBIDDEN" }, { status: 403 }); await DAOPosteos.deletePosteoByID(id); return NextResponse.json({ result: "Posteo eliminado" }); } catch { return NextResponse.json({ code: "POST_DELETE_ERROR" }, { status: 500 }); } }
+export async function PUT(req: Request) { const user = await getAuthenticatedUser(); if (!user) return unauthorized(); const id = new URL(req.url).searchParams.get("id"); if (!id) return NextResponse.json({ code: "VALIDATION_ERROR", message: "Falta el id." }, { status: 400 }); try { await mongo(); const post = await Posteos.findOne({ _id: id, moderationState: { $ne: "removed" } }).lean(); if (!post) return NextResponse.json({ code: "NOT_FOUND" }, { status: 404 }); if (await usersAreBlocked(user.id, String((post as any).usuario))) return NextResponse.json({ code: "FORBIDDEN" }, { status: 403 }); const existing = await PostLike.findOne({ user: user.id, post: id }); if (existing) { const result = await Posteos.findById(id); return NextResponse.json({ result, liked: true }); } await PostLike.create({ user: user.id, post: id }); const result = await Posteos.findByIdAndUpdate(id, { $inc: { likes: 1 } }, { new: true }); await createSocialNotification({ recipient: String((post as any).usuario), actor: user.id, type: "post_like", resourceType: "post", resourceId: id, href: `/posteo/${id}` }); return NextResponse.json({ result, liked: true }); } catch { return NextResponse.json({ code: "POST_LIKE_ERROR" }, { status: 500 }); } }
+export async function PATCH(req: Request) { const user = await getAuthenticatedUser(); if (!user) return unauthorized(); const id = new URL(req.url).searchParams.get("id"); if (!id) return NextResponse.json({ code: "VALIDATION_ERROR" }, { status: 400 }); try { await mongo(); const post = await Posteos.findOne({ _id: id, moderationState: { $ne: "removed" } }).lean(); if (!post) return NextResponse.json({ code: "NOT_FOUND" }, { status: 404 }); const deleted = await PostLike.findOneAndDelete({ user: user.id, post: id }); if (deleted) { await Posteos.findByIdAndUpdate(id, [{ $set: { likes: { $max: [{ $subtract: ["$likes", 1] }, 0] } } }]); await removeGroupedSocialNotification({ recipient: String((post as any).usuario), actor: user.id, type: "post_like", resourceId: id }); } return NextResponse.json({ result: await Posteos.findById(id), liked: false }); } catch { return NextResponse.json({ code: "POST_UNLIKE_ERROR" }, { status: 500 }); } }
 
-export async function GET(req: Request) {
-  try {
-    const id = new URL(req.url).searchParams.get("id");
-    const viewer = await getAuthenticatedUser();
-    const result = id ? await DAOPosteos.getPosteoByID(id, viewer?.id) : await DAOPosteos.getAll(viewer?.id);
-    return NextResponse.json({ result: result || [] });
-  } catch (error) {
-    console.error("Post lookup failed", error instanceof Error ? error.message : "unknown error");
-    return NextResponse.json({ code: "POST_LOOKUP_ERROR", message: "No se pudieron obtener los posteos." }, { status: 500 });
-  }
-}
-
-export async function POST(req: Request) {
-  const user = await getAuthenticatedUser();
-  if (!user) return unauthorized();
-
-  try {
-    const body = await req.json();
-    if (typeof body.imagen !== "string" || !body.imagen.trim()) {
-      return NextResponse.json({ code: "VALIDATION_ERROR", message: "La imagen es obligatoria." }, { status: 400 });
-    }
-
-    const posteo = await DAOPosteos.createPost({
-      usuario: user.id,
-      imagen: body.imagen,
-      descripcion: typeof body.descripcion === "string" ? body.descripcion.slice(0, 2000) : "",
-      likes: 0,
-      comentarios: [],
-    });
-    return NextResponse.json({ result: posteo }, { status: 201 });
-  } catch (error) {
-    console.error("Post creation failed", error instanceof Error ? error.message : "unknown error");
-    return NextResponse.json({ code: "POST_CREATE_ERROR", message: "No se pudo crear el posteo." }, { status: 500 });
-  }
-}
-
-export async function DELETE(req: Request) {
-  const user = await getAuthenticatedUser();
-  if (!user) return unauthorized();
-  const id = new URL(req.url).searchParams.get("id");
-  if (!id) return NextResponse.json({ code: "VALIDATION_ERROR", message: "Falta el id." }, { status: 400 });
-
-  try {
-    const posteo = await DAOPosteos.getPosteoByID(id);
-    if (!posteo) return NextResponse.json({ code: "NOT_FOUND", message: "Posteo no encontrado." }, { status: 404 });
-    if (String(posteo.usuario?._id || posteo.usuario) !== user.id) {
-      return NextResponse.json({ code: "FORBIDDEN", message: "No tenés permiso para eliminar este posteo." }, { status: 403 });
-    }
-    await DAOPosteos.deletePosteoByID(id);
-    return NextResponse.json({ result: "Posteo eliminado" });
-  } catch (error) {
-    console.error("Post deletion failed", error instanceof Error ? error.message : "unknown error");
-    return NextResponse.json({ code: "POST_DELETE_ERROR", message: "No se pudo eliminar el posteo." }, { status: 500 });
-  }
-}
-
-export async function PUT(req: Request) {
-  const user = await getAuthenticatedUser();
-  if (!user) return unauthorized();
-  const id = new URL(req.url).searchParams.get("id");
-  if (!id) return NextResponse.json({ code: "VALIDATION_ERROR", message: "Falta el id." }, { status: 400 });
-
-  try {
-    const result = await DAOPosteos.likePosteo(id);
-    if (!result) return NextResponse.json({ code: "NOT_FOUND", message: "Posteo no encontrado." }, { status: 404 });
-    return NextResponse.json({ result });
-  } catch (error) {
-    console.error("Post like failed", error instanceof Error ? error.message : "unknown error");
-    return NextResponse.json({ code: "POST_LIKE_ERROR", message: "No se pudo actualizar el like." }, { status: 500 });
-  }
-}

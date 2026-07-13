@@ -1,4 +1,4 @@
-import axios from "axios";
+﻿import axios from "axios";
 import type { Post, PostComment } from "@/infrastructure/types";
 
 export async function getPostById(id: string): Promise<Post | null> {
@@ -75,8 +75,8 @@ export async function getComments(postId: string): Promise<PostComment[]> {
   }
 }
 
-export async function createComment(postId: string, contenido: string): Promise<PostComment> {
-  const result = await axios.post("/api/comentarios", { posteo: postId, contenido });
+export async function createComment(postId: string, contenido: string, parentComment?: string): Promise<PostComment> {
+  const result = await axios.post("/api/comentarios", { posteo: postId, contenido, parentComment });
   return result.data.result;
 }
 
@@ -85,3 +85,5 @@ export function getDisplayUsername(post: Post): string {
     ? post.usuario?.email
     : post.usuario?.userName;
 }
+
+
