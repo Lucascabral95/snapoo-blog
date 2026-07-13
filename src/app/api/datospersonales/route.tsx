@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import DatosPersonalesDAO from "@/DAO/DatosPersonalesDAO";
 import { getAuthenticatedUser } from "@/infrastructure/auth/session";
+import mongoose from "mongoose";
 
 function unauthorized() {
   return NextResponse.json({ code: "UNAUTHORIZED", message: "Sesión requerida." }, { status: 401 });
@@ -67,7 +68,7 @@ export async function POST(req: Request) {
       pais: body.pais.trim().slice(0, 80),
       bio: body.bio.trim().slice(0, 1000),
       edad: Number(body.edad),
-      user: user.id,
+      user: user.id as unknown as mongoose.Schema.Types.ObjectId,
     });
     return NextResponse.json({ result }, { status: 201 });
   } catch (error) {

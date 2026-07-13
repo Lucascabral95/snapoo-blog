@@ -9,6 +9,10 @@ export interface UserRecord {
   userName?: string;
   avatar?: string;
   emailVerifiedAt?: Date;
+  role?: "user" | "moderator" | "admin";
+  accountStatus?: "active" | "suspended";
+  suspendedUntil?: Date;
+  suspensionReason?: string;
 }
 
 class DAOUsuarios {
@@ -36,7 +40,7 @@ class DAOUsuarios {
 
   async getUserByID(id: string): Promise<UserRecord | null> {
     await mongo();
-    return Usuarios.findOne({ _id: id }).select("email userName avatar emailVerifiedAt").lean<UserRecord>();
+    return Usuarios.findOne({ _id: id }).select("email userName avatar emailVerifiedAt role accountStatus suspendedUntil suspensionReason").lean<UserRecord>();
   }
 
   async markEmailVerified(id: string): Promise<void> {

@@ -6,6 +6,10 @@ interface IUsuarios extends mongoose.Document {
   userName?: string;
   avatar?: string;
   emailVerifiedAt?: Date;
+  role: "user" | "moderator" | "admin";
+  accountStatus: "active" | "suspended";
+  suspendedUntil?: Date;
+  suspensionReason?: string;
 }
 
 const usuarioSchema = new mongoose.Schema<IUsuarios>({
@@ -14,6 +18,10 @@ const usuarioSchema = new mongoose.Schema<IUsuarios>({
   userName: { type: String, unique: true, trim: true },
   avatar: { type: String, default: "" },
   emailVerifiedAt: { type: Date },
+  role: { type: String, enum: ["user", "moderator", "admin"], default: "user", index: true },
+  accountStatus: { type: String, enum: ["active", "suspended"], default: "active", index: true },
+  suspendedUntil: { type: Date, index: true },
+  suspensionReason: { type: String, maxlength: 160 },
 }, { timestamps: true });
 
 const Usuarios = mongoose.models.Usuarios || mongoose.model<IUsuarios>("Usuarios", usuarioSchema);

@@ -11,7 +11,9 @@
     "start": "next start",
     "lint": "next lint",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "moderation:migrate-media:check": "node --env-file=.env.local scripts/migrate-cloudinary-assets.mjs",
+    "moderation:migrate-media:apply": "node --env-file=.env.local scripts/migrate-cloudinary-assets.mjs --apply"
   },
   "dependencies": {
     "@upstash/ratelimit": "^2.0.8",

@@ -40,6 +40,8 @@ export async function POST(request) {
       likes: 0,
       usuario: user.id,
       imagen: result.secure_url,
+      cloudinaryPublicId: result.public_id,
+      cloudinaryDeliveryType: "upload",
       descripcion: String(data.get("comentario") || "").slice(0, 2000),
       comentarios: [],
     });

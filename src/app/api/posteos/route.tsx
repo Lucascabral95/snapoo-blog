@@ -9,7 +9,8 @@ function unauthorized() {
 export async function GET(req: Request) {
   try {
     const id = new URL(req.url).searchParams.get("id");
-    const result = id ? await DAOPosteos.getPosteoByID(id) : await DAOPosteos.getAll();
+    const viewer = await getAuthenticatedUser();
+    const result = id ? await DAOPosteos.getPosteoByID(id, viewer?.id) : await DAOPosteos.getAll(viewer?.id);
     return NextResponse.json({ result: result || [] });
   } catch (error) {
     console.error("Post lookup failed", error instanceof Error ? error.message : "unknown error");
