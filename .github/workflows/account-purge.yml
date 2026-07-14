@@ -1,0 +1,29 @@
+﻿name: Purge deactivated accounts
+
+on:
+  schedule:
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: account-purge
+  cancel-in-progress: false
+
+jobs:
+  purge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
+      ACCOUNT_PURGE_JOB_TOKEN: ${{ secrets.ACCOUNT_PURGE_JOB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: node scripts/purge-deactivated-accounts.mjs

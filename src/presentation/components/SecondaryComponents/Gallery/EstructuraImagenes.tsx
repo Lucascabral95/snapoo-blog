@@ -47,8 +47,9 @@ export default function EstructuraImagenes({ posteos }: EstructuraImagenesProps)
             loading="lazy"
             width={500}
             height={500}
-            src={item.imagen}
+            src={`/api/media/posts/${item._id}`}
             alt={item.descripcion || "Imagen del post"}
+            unoptimized
           />
 
           <div className={styles.overlay}>

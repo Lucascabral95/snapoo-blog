@@ -20,7 +20,7 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
   if (!staff || staff.role !== "admin") return NextResponse.json({ code: "FORBIDDEN", message: "Solo admins pueden gestionar roles." }, { status: 403 });
   const { id } = await params;
   const parsed = schema.safeParse(await request.json().catch(() => null));
-  if (!mongoose.isValidObjectId(id) || !parsed.success) return NextResponse.json({ code: "VALIDATION_ERROR", message: "Datos invÃ¡lidos." }, { status: 400 });
+  if (!mongoose.isValidObjectId(id) || !parsed.success) return NextResponse.json({ code: "VALIDATION_ERROR", message: "Datos inválidos." }, { status: 400 });
   if (id === staff.id) return NextResponse.json({ code: "FORBIDDEN", message: "No podés modificar tu propio rol." }, { status: 403 });
   await mongo();
   const result = await Usuarios.findByIdAndUpdate(id, { $set: { role: parsed.data.role } }, { new: true }).select("userName email role accountStatus").lean();

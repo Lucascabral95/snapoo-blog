@@ -6,7 +6,7 @@ import mongo from "@/services/mongoDB";
 
 export async function GET(_: Request, { params }: { params: Promise<{ id: string }> }) {
   const viewer = await getActiveAuthenticatedUser();
-  if (!viewer) return NextResponse.json({ code: "UNAUTHORIZED", message: "SesiÃ³n activa requerida." }, { status: 401 });
+  if (!viewer) return NextResponse.json({ code: "UNAUTHORIZED", message: "Sesión activa requerida." }, { status: 401 });
   const { id } = await params;
   await mongo();
   const blocked = await getBlockedUserIds(viewer.id);
