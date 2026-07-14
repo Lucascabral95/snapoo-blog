@@ -1,8 +1,8 @@
-﻿import { beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 const state = vi.hoisted(() => ({ user: { id: "507f1f77bcf86cd799439011" } as any, like: null as any, create: vi.fn(), findOneAndDelete: vi.fn(), findByIdAndUpdate: vi.fn(), findById: vi.fn() }));
 vi.mock("@/infrastructure/auth/session", () => ({ getAuthenticatedUser: vi.fn(async () => state.user) }));
 vi.mock("@/services/mongoDB", () => ({ default: vi.fn(async () => undefined) }));
-vi.mock("@/DAO/PosteosDAO", () => ({ default: { getPosteoByID: vi.fn(), getAll: vi.fn(), createPost: vi.fn(), deletePosteoByID: vi.fn() } }));
+vi.mock("@/DAO/PosteosDAO", () => ({ default: { getPosteoByID: vi.fn(async () => ({ _id: "507f1f77bcf86cd799439012", usuario: "507f1f77bcf86cd799439013", likes: 4 })), getAll: vi.fn(), createPost: vi.fn(), deletePosteoByID: vi.fn() } }));
 vi.mock("@/models/PostLike", () => ({ default: { findOne: vi.fn(async () => state.like), create: state.create, findOneAndDelete: state.findOneAndDelete, exists: vi.fn(async () => Boolean(state.like)) } }));
 vi.mock("@/models/Posteos", () => ({ default: { findOne: vi.fn(() => ({ lean: async () => ({ _id: "507f1f77bcf86cd799439012", usuario: "507f1f77bcf86cd799439013", likes: 4 }) })), findById: state.findById, findByIdAndUpdate: state.findByIdAndUpdate } }));
 vi.mock("@/infrastructure/social/notifications", () => ({ usersAreBlocked: vi.fn(async () => false), createSocialNotification: vi.fn(async () => undefined), removeGroupedSocialNotification: vi.fn(async () => undefined) }));

@@ -24,10 +24,10 @@ async function findTarget(targetType: z.infer<typeof schema>["targetType"], targ
 
 export async function POST(request: Request) {
   const reporter = await getAuthenticatedUser();
-  if (!reporter) return NextResponse.json({ code: "UNAUTHORIZED", message: "SesiÃ³n requerida." }, { status: 401 });
+  if (!reporter) return NextResponse.json({ code: "UNAUTHORIZED", message: "Sesión requerida." }, { status: 401 });
 
   const parsed = schema.safeParse(await request.json().catch(() => null));
-  if (!parsed.success) return NextResponse.json({ code: "VALIDATION_ERROR", message: "La denuncia no es vÃ¡lida." }, { status: 400 });
+  if (!parsed.success) return NextResponse.json({ code: "VALIDATION_ERROR", message: "La denuncia no es válida." }, { status: 400 });
 
   await mongo();
   const target = await findTarget(parsed.data.targetType, parsed.data.targetId) as { _id: unknown; usuario?: { _id: unknown } } | null;

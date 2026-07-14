@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import DatosPersonalesDAO from "@/DAO/DatosPersonalesDAO";
-import { getAuthenticatedUser } from "@/infrastructure/auth/session";
+import { getActiveAuthenticatedUser } from "@/infrastructure/auth/session";
 import mongoose from "mongoose";
 
 function unauthorized() {
@@ -12,7 +12,7 @@ function forbidden() {
 }
 
 export async function GET(req: Request) {
-  const user = await getAuthenticatedUser();
+  const user = await getActiveAuthenticatedUser();
   if (!user) return unauthorized();
   const id = new URL(req.url).searchParams.get("id");
   if (!id) return NextResponse.json({ code: "VALIDATION_ERROR", message: "Falta el id." }, { status: 400 });
@@ -30,7 +30,7 @@ export async function GET(req: Request) {
 }
 
 export async function DELETE(req: Request) {
-  const user = await getAuthenticatedUser();
+  const user = await getActiveAuthenticatedUser();
   if (!user) return unauthorized();
   const id = new URL(req.url).searchParams.get("id");
   if (!id) return NextResponse.json({ code: "VALIDATION_ERROR", message: "Falta el id." }, { status: 400 });
@@ -48,7 +48,7 @@ export async function DELETE(req: Request) {
 }
 
 export async function POST(req: Request) {
-  const user = await getAuthenticatedUser();
+  const user = await getActiveAuthenticatedUser();
   if (!user) return unauthorized();
 
   try {

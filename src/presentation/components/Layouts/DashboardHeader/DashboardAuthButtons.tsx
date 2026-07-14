@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -28,7 +28,7 @@ export default function DashboardAuthButtons() {
   if (!session?.user) {
     return (
       <Button href="/login" variant="primary" size="sm" pill>
-        Iniciar sesiÃ³n
+        Iniciar sesión
       </Button>
     );
   }
@@ -55,7 +55,7 @@ export default function DashboardAuthButtons() {
           type="button"
           className={styles.avatarButton}
           onClick={() => setIsMenuOpen((open) => !open)}
-          aria-label="MenÃº de usuario"
+          aria-label="Menú de usuario"
         >
           <Avvvatars value={session.user.userName ?? session.user.email ?? "Snapoo"} size={34} />
         </button>
@@ -66,7 +66,7 @@ export default function DashboardAuthButtons() {
               <DropdownItem href={profileHref}>Mi perfil</DropdownItem>
               <DropdownItem href="/feed/ajustes">Ajustes</DropdownItem>
               <DropdownDivider />
-              <DropdownItem onClick={() => signOut()}>Cerrar sesiÃ³n</DropdownItem>
+              <DropdownItem onClick={() => signOut()}>Cerrar sesión</DropdownItem>
             </Dropdown>
           </div>
         )}

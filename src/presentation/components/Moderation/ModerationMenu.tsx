@@ -7,11 +7,11 @@ type TargetType = "post" | "comment" | "user";
 const reasons = [
   ["spam_scam", "Spam o estafa"],
   ["harassment", "Acoso"],
-  ["hate_discrimination", "Odio o discriminaciÃ³n"],
+  ["hate_discrimination", "Odio o discriminación"],
   ["sexual_content", "Contenido sexual"],
   ["violence_threats", "Violencia o amenazas"],
   ["child_safety", "Seguridad infantil"],
-  ["self_harm", "AutolesiÃ³n"],
+  ["self_harm", "Autolesión"],
   ["intellectual_property", "Propiedad intelectual"],
   ["other", "Otro"],
 ] as const;
@@ -42,8 +42,8 @@ export default function ModerationMenu({ targetType, targetId, userId }: { targe
 
   return (
     <div>
-      <button type="button" onClick={() => setOpen((value) => !value)} aria-expanded={open}>⋯</button>
-      {open && <div role="dialog" aria-label="Opciones de moderaciÃ³n">
+      <button type="button" onClick={() => setOpen((value) => !value)} aria-expanded={open}>?</button>
+      {open && <div role="dialog" aria-label="Opciones de moderación">
         <button type="button" onClick={block} disabled={!userId || loading}>Bloquear usuario</button>
         <label>Motivo de denuncia
           <select value={reason} onChange={(event) => setReason(event.target.value as typeof reason)}>

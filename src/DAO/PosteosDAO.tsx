@@ -1,114 +1,29 @@
 import mongo from "@/services/mongoDB";
 import Posteos from "@/models/Posteos";
 import Usuarios from "@/models/Usuario";
+import UserFollow from "@/models/UserFollow";
 import { getBlockedUserIds } from "@/infrastructure/moderation/visibility";
+import { ACTIVE_ACCOUNT_FILTER } from "@/infrastructure/account/account-status";
 
-class DAOPosteos {
-  constructor() {
-    this.inizializeDB();
-  }
-
-  async inizializeDB(): Promise<void> {
-    try {
-      await mongo();
-      console.log(`MongoDB Connected of Posteos`);
-    } catch (error) {
-      console.log(error);
-      throw new Error("Error al conectar con MongoDB");
-    }
-  }
-
-  async getAll(viewerId?: string): Promise<any> {
-    try {
-      const hiddenUsers = await getBlockedUserIds(viewerId);
-      const posteos = await Posteos.find({ moderationState: { $ne: "removed" }, usuario: { $nin: hiddenUsers } }).populate("usuario");
-      return posteos;
-    } catch (error) {
-      console.error("Error al obtener todos los posteos:", error);
-      throw error;
-    }
-  }
-
-  async getPosteoByID(id: string, viewerId?: string): Promise<any> {
-    try {
-      const hiddenUsers = await getBlockedUserIds(viewerId);
-      const posteo = await Posteos.findOne({ _id: id, moderationState: { $ne: "removed" }, usuario: { $nin: hiddenUsers } }).populate("usuario");
-      return posteo;
-    } catch (error) {
-      console.error("Error al obtener el posteo:", error);
-      throw error;
-    }
-  }
-
-  async getAllWithoutPopulate(viewerId?: string): Promise<any> {
-    try {
-      const hiddenUsers = await getBlockedUserIds(viewerId);
-      return await Posteos.find({ moderationState: { $ne: "removed" }, usuario: { $nin: hiddenUsers } });
-    } catch (error) {
-      console.error("Error al obtener todos los posteos:", error);
-      throw error;
-    }
-  }
-
-  async createPost(data: any): Promise<any> {
-    try {
-      return await Posteos.create(data);
-    } catch (error) {
-      console.error("Error al crear el posteo:", error);
-      throw error;
-    }
-  }
-
-  async deletePosteoByID(id: string): Promise<any> {
-    try {
-      return await Posteos.findOneAndDelete({ _id: id });
-    } catch (error) {
-      console.error("Error al eliminar el posteo:", error);
-      throw error;
-    }
-  }
-
-  async filtrarPosteosPorUsuario(id: string): Promise<any> {
-    try {
-      const posteos = await Posteos.find().populate("usuario");
-      const filtrarPosteosPorUsuario = posteos.filter(
-        (posteo) => posteo.usuario._id.toString() === id
-      );
-      return filtrarPosteosPorUsuario;
-    } catch (error) {
-      console.error("Error al obtener los posteos del usuario:", error);
-      throw error;
-    }
-  }
-
-  async likePosteo(id: string): Promise<any> {
-    try {
-      const posteo = await Posteos.findOneAndUpdate(
-        { _id: id },
-        { $inc: { likes: 1 } },
-        { new: true }
-      );
-      return posteo;
-    } catch (error) {
-      console.error("Error al dar me gusta:", error);
-      throw error;
-    }
-  }
-
-  async getAllPosteosByUserNameId(userName: string): Promise<any> {
-    try {
-      const usuario = await Usuarios.findOne({ userName: userName });
-      const posteos = (await Posteos.find()).filter(
-        (posteo) => posteo.usuario._id.toString() === usuario._id.toString()
-      );
-
-      return posteos;
-    } catch (error) {
-      console.error("Error al obtener los posteos del usuario:", error);
-      throw error;
-    }
-  }
+async function visibleUserIds(viewerId?: string): Promise<unknown[]> {
+  const [users, blockedUsers, follows] = await Promise.all([
+    Usuarios.find(ACTIVE_ACCOUNT_FILTER).select("_id isPrivate").lean(),
+    getBlockedUserIds(viewerId),
+    viewerId ? UserFollow.find({ follower: viewerId }).select("followed").lean() : [],
+  ]);
+  const followedIds = new Set(follows.map((follow: any) => String(follow.followed)));
+  return users.filter((user: any) => !blockedUsers.includes(String(user._id)) && (!user.isPrivate || String(user._id) === viewerId || followedIds.has(String(user._id)))).map((user: any) => user._id);
 }
 
+class DAOPosteos {
+  async getAll(viewerId?: string): Promise<any> { await mongo(); return Posteos.find({ moderationState: { $ne: "removed" }, usuario: { $in: await visibleUserIds(viewerId) } }).populate("usuario"); }
+  async getPosteoByID(id: string, viewerId?: string): Promise<any> { await mongo(); return Posteos.findOne({ _id: id, moderationState: { $ne: "removed" }, usuario: { $in: await visibleUserIds(viewerId) } }).populate("usuario"); }
+  async getAllWithoutPopulate(viewerId?: string): Promise<any> { await mongo(); return Posteos.find({ moderationState: { $ne: "removed" }, usuario: { $in: await visibleUserIds(viewerId) } }); }
+  async createPost(data: any): Promise<any> { await mongo(); return Posteos.create(data); }
+  async deletePosteoByID(id: string): Promise<any> { await mongo(); return Posteos.findOneAndDelete({ _id: id }); }
+  async filtrarPosteosPorUsuario(id: string): Promise<any> { await mongo(); const user = await Usuarios.findOne({ _id: id, ...ACTIVE_ACCOUNT_FILTER }); return user ? Posteos.find({ usuario: id, moderationState: { $ne: "removed" } }).populate("usuario") : []; }
+  async likePosteo(id: string): Promise<any> { await mongo(); return Posteos.findOneAndUpdate({ _id: id }, { $inc: { likes: 1 } }, { new: true }); }
+  async getAllPosteosByUserNameId(userName: string): Promise<any> { await mongo(); const user = await Usuarios.findOne({ userName, ...ACTIVE_ACCOUNT_FILTER }); return user ? Posteos.find({ usuario: user._id, moderationState: { $ne: "removed" } }) : []; }
+}
 const daoPosteos = new DAOPosteos();
 export default daoPosteos;

@@ -15,14 +15,15 @@ export default function FeedCard({ post }: FeedCardProps) {
   const displayName = getDisplayUsername(post);
 
   return (
-    <Link href={`/posteos/${post._id}`} className={styles.feedCard}>
+    <Link href={`/posteo/${post._id}`} className={styles.feedCard}>
       <div className={styles.imageWrapper}>
         <Image
-          src={post.imagen}
+          src={`/api/media/posts/${post._id}`}
           alt={post.descripcion || "Imagen del post"}
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           className={styles.image}
+          unoptimized
         />
 
         <div className={styles.overlay}>

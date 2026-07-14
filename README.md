@@ -1,40 +1,40 @@
-﻿<p align="center">
+<p align="center">
   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png" alt="React Logo" width="180"/>
 </p>
 
 # Snapoo Blog
 
-## DescripciÃ³n general
+## Descripción general
 
-**Snapoo Blog** es una red social de fotografÃ­a desarrollada en Next.js y TypeScript, donde los usuarios pueden crear perfiles, compartir imÃ¡genes, interactuar y descubrir contenido visual. El proyecto implementa arquitectura modular, autenticaciÃ³n segura, almacenamiento en la nube y una UI moderna y responsiva con SCSS y Tailwind CSS.
-
----
-
-## âš™ï¸ CaracterÃ­sticas Principales
-
-- **AutenticaciÃ³n y AutorizaciÃ³n:** Inicio de sesiÃ³n con Google/email, gestiÃ³n de sesiones seguras con NextAuth.js.
-- **GestiÃ³n de ImÃ¡genes:** Subida, manipulaciÃ³n y almacenamiento eficiente en Cloudinary.
-- **Perfiles de Usuario:** VisualizaciÃ³n de fotos propias, reposts y detalles de usuario.
-- **InteracciÃ³n Social:** Likes, reposts y comentarios en publicaciones.
-- **Feed DinÃ¡mico:** Descubrimiento de contenido, bÃºsqueda y filtrado avanzado.
-- **UI Responsive:** DiseÃ±o profesional tipo masonry, animaciones suaves y experiencia optimizada en mobile.
-- **GestiÃ³n de Errores y Feedback:** Manejo global de errores y notificaciones contextuales.
-- **OptimizaciÃ³n de Performance:** SSR, lazy loading y caching inteligente con Next.js.
-- **Seguridad:** ValidaciÃ³n de datos y protecciÃ³n de rutas.
-- **Testing Extensivo:** Pruebas unitarias y de integraciÃ³n.
-- **DocumentaciÃ³n:** DocumentaciÃ³n clara de la API y componentes.
+**Snapoo Blog** es una red social de fotografía desarrollada en Next.js y TypeScript, donde los usuarios pueden crear perfiles, compartir imágenes, interactuar y descubrir contenido visual. El proyecto implementa arquitectura modular, autenticación segura, almacenamiento en la nube y una UI moderna y responsiva con SCSS y Tailwind CSS.
 
 ---
 
-## ðŸš€ TecnologÃ­as Utilizadas
+## Caracteristicas principales
+
+- **Autenticación y Autorización:** Inicio de sesión con Google/email, gestión de sesiones seguras con NextAuth.js.
+- **Gestión de Imágenes:** Subida, manipulación y almacenamiento eficiente en Cloudinary.
+- **Perfiles de Usuario:** Visualización de fotos propias, reposts y detalles de usuario.
+- **Interacción Social:** Likes, reposts y comentarios en publicaciones.
+- **Feed Dinámico:** Descubrimiento de contenido, búsqueda y filtrado avanzado.
+- **UI Responsive:** Diseño profesional tipo masonry, animaciones suaves y experiencia optimizada en mobile.
+- **Gestión de Errores y Feedback:** Manejo global de errores y notificaciones contextuales.
+- **Optimización de Performance:** SSR, lazy loading y caching inteligente con Next.js.
+- **Seguridad:** Validación de datos y protección de rutas.
+- **Testing Extensivo:** Pruebas unitarias y de integración.
+- **Documentación:** Documentación clara de la API y componentes.
+
+---
+
+## Tecnologias utilizadas
 
 - **Framework:** [Next.js](https://nextjs.org/), [React](https://react.dev/), [TypeScript](https://www.typescriptlang.org/)
 - **Base de Datos:** [MongoDB](https://www.mongodb.com/)
-- **GestiÃ³n de Estado:** React Context
+- **Gestión de Estado:** React Context
 - **Estilos:** [Tailwind CSS](https://tailwindcss.com/), [SCSS](https://sass-lang.com/)
-- **AutenticaciÃ³n:** [NextAuth.js](https://next-auth.js.org/), [Google OAuth](https://developers.google.com/identity/protocols/oauth2)
+- **Autenticación:** [NextAuth.js](https://next-auth.js.org/), [Google OAuth](https://developers.google.com/identity/protocols/oauth2)
 - **Media:** [Cloudinary](https://cloudinary.com/)
-- **ValidaciÃ³n:** [Zod](https://zod.dev/)
+- **Validación:** [Zod](https://zod.dev/)
 - **Testing:** [Jest](https://jestjs.io/), [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
 - **Linting & Formatting:** [ESLint](https://eslint.org/), [Prettier](https://prettier.io/)
 
@@ -42,7 +42,7 @@
 
 ## Tabla de contenidos
 
-- [InstalaciÃ³n](#instalaciÃ³n)
+- [Instalación](#instalación)
 - [Uso](#uso)
 - [Estructura del proyecto](#estructura-del-proyecto)
 - [Contribuciones](#contribuciones)
@@ -51,28 +51,28 @@
 
 ---
 
-## InstalaciÃ³n
+## Instalación
 
-1. **ClonÃ¡ el repositorio:**
+1. **Cloná el repositorio:**
 
 ```bash
 git clone https://github.com/Lucascabral95/snapoo-blog.git
 cd snapoo
 ```
 
-2. **InstalÃ¡ las dependencias:**
+2. **Instalá las dependencias:**
 
 ```bash
 npm install
 ```
 
-3. **ConfigurÃ¡ las variables de entorno:**
+3. **Configurá las variables de entorno:**
 
 ```bash
 cp .env.template .env.local
 ```
 
-4. **CompilÃ¡ el proyecto:**
+4. **Compilá el proyecto:**
 
 ```bash
 npm run dev
@@ -80,35 +80,35 @@ npm run dev
 
 ## Uso
 
-La aplicaciÃ³n estarÃ¡ disponible en:
+La aplicación estará disponible en:
 
 `http://localhost:3000`
 
 ## Estructura del proyecto
 
 ```bash
-â”œâ”€â”€ src/
-â”‚   â”œâ”€â”€ app/
-â”‚   â”‚   â”œâ”€â”€ api/                  # Rutas de API
-â”‚   â”‚   â”œâ”€â”€ feed/                 # Feed principal y subrutas
-â”‚   â”‚   â”œâ”€â”€ usuario/              # Perfil de usuario
-â”‚   â”‚   â”œâ”€â”€ posteo/               # Detalle de posteos
-â”‚   â”‚   â”œâ”€â”€ fonts/                # Fuentes personalizadas
-â”‚   â”‚   â”œâ”€â”€ globals.css           # Estilos globales
-â”‚   â”‚   â”œâ”€â”€ layout.tsx            # Layout principal
-â”‚   â”‚   â””â”€â”€ page.tsx              # PÃ¡gina de inicio
-â”‚   â”œâ”€â”€ DAO/                      # Acceso a datos
-â”‚   â”œâ”€â”€ infrastructure/           # ConfiguraciÃ³n, interfaces, servicios
-â”‚   â”œâ”€â”€ models/                   # Modelos de datos
-â”‚   â”œâ”€â”€ presentation/             # Componentes de UI
-â”‚   â””â”€â”€ services/                 # LÃ³gica de negocio
-â”œâ”€â”€ public/                       # Assets estÃ¡ticos
-â”œâ”€â”€ .eslintrc.js                  # ConfiguraciÃ³n de ESLint
-â”œâ”€â”€ next.config.js                 # ConfiguraciÃ³n de Next.js
-â”œâ”€â”€ package.json                  # Dependencias y scripts
-â”œâ”€â”€ tailwind.config.js            # ConfiguraciÃ³n de Tailwind
-â”œâ”€â”€ tsconfig.json                 # ConfiguraciÃ³n de TypeScript
-â””â”€â”€ README.md                     # DocumentaciÃ³n
++-- src/
+│   +-- app/
+│   │   +-- api/                  # Rutas de API
+│   │   +-- feed/                 # Feed principal y subrutas
+│   │   +-- usuario/              # Perfil de usuario
+│   │   +-- posteo/               # Detalle de posteos
+│   │   +-- fonts/                # Fuentes personalizadas
+│   │   +-- globals.css           # Estilos globales
+│   │   +-- layout.tsx            # Layout principal
+│   │   +-- page.tsx              # Página de inicio
+│   +-- DAO/                      # Acceso a datos
+│   +-- infrastructure/           # Configuración, interfaces, servicios
+│   +-- models/                   # Modelos de datos
+│   +-- presentation/             # Componentes de UI
+│   +-- services/                 # Lógica de negocio
++-- public/                       # Assets estáticos
++-- .eslintrc.js                  # Configuración de ESLint
++-- next.config.js                 # Configuración de Next.js
++-- package.json                  # Dependencias y scripts
++-- tailwind.config.js            # Configuración de Tailwind
++-- tsconfig.json                 # Configuración de TypeScript
++-- README.md                     # Documentación
 ```
 
 ## Moderacion y seguridad de la comunidad
@@ -121,43 +121,43 @@ Snapoo incluye un sistema de moderacion manual para proteger a la comunidad y ad
 - `moderator`: puede revisar reportes, retirar contenido y suspender cuentas por 1, 7 o 30 dias.
 - `admin`: puede resolver reportes, restaurar contenido, suspender cuentas por plazos personalizados y administrar roles.
 
-Para definir el primer administrador, configurÃ¡ en `.env.local`:
+Para definir el primer administrador, configurá en `.env.local`:
 
 ```env
 MODERATION_BOOTSTRAP_ADMIN_EMAIL="tu-email@example.com"
 ```
 
-ReiniciÃ¡ Next.js y volvÃ© a iniciar sesiÃ³n con esa cuenta. El email se promueve automÃ¡ticamente a `admin`.
+Reiniciá Next.js y volvé a iniciar sesión con esa cuenta. El email se promueve automáticamente a `admin`.
 
 ### Reportes y bloqueos
 
-Los usuarios pueden denunciar posteos, comentarios y perfiles desde el detalle del posteo, los comentarios y los perfiles. TambiÃ©n pueden bloquear usuarios; el bloqueo oculta mutuamente sus perfiles, posteos y comentarios.
+Los usuarios pueden denunciar posteos, comentarios y perfiles desde el detalle del posteo, los comentarios y los perfiles. También pueden bloquear usuarios; el bloqueo oculta mutuamente sus perfiles, posteos y comentarios.
 
-La cola administrativa estÃ¡ disponible en `/admin/moderation/reports`. La gestiÃ³n de roles estÃ¡ en `/admin/moderation/staff`.
+La cola administrativa está disponible en `/admin/moderation/reports`. La gestión de roles está en `/admin/moderation/staff`.
 
-Las medidas aplicadas quedan auditadas y generan notificaciones in-app para la cuenta afectada. El contenido retirado se conserva para permitir restauraciÃ³n y no se elimina automÃ¡ticamente de la base durante el perÃ­odo de retenciÃ³n.
+Las medidas aplicadas quedan auditadas y generan notificaciones in-app para la cuenta afectada. El contenido retirado se conserva para permitir restauración y no se elimina automáticamente de la base durante el período de retención.
 
 ### Migracion de imagenes de Cloudinary
 
-Las nuevas publicaciones guardan el `publicId` de Cloudinary y se entregan mediante una ruta autenticada. Para migrar las imÃ¡genes existentes, asegurate de tener las variables de MongoDB y Cloudinary en `.env.local`.
+Las nuevas publicaciones guardan el `publicId` de Cloudinary y se entregan mediante una ruta autenticada. Para migrar las imágenes existentes, asegurate de tener las variables de MongoDB y Cloudinary en `.env.local`.
 
-Primero ejecutÃ¡ una simulaciÃ³n:
+Primero ejecutá una simulación:
 
 ```bash
 npm run moderation:migrate-media:check
 ```
 
-RevisÃ¡ el JSON final (`migrated` y `skipped`). Si el resultado es correcto, aplicÃ¡ la migraciÃ³n:
+Revisá el JSON final (`migrated` y `skipped`). Si el resultado es correcto, aplicá la migración:
 
 ```bash
 npm run moderation:migrate-media:apply
 ```
 
-La migraciÃ³n es idempotente: solo procesa publicaciones que todavÃ­a no tienen `cloudinaryPublicId`. HacÃ© una copia de seguridad de MongoDB y verificÃ¡ la cuenta de Cloudinary antes de usar el comando `:apply`.
+La migración es idempotente: solo procesa publicaciones que todavía no tienen `cloudinaryPublicId`. Hacé una copia de seguridad de MongoDB y verificá la cuenta de Cloudinary antes de usar el comando `:apply`.
 
 ### Configuracion requerida
 
-AdemÃ¡s de las credenciales existentes, la moderaciÃ³n usa:
+Además de las credenciales existentes, la moderación usa:
 
 ```env
 MODERATION_BOOTSTRAP_ADMIN_EMAIL="tu-email@example.com"
@@ -166,7 +166,7 @@ MAX_REPORTS_PER_HOUR=10
 MEDIA_PRIVATE_DELIVERY_ENABLED=false
 ```
 
-`MEDIA_PRIVATE_DELIVERY_ENABLED` se mantiene como bandera de despliegue; activala despuÃ©s de verificar la migraciÃ³n de assets.
+`MEDIA_PRIVATE_DELIVERY_ENABLED` se mantiene como bandera de despliegue; activala después de verificar la migración de assets.
 
 ### Validacion
 
@@ -217,28 +217,105 @@ npm run build
 ```
 ## Contribuciones
 
-Â¡Las contribuciones son bienvenidas! SeguÃ­ estos pasos:
+¡Las contribuciones son bienvenidas! Seguí estos pasos:
 
-1. HacÃ© un fork del repositorio.
-2. CreÃ¡ una rama para tu feature o fix (`git checkout -b feature/nueva-funcionalidad`).
-3. RealizÃ¡ tus cambios y escribÃ­ pruebas si es necesario.
-4. HacÃ© commit y push a tu rama (`git commit -m "feat: agrega nueva funcionalidad"`).
-5. AbrÃ­ un Pull Request describiendo tus cambios.
+1. Hacé un fork del repositorio.
+2. Creá una rama para tu feature o fix (`git checkout -b feature/nueva-funcionalidad`).
+3. Realizá tus cambios y escribí pruebas si es necesario.
+4. Hacé commit y push a tu rama (`git commit -m "feat: agrega nueva funcionalidad"`).
+5. Abrí un Pull Request describiendo tus cambios.
 
 ---
 
 ## Licencia
 
-Este proyecto estÃ¡ bajo la licencia **MIT**.
+Este proyecto está bajo la licencia **MIT**.
 
 ---
 
-## ðŸ“¬ Contacto
+## Contacto
 
 - **Autor:** Lucas Cabral
-- **LinkedIn:** [https://www.linkedin.com/in/lucas-gastÃ³n-cabral/](https://www.linkedin.com/in/lucas-gastÃ³n-cabral/)
+- **LinkedIn:** [https://www.linkedin.com/in/lucas-gastón-cabral/](https://www.linkedin.com/in/lucas-gastón-cabral/)
 - **Portfolio:** [https://portfolio-web-dev-git-main-lucascabral95s-projects.vercel.app/](https://portfolio-web-dev-git-main-lucascabral95s-projects.vercel.app/)
 - **Github:** [https://github.com/Lucascabral95](https://github.com/Lucascabral95/)
 
 ---
 
+
+### Purga automática de cuentas
+
+La purga de cuentas desactivadas se ejecuta diariamente mediante `/.github/workflows/account-purge.yml`. Configurá los secretos `NEXTAUTH_URL` y `ACCOUNT_PURGE_JOB_TOKEN` en GitHub Actions. El token debe ser aleatorio, tener al menos 32 caracteres y coincidir con `ACCOUNT_PURGE_JOB_TOKEN` del entorno de la aplicación.
+
+También podés ejecutarla manualmente desde el repositorio o con:
+
+```bash
+npm run account:purge
+```
+
+### Smoke check de cuenta
+
+Con la aplicación levantada y un entorno configurado, `npm run account:smoke` valida que estén cargadas las credenciales de SMTP/Google, comprueba que recuperación de contraseña mantenga la respuesta no enumerable y verifica que el redirect OAuth de Google sea accesible. La devolución de Google debe completarse manualmente en el navegador con una cuenta real; el script nunca imprime secretos ni envía credenciales.
+
+```bash
+npm run account:smoke
+```
+## Gestion de cuentas, seguridad y soporte
+
+La pantalla `/feed/ajustes` agrupa Perfil, Seguridad, Privacidad y Soporte.
+
+- **Seguridad:** recuperacion de contrasena con token de un solo uso, cambio de contrasena, cambio de email con confirmacion y reautenticacion de diez minutos. Las cuentas Google se reautentican con el proveedor y no reciben una contrasena local.
+- **Sesiones:** cada inicio de sesion se registra por dispositivo, con actividad, vencimiento e IP hasheada. Se puede revocar un dispositivo o cerrar todas las otras sesiones.
+- **Privacidad:** perfiles publicos o privados, preferencia de mensajes, exportacion JSON y desactivacion recuperable durante 30 dias.
+- **Soporte:** usuarios autenticados pueden crear y consultar tickets. Moderadores y administradores los asignan y cambian de estado desde `/admin/moderation/support`.
+
+### API de cuenta
+
+| Metodo | Endpoint | Uso |
+| --- | --- | --- |
+| `GET` | `/api/account/sessions` | Lista los dispositivos de la cuenta. |
+| `DELETE` | `/api/account/sessions/:id` | Revoca una sesion concreta. |
+| `DELETE` | `/api/account/sessions` | Cierra las otras sesiones. |
+| `POST` | `/api/account/reauthenticate` | Crea un desafio temporal para acciones sensibles. |
+| `POST` | `/api/account/password` | Cambia la contrasena y revoca las otras sesiones. |
+| `POST` | `/api/account/email` | Solicita el cambio de email. |
+| `POST` | `/api/account/email/verify` | Confirma el email nuevo. |
+| `PATCH` | `/api/account/privacy` | Actualiza visibilidad y preferencia de mensajes. |
+| `GET` | `/api/account/export` | Descarga los datos personales en JSON. |
+| `POST` | `/api/account/deactivate` | Desactiva la cuenta durante 30 dias. |
+| `POST` | `/api/account/reactivate` | Reactiva una cuenta dentro del periodo permitido. |
+| `POST` / `GET` | `/api/support/tickets` | Crea y lista los tickets propios. |
+
+### Variables y tareas operativas
+
+Configura estas variables en cada entorno de ejecucion; nunca las subas al repositorio:
+
+```env
+ACCOUNT_PURGE_JOB_TOKEN=<token-aleatorio-de-al-menos-32-caracteres>
+NODEMAILER_EMAIL=<cuenta-smtp>
+NODEMAILER_TOKEN=<credencial-smtp>
+GOOGLE_CLIENT_ID=<cliente-oauth>
+GOOGLE_CLIENT_SECRET=<secreto-oauth>
+```
+
+El workflow `.github/workflows/account-purge.yml` llama diariamente a `/api/admin/account-purge`. En GitHub Actions, `ACCOUNT_PURGE_JOB_TOKEN` debe coincidir exactamente con el entorno de la aplicacion.
+
+### Entrega de imagenes de Cloudinary
+
+Las fotos se muestran mediante `/api/media/posts/:id`. La ruta entrega las cargas publicas y genera una URL firmada para las fotos migradas a entrega autenticada. Esto mantiene visibles las publicaciones antiguas despues de migrarlas; no se deben editar manualmente las URLs guardadas en `imagen`.
+
+Antes de migrar assets legacy ejecuta el modo de simulacion y revisa el resultado. El comando `:apply` cambia el tipo de entrega en Cloudinary y es idempotente:
+
+```bash
+npm run moderation:migrate-media:check
+npm run moderation:migrate-media:apply
+```
+
+### Validacion
+
+```bash
+npm test
+npm run lint
+npm run build
+npm run account:smoke
+```

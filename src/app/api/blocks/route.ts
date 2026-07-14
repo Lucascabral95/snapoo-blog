@@ -3,22 +3,22 @@ import mongoose from "mongoose";
 import { z } from "zod";
 import UserBlock from "@/models/UserBlock";
 import Usuarios from "@/models/Usuario";
-import { getAuthenticatedUser } from "@/infrastructure/auth/session";
+import { getActiveAuthenticatedUser } from "@/infrastructure/auth/session";
 import mongo from "@/services/mongoDB";
 
 const schema = z.object({ userId: z.string().refine((value) => mongoose.isValidObjectId(value)) });
 
 export async function GET() {
-  const user = await getAuthenticatedUser();
-  if (!user) return NextResponse.json({ code: "UNAUTHORIZED", message: "SesiÃ³n requerida." }, { status: 401 });
+  const user = await getActiveAuthenticatedUser();
+  if (!user) return NextResponse.json({ code: "UNAUTHORIZED", message: "Sesión requerida." }, { status: 401 });
   await mongo();
   const result = await UserBlock.find({ blocker: user.id }).populate("blocked", "userName email avatar").lean();
   return NextResponse.json({ result });
 }
 
 export async function POST(request: Request) {
-  const user = await getAuthenticatedUser();
-  if (!user) return NextResponse.json({ code: "UNAUTHORIZED", message: "SesiÃ³n requerida." }, { status: 401 });
+  const user = await getActiveAuthenticatedUser();
+  if (!user) return NextResponse.json({ code: "UNAUTHORIZED", message: "Sesión requerida." }, { status: 401 });
   const parsed = schema.safeParse(await request.json().catch(() => null));
   if (!parsed.success || parsed.data.userId === user.id) return NextResponse.json({ code: "VALIDATION_ERROR", message: "No se puede bloquear este usuario." }, { status: 400 });
   await mongo();

@@ -13,7 +13,9 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "moderation:migrate-media:check": "node --env-file=.env.local scripts/migrate-cloudinary-assets.mjs",
-    "moderation:migrate-media:apply": "node --env-file=.env.local scripts/migrate-cloudinary-assets.mjs --apply"
+    "moderation:migrate-media:apply": "node --env-file=.env.local scripts/migrate-cloudinary-assets.mjs --apply",
+    "account:purge": "node --env-file=.env.local scripts/purge-deactivated-accounts.mjs",
+    "account:smoke": "node --env-file=.env.local scripts/smoke-account-flows.mjs"
   },
   "dependencies": {
     "@upstash/ratelimit": "^2.0.8",

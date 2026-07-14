@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { FormEvent, useState } from "react";
 import Image from "next/image";
@@ -125,7 +125,7 @@ export default function VistaImagen({
           <Avvvatars value={session?.user?.userName ?? session?.user?.email ?? "Vos"} size={28} />
           <input
             className={styles.commentInput}
-            placeholder="AgregÃ¡ un comentario..."
+            placeholder="Agregá un comentario..."
             value={commentText}
             onChange={(event) => setCommentText(event.target.value)}
             maxLength={1000}
